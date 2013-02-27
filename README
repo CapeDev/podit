@@ -1,0 +1,7 @@
+You need the Android SDK installed 
+
+To get dependencies and run tests:
+	mvn test
+
+
+Please update this readme
