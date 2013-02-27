@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello carpods-android!</string>
+    <string name="app_name">carpods-android</string>
+    <string name="edit_message">edit message</string>
+    <string name="button_send">send</string>
+</resources>
