@@ -1,7 +1,12 @@
 You need the Android SDK installed 
+You may need to set ANDROID_HOME in your .bashrc or .bash_profile to point to where your android-sdk lives
 
 To get dependencies and run tests:
 	mvn test
 
+To get maven on osx: 
+	brew install maven
+
+Using: android version 14 (specified in POM file)
 
 Please update this readme
