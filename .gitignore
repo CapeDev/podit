@@ -4,4 +4,6 @@ target
 bin
 gen
 .classpath
-.idea
+workspace.xml
+tasks.xml
+*.iws
