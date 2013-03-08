@@ -19,7 +19,6 @@ public class CarPodsDatabase {
     public static final String NAME = "name";
 
     private final Context context;
-    private DBHelper dbHelper;
     private SQLiteDatabase database;
 
     private static final String PERSON_TABLE_CREATE_STMT =
@@ -35,7 +34,7 @@ public class CarPodsDatabase {
 
     public CarPodsDatabase open()
             throws SQLException {
-        dbHelper = new DBHelper(this.context);
+        DBHelper dbHelper = new DBHelper(this.context);
         database = dbHelper.getWritableDatabase();
         return this;
     }
@@ -49,71 +48,36 @@ public class CarPodsDatabase {
 
         ContentValues info = new ContentValues();
         info.put(NAME, personsName);
+        this.open();
         database.insert(table, null, info);
+        this.close();
     }
 
-    public String getFirstPerson() {
+    public String getLastPerson() {
         String personsName = "";
         Cursor cursor = null;
 
         String[] columns = {ROWID, NAME};
-        String whereClause = ROWID + " = ?";
-        String[] whereArgs = {String.valueOf(0)};
+        String whereClause = ROWID + " > ?";
+        String[] whereArgs = {"0"};
 
+        this.open();
         try {
-           cursor = this.database.query(PERSON_TABLE, columns, whereClause, whereArgs, null, null, null, null);
+            cursor = this.database.query(PERSON_TABLE, columns, whereClause, whereArgs, null, null, null, null);
 
-            if (cursor != null) {
-
-                cursor.moveToFirst();
-
-                if (cursor.getCount() > 0) {
-                    personsName = cursor.getString(cursor.getColumnIndex(NAME));
-                }
+            if (cursor != null && cursor.getCount() > 0) {
+                cursor.moveToLast();
+                personsName = cursor.getString(cursor.getColumnIndex(NAME));
             }
 
         }  finally {
             if (cursor != null) {
                 cursor.close();
             }
+            this.close();
         }
 
         return personsName;
-//        Cursor cursor = null;
-//        String note = null;
-//
-//        String[] columns = {DBC_ROWID, DBC_NOTES};
-//        String whereClause = DBC_TASKID + " = ?" + " AND " + DBC_STAMPID + " = ?";
-//        String[] whereArgs = {String.valueOf(taskID), String.valueOf(stampID) };
-//
-//        try {
-//            if (verboseLogging) {
-//                Log.v(CLASS_TAG, "fetchOneNote() - opening a cursor");
-//            }
-//
-//            cursor = this.database.query(true, DBT_NOTES, columns, whereClause, whereArgs, null, null, null, null);
-//            if (verboseLogging) {
-//                Log.v(CLASS_TAG, "fetchOneNote() - retreived a cursor");
-//            }
-//
-//            if (cursor != null) {
-//                cursor.moveToFirst();
-//
-//                if (cursor.getCount() > 0) {
-//                    // task already has a note, get its content and put it on the screen
-//                    note = cursor.getString(cursor.getColumnIndexOrThrow(TaskDbAdapter.DBC_NOTES));
-//                }
-//            }
-//        } finally {
-//            if (cursor != null) {
-//                if (verboseLogging) {
-//                    Log.v(CLASS_TAG, "fetchOneNote() - closing a cursor");
-//                }
-//                cursor.close();
-//            }
-//        }
-//        return note;
-
     }
 
     private static class DBHelper extends SQLiteOpenHelper {

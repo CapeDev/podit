@@ -42,10 +42,7 @@ public class HelloAndroidActivity extends Activity {
     }
 
     private String getFirstPersonFromDatabase() {
-        carPodsDatabase.open();
-        String personsName = carPodsDatabase.getFirstPerson();
-        carPodsDatabase.close();
-        return personsName;
+        return carPodsDatabase.getLastPerson();
     }
 
     @Override
@@ -72,9 +69,6 @@ public class HelloAndroidActivity extends Activity {
 
         editTextView.setText("");
 
-        carPodsDatabase.open();
         carPodsDatabase.savePerson(newText);
-        carPodsDatabase.close();
     }
 }
-
