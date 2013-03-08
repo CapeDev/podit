@@ -1,17 +1,22 @@
 package com.thoughtworks.carpods;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.thoughtworks.carpods.data.CarPodsDatabase;
 
 //example class based on Kris Gonzalez's myTW screencast
 public class HelloAndroidActivity extends Activity {
 
     private static String TAG = "carpods-android";
     LongRunningOperationExecutor operationExecutor = new LongRunningOperationExecutor();
+
+    private Context context;
+    private CarPodsDatabase carPodsDatabase;
 
     /**
      * Called when the activity is first created.
@@ -24,6 +29,23 @@ public class HelloAndroidActivity extends Activity {
         super.onCreate(savedInstanceState);
 		Log.i(TAG, "onCreate");
         setContentView(R.layout.main);
+
+        this.context = this;
+
+        if(carPodsDatabase == null) {
+            carPodsDatabase = new CarPodsDatabase(context);
+        }
+
+        TextView view_database_field = (TextView)findViewById(R.id.view_database_field);
+        String firstPersonFromDatabase = getFirstPersonFromDatabase();
+        view_database_field.setText(firstPersonFromDatabase);
+    }
+
+    private String getFirstPersonFromDatabase() {
+        carPodsDatabase.open();
+        String personsName = carPodsDatabase.getFirstPerson();
+        carPodsDatabase.close();
+        return personsName;
     }
 
     @Override
@@ -49,6 +71,10 @@ public class HelloAndroidActivity extends Activity {
         messageTextView.setText(newText);
 
         editTextView.setText("");
+
+        carPodsDatabase.open();
+        carPodsDatabase.savePerson(newText);
+        carPodsDatabase.close();
     }
 }
 
