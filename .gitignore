@@ -8,3 +8,4 @@ workspace.xml
 tasks.xml
 *.iws
 tmp/*
+.elasticbeanstalk/
