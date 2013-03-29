@@ -9,3 +9,4 @@ tasks.xml
 *.iws
 tmp/*
 .elasticbeanstalk/
+.idea/*
