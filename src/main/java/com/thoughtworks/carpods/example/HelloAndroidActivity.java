@@ -1,4 +1,4 @@
-package com.thoughtworks.carpods;
+package com.thoughtworks.carpods.example;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.CarPodsDatabase;
 
 //example class based on Kris Gonzalez's myTW screencast

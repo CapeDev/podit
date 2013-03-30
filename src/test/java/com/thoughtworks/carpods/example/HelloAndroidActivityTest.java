@@ -1,10 +1,10 @@
-package com.thoughtworks.carpods;
+package com.thoughtworks.carpods.example;
 
 import android.widget.EditText;
 import android.widget.TextView;
+import com.thoughtworks.carpods.R;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

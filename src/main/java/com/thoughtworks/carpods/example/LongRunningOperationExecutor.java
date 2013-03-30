@@ -1,4 +1,4 @@
-package com.thoughtworks.carpods;
+package com.thoughtworks.carpods.example;
 
 
 //Example class to follow Kris Gonzalez's screencast on myTW

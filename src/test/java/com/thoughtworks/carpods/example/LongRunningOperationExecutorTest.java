@@ -1,4 +1,4 @@
-package com.thoughtworks.carpods;
+package com.thoughtworks.carpods.example;
 
 import org.junit.Test;
 
