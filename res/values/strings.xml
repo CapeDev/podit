@@ -5,4 +5,9 @@
     <string name="edit_message">edit message</string>
     <string name="button_send">send</string>
     <string name="view_database">view database</string>
+    <string name="first_name_label">First Name:</string>
+    <string name="last_name_label">Last Name:</string>
+    <string name="home_location_label">Home Location:</string>
+    <string name="about_me_label">About Me:</string>
+    <string name="save_label">Save</string>
 </resources>
