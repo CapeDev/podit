@@ -25,7 +25,10 @@
         <EditText android:id="@+id/first_name_input"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
-                  android:textSize="25sp" />
+                  android:textSize="25sp"
+                  android:background="#CCCCCC"
+                  android:textColor="#000000"
+                  android:layout_margin="5sp"/>
     </LinearLayout>
 
     <LinearLayout android:orientation="horizontal"
@@ -44,7 +47,10 @@
         <EditText android:id="@+id/last_name_input"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
-                  android:textSize="25sp" />
+                  android:textSize="25sp"
+                  android:background="#CCCCCC"
+                  android:textColor="#000000"
+                  android:layout_margin="5sp" />
     </LinearLayout>
 
     <LinearLayout android:orientation="horizontal"
@@ -63,7 +69,10 @@
         <EditText android:id="@+id/home_location_input"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
-                  android:textSize="25sp" />
+                  android:textSize="25sp"
+                  android:background="#CCCCCC"
+                  android:textColor="#000000"
+                  android:layout_margin="5sp"/>
     </LinearLayout>
 
     <LinearLayout android:orientation="vertical"
@@ -84,6 +93,9 @@
                   android:layout_height="fill_parent"
                   android:textSize="25sp"
                   android:minLines="3"
+                  android:background="#CCCCCC"
+                  android:textColor="#000000"
+                  android:layout_margin="5sp"
                   />
     </LinearLayout>
 
