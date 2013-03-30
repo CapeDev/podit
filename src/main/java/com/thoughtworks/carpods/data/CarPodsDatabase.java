@@ -12,28 +12,44 @@ public class CarPodsDatabase {
 
     private static final String CLASS_TAG = "CarPodsDatabase";
 
-    public static final String DATABASE_NAME = "carpodsDatabase";
+    private static final String DATABASE_NAME = "carpodsDatabase";
 
-    public static final String PERSON_TABLE = "personTable";
-    public static final String ROWID = "_id";
-    public static final String NAME = "name";
+    private static final String ROWID = "_id";
+
+    private static final String EXAMPLE_TABLE = "exampleTable";
+    private static final String PERSON_TABLE = "personTable";
+
+    private static final String EXAMPLE_STRING = "example_string";
+    private static final String FIRST_NAME = "first_name";
+    private static final String LAST_NAME = "last_name";
+    private static final String HOME_LOCATION = "home_location";
+    private static final String ABOUT_ME = "about_name";
 
     private final Context context;
     private SQLiteDatabase database;
+
+    private static final String EXAMPLE_TABLE_CREATE_STMT =
+            "create table " + EXAMPLE_TABLE
+                    + " ("
+                    + ROWID + " integer primary key autoincrement, "
+                    + EXAMPLE_STRING + " text not null"
+                    + ");";
 
     private static final String PERSON_TABLE_CREATE_STMT =
             "create table " + PERSON_TABLE
                     + " ("
                     + ROWID + " integer primary key autoincrement, "
-                    + NAME + " text not null"
+                    + FIRST_NAME + " text not null,"
+                    + LAST_NAME + " text not null,"
+                    + ABOUT_ME + " text not null,"
+                    + HOME_LOCATION + " text not null"
                     + ");";
 
     public CarPodsDatabase (Context context) {
         this.context = context;
     }
 
-    public CarPodsDatabase open()
-            throws SQLException {
+    public CarPodsDatabase open() throws SQLException {
         DBHelper dbHelper = new DBHelper(this.context);
         database = dbHelper.getWritableDatabase();
         return this;
@@ -43,31 +59,31 @@ public class CarPodsDatabase {
         database.close();
     }
 
-    public void savePerson(String personsName) {
-        String table = PERSON_TABLE;
+    public void saveStringExample(String personsName) {
+        String table = EXAMPLE_TABLE;
 
         ContentValues info = new ContentValues();
-        info.put(NAME, personsName);
+        info.put(EXAMPLE_STRING, personsName);
         this.open();
         database.insert(table, null, info);
         this.close();
     }
 
-    public String getLastPerson() {
-        String personsName = "";
+    public String getExampleString() {
+        String exampleString = "";
         Cursor cursor = null;
 
-        String[] columns = {ROWID, NAME};
+        String[] columns = {ROWID, EXAMPLE_STRING};
         String whereClause = ROWID + " > ?";
         String[] whereArgs = {"0"};
 
         this.open();
         try {
-            cursor = this.database.query(PERSON_TABLE, columns, whereClause, whereArgs, null, null, null, null);
+            cursor = this.database.query(EXAMPLE_TABLE, columns, whereClause, whereArgs, null, null, null, null);
 
             if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToLast();
-                personsName = cursor.getString(cursor.getColumnIndex(NAME));
+                exampleString = cursor.getString(cursor.getColumnIndex(EXAMPLE_STRING));
             }
 
         }  finally {
@@ -77,7 +93,31 @@ public class CarPodsDatabase {
             this.close();
         }
 
-        return personsName;
+        return exampleString;
+    }
+
+    public void savePerson(Person person) {
+        String table = PERSON_TABLE;
+
+        ContentValues info = new ContentValues();
+        info.put(FIRST_NAME, person.getFirstName());
+        info.put(LAST_NAME, person.getLastName());
+        info.put(HOME_LOCATION, person.getHomeLocation());
+        info.put(ABOUT_ME, person.getAboutMe());
+
+        this.open();
+        database.insert(table, null, info);
+        this.close();
+
+        Log.d("CarPodsDatabase", "saved " + person.getFirstName() + " to the local database");
+    }
+
+    public Boolean isOpen() {
+        Boolean isOpen = false;
+        if (database != null) {
+            isOpen = database.isOpen();
+        }
+        return isOpen;
     }
 
     private static class DBHelper extends SQLiteOpenHelper {
@@ -89,6 +129,7 @@ public class CarPodsDatabase {
 
         @Override
         public void onCreate (SQLiteDatabase db) {
+            db.execSQL(EXAMPLE_TABLE_CREATE_STMT);
             db.execSQL(PERSON_TABLE_CREATE_STMT);
         }
 

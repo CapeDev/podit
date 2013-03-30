@@ -37,12 +37,12 @@ public class HelloAndroidActivity extends Activity {
         }
 
         TextView view_database_field = (TextView)findViewById(R.id.view_database_field);
-        String firstPersonFromDatabase = getFirstPersonFromDatabase();
+        String firstPersonFromDatabase = getexampleStringFromDatabase();
         view_database_field.setText(firstPersonFromDatabase);
     }
 
-    private String getFirstPersonFromDatabase() {
-        return carPodsDatabase.getLastPerson();
+    private String getexampleStringFromDatabase() {
+        return carPodsDatabase.getExampleString();
     }
 
     @Override
@@ -69,6 +69,6 @@ public class HelloAndroidActivity extends Activity {
 
         editTextView.setText("");
 
-        carPodsDatabase.savePerson(newText);
+        carPodsDatabase.saveStringExample(newText);
     }
 }

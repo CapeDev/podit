@@ -4,6 +4,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
