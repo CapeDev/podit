@@ -17,4 +17,10 @@
             android:text="Start Edit Person"
             android:layout_gravity="bottom"
             android:onClick="startEditPerson" />
+    <Button android:id="@+id/start_display_person"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Display Person"
+            android:layout_gravity="bottom"
+            android:onClick="startDisplayPerson" />
 </LinearLayout>

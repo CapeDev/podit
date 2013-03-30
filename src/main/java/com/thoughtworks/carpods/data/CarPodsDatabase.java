@@ -120,6 +120,37 @@ public class CarPodsDatabase {
         return isOpen;
     }
 
+    public Person getFirstPersonFromDatabase() {
+
+        Cursor cursor = null;
+
+        String[] columns = {ROWID, FIRST_NAME, LAST_NAME, HOME_LOCATION, ABOUT_ME};
+        String whereClause = ROWID + " = ?";
+        String[] whereArgs = {"1"};
+        Person.Builder personBuilder = new Person.Builder();
+
+        this.open();
+        try {
+            cursor = this.database.query(PERSON_TABLE, columns, whereClause, whereArgs, null, null, null, null);
+
+            if (cursor != null && cursor.getCount() > 0) {
+                cursor.moveToLast();
+                personBuilder.firstName(cursor.getString(cursor.getColumnIndex(FIRST_NAME)));
+                personBuilder.lastName(cursor.getString(cursor.getColumnIndex(LAST_NAME)));
+                personBuilder.homeLocation(cursor.getString(cursor.getColumnIndex(HOME_LOCATION)));
+                personBuilder.aboutMe(cursor.getString(cursor.getColumnIndex(ABOUT_ME)));
+            }
+
+        }  finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            this.close();
+        }
+
+        return personBuilder.build();
+    }
+
     private static class DBHelper extends SQLiteOpenHelper {
         private static final int DATABASE_VERSION = 1;
 

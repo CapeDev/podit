@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import com.thoughtworks.carpods.UI.DisplayPerson;
 import com.thoughtworks.carpods.UI.EditPerson;
 import com.thoughtworks.carpods.example.HelloAndroidActivity;
 
@@ -19,5 +20,9 @@ public class ActivitySwitcher extends Activity {
 
     public void startEditPerson(View view) {
         startActivity(new Intent(this, EditPerson.class));
+    }
+
+    public void startDisplayPerson(View view) {
+        startActivity(new Intent(this, DisplayPerson.class));
     }
 }

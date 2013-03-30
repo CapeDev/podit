@@ -12,10 +12,11 @@
               <category android:name="android.intent.category.LAUNCHER" />
           </intent-filter>
       </activity>
-      <activity android:name=".example.HelloAndroidActivity" />
-      <activity android:name=".UI.EditPerson" />
 
-      <activity android:name=".ActivitySwitcher"/>
+      <activity android:name=".example.HelloAndroidActivity" />
+
+      <activity android:name=".UI.EditPerson" />
+      <activity android:name=".UI.DisplayPerson"/>
   </application>
 </manifest>
 
