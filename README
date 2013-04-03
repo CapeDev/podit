@@ -10,9 +10,5 @@ To get maven on osx:
 To deploy to your running android emulator from the command line, use:
 mvn android:deploy
 
-
-
 Using: android version 14 (specified in POM file)
 
-Please update this readme
-I moved the repo to the CapeDevDal organization on github.
