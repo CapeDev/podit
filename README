@@ -10,7 +10,7 @@ To get maven on osx:
 	brew install maven
 
 To install your app on a running emulator:
-	mvn package android:deploy
+	mvn install android:deploy
 (look for it in the emulators apps)
 
 
