@@ -11,3 +11,4 @@ tmp/*
 .elasticbeanstalk/
 .idea/*
 *.iml
+out
