@@ -1,5 +1,7 @@
+Assumptions:
 You need the Android SDK installed 
 You may need to set ANDROID_HOME in your .bashrc or .bash_profile to point to where your android-sdk lives
+Using: android version 14 (specified in POM file) - version must be past 4.0.3
 
 To get dependencies and run tests:
 	mvn test
@@ -7,8 +9,12 @@ To get dependencies and run tests:
 To get maven on osx: 
 	brew install maven
 
-To deploy to your running android emulator from the command line, use:
-mvn android:deploy
+To install your app on a running emulator:
+	mvn package android:deploy
+(look for it in the emulators apps)
 
-Using: android version 14 (specified in POM file)
 
+To start an android virtual device (emulator) from the command line, use:
+android
+# Tools > manage AVDs > pick AVD > start 
+(note: adt-bundle-mac-x86_64/sdk/tools must be on your path for this to work)
