@@ -36,6 +36,7 @@ public class EditPerson extends Activity {
     public void savePerson(View v) {
         Person person = getDataFromView();
         carPodsDatabase.savePerson(person);
+        finish();
     }
 
     protected Person getDataFromView() {

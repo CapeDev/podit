@@ -26,13 +26,3 @@
               android:text="@string/view_database" />
 
 </LinearLayout>
-
-
-
-
-    <!--@Test-->
-    <!--public void shouldInitializeTextField(){-->
-    <!--private String message = "test"-->
-        <!--HelloAndroidActivity.updateMessage(message);-->
-        <!--assert(message.equals(message))-->
-    <!--}-->
