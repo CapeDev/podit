@@ -17,6 +17,10 @@ public class PeoplePopulator {
         database.savePerson(createPerson("Bob", "Smith", "Residence Inn", "Smart"));
         database.savePerson(createPerson("Charlie", "White", "Renaissance Hotel", "Kind"));
         database.savePerson(createPerson("David", "Washington", "Renaissance Hotel", "Caring"));
+        database.savePerson(createPerson("Han", "Solo", "Hilton Anatole", "Scruffy Nerf Herder"));
+        database.savePerson(createPerson("Luke", "Skywalker", "Hilton Anatole", "Young Jedi"));
+        database.savePerson(createPerson("Princess", "Leia", "Hilton Anatole", "Luke's Sister"));
+        database.savePerson(createPerson("Darth", "Vader", "Hilton Anatole", "Luke's Father"));
         database.close();
     }
 
