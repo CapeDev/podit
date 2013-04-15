@@ -23,4 +23,10 @@
             android:text="Start Display Person"
             android:layout_gravity="bottom"
             android:onClick="startDisplayPerson" />
+    <Button android:id="@+id/populate_people"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Populate People"
+            android:layout_gravity="bottom"
+            android:onClick="populatePeople" />
 </LinearLayout>
