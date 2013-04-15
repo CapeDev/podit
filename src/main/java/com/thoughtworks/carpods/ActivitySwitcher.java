@@ -34,4 +34,9 @@ public class ActivitySwitcher extends Activity {
         Toast toast = Toast.makeText(getApplicationContext(), "Done populating People", Toast.LENGTH_LONG);
         toast.show();
     }
+
+    public void startPeopleList(View view) {
+        Toast toast = Toast.makeText(getApplicationContext(), "The People ListView Activity Has Not Yet Been Implemented", Toast.LENGTH_LONG);
+        toast.show();
+    }
 }

@@ -29,4 +29,10 @@
             android:text="Populate People"
             android:layout_gravity="bottom"
             android:onClick="populatePeople" />
+    <Button android:id="@+id/show_people_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Start People ListView"
+            android:layout_gravity="bottom"
+            android:onClick="startPeopleList" />
 </LinearLayout>
