@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.Toast;
 import com.thoughtworks.carpods.UI.DisplayPerson;
 import com.thoughtworks.carpods.UI.EditPerson;
-import com.thoughtworks.carpods.data.PeoplePopulator;import com.thoughtworks.carpods.example.HelloAndroidActivity;
+import com.thoughtworks.carpods.UI.PeopleList;
+import com.thoughtworks.carpods.data.PeoplePopulator;
+import com.thoughtworks.carpods.example.HelloAndroidActivity;
 
 public class ActivitySwitcher extends Activity {
     public void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,8 @@ public class ActivitySwitcher extends Activity {
     }
 
     public void startPeopleList(View view) {
-        Toast toast = Toast.makeText(getApplicationContext(), "The People ListView Activity Has Not Yet Been Implemented", Toast.LENGTH_LONG);
-        toast.show();
+        startActivity(new Intent(this, PeopleList.class));
+        // Toast toast = Toast.makeText(getApplicationContext(), "The People ListView Activity Has Not Yet Been Implemented", Toast.LENGTH_LONG);
+        // toast.show();
     }
 }
