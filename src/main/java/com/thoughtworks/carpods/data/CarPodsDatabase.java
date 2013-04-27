@@ -120,18 +120,23 @@ public class CarPodsDatabase {
         return isOpen;
     }
 
-    public Person getFirstPersonFromDatabase() {
-
+    public Cursor getFirstPersonFromDatabaseAsCursor(){
         Cursor cursor = null;
-
         String[] columns = {ROWID, FIRST_NAME, LAST_NAME, HOME_LOCATION, ABOUT_ME};
         String whereClause = ROWID + " = ?";
         String[] whereArgs = {"1"};
+        cursor = this.database.query(PERSON_TABLE, columns, whereClause, whereArgs, null, null, null, null);
+        return cursor;
+    }
+
+    public Person getFirstPersonFromDatabase() {
+        Cursor cursor = null;
+
         Person.Builder personBuilder = new Person.Builder();
 
         this.open();
         try {
-            cursor = this.database.query(PERSON_TABLE, columns, whereClause, whereArgs, null, null, null, null);
+            cursor = getFirstPersonFromDatabaseAsCursor();
 
             if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToLast();
