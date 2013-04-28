@@ -19,8 +19,8 @@ public class PeopleList extends ListActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         mAdapter = new SimpleCursorAdapter(this, R.layout.people_list_view, null, testArray, toViews, 0);
-           setListAdapter(mAdapter);
+        mAdapter = new SimpleCursorAdapter(this, R.layout.people_list_view, null, testArray, toViews, 0);
+        setListAdapter(mAdapter);
     }
 
 
