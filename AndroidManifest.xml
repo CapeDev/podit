@@ -17,7 +17,7 @@
 
       <activity android:name=".UI.EditPerson" />
       <activity android:name=".UI.DisplayPerson"/>
-      <activity android:name=".UI.PeopleList"/>
+      <activity android:name=".UI.PeopleListLoader"/>
   </application>
 </manifest>
 

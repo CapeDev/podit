@@ -16,7 +16,7 @@
 //
 //    @Test
 //    public void shouldCreateAPeopleList(){
-//        PeopleList peopleList = new PeopleList();
+//        PeopleListLoader peopleList = new PeopleListLoader();
 //        peopleList.onCreate(null);
 //
 //    }

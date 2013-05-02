@@ -14,14 +14,14 @@ public class CarPodsDatabase {
 
     private static final String DATABASE_NAME = "carpodsDatabase";
 
-    private static final String ROWID = "_id";
+    public static final String ROWID = "_id";
 
     private static final String EXAMPLE_TABLE = "exampleTable";
-    private static final String PERSON_TABLE = "personTable";
+    public static final String PERSON_TABLE = "personTable";
 
     private static final String EXAMPLE_STRING = "example_string";
-    private static final String FIRST_NAME = "first_name";
-    private static final String LAST_NAME = "last_name";
+    public static final String FIRST_NAME = "first_name";
+    public static final String LAST_NAME = "last_name";
     private static final String HOME_LOCATION = "home_location";
     private static final String ABOUT_ME = "about_name";
 
@@ -120,23 +120,25 @@ public class CarPodsDatabase {
         return isOpen;
     }
 
-    public Cursor getFirstPersonFromDatabaseAsCursor(){
-        Cursor cursor = null;
-        String[] columns = {ROWID, FIRST_NAME, LAST_NAME, HOME_LOCATION, ABOUT_ME};
-        String whereClause = ROWID + " = ?";
-        String[] whereArgs = {"1"};
-        cursor = this.database.query(PERSON_TABLE, columns, whereClause, whereArgs, null, null, null, null);
-        return cursor;
-    }
+//    public Cursor getFirstPersonFromDatabaseAsCursor(){
+//        String[] columns = {ROWID, FIRST_NAME, LAST_NAME, HOME_LOCATION, ABOUT_ME};
+//        String whereClause = ROWID + " = ?";
+//        String[] whereArgs = {"1"};
+//        return database.query(PERSON_TABLE, columns, whereClause, whereArgs, null, null, null, null);
+//    }
 
     public Person getFirstPersonFromDatabase() {
         Cursor cursor = null;
+
+        String[] columns = {ROWID, FIRST_NAME, LAST_NAME, HOME_LOCATION, ABOUT_ME};
+        String selection = ROWID + " = ?";
+        String[] selectionArgs = {"1"};
 
         Person.Builder personBuilder = new Person.Builder();
 
         this.open();
         try {
-            cursor = getFirstPersonFromDatabaseAsCursor();
+            cursor = database.query(PERSON_TABLE, columns, selection, selectionArgs, null, null, null, null);
 
             if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToLast();
@@ -155,6 +157,18 @@ public class CarPodsDatabase {
 
         return personBuilder.build();
     }
+
+    public Cursor getCursorWithAllPeople() {
+        Cursor cursor;
+
+        String table = PERSON_TABLE;
+        String[] columns = {ROWID, FIRST_NAME, LAST_NAME, HOME_LOCATION, ABOUT_ME};
+
+        cursor = database.query(table, columns, null, null, null, null, null, null);
+
+        return cursor;
+    }
+
 
     private static class DBHelper extends SQLiteOpenHelper {
         private static final int DATABASE_VERSION = 1;

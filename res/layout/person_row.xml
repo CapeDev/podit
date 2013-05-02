@@ -17,7 +17,7 @@
             android:text="@string/first_name_label"
             android:gravity="left" />
     <TextView
-            android:id="@+id/tvCreationStamp"
+            android:id="@+id/lastNameLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
