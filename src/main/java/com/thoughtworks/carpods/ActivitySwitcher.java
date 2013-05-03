@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 import com.thoughtworks.carpods.UI.DisplayPerson;
 import com.thoughtworks.carpods.UI.EditPerson;
+import com.thoughtworks.carpods.UI.PeopleList;
 import com.thoughtworks.carpods.UI.PeopleListLoader;
 import com.thoughtworks.carpods.data.PeoplePopulator;
 import com.thoughtworks.carpods.example.HelloAndroidActivity;
@@ -32,13 +33,11 @@ public class ActivitySwitcher extends Activity {
     public void populatePeople(View view) {
         PeoplePopulator populator = new PeoplePopulator(getApplicationContext());
         populator.populate();
-
-        Toast toast = Toast.makeText(getApplicationContext(), "Done populating People", Toast.LENGTH_LONG);
-        toast.show();
+        Toast.makeText(getApplicationContext(), "Done populating People", Toast.LENGTH_SHORT).show();
     }
 
     public void startPeopleList(View view) {
-        startActivity(new Intent(this, PeopleListLoader.class));
+        startActivity(new Intent(this, PeopleList.class));
         // Toast toast = Toast.makeText(getApplicationContext(), "The People ListView Activity Has Not Yet Been Implemented", Toast.LENGTH_LONG);
         // toast.show();
     }

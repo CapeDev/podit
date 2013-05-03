@@ -18,6 +18,7 @@
       <activity android:name=".UI.EditPerson" />
       <activity android:name=".UI.DisplayPerson"/>
       <activity android:name=".UI.PeopleListLoader"/>
+      <activity android:name=".UI.PeopleList" android:label="This is the people list label"/>
   </application>
 </manifest>
 

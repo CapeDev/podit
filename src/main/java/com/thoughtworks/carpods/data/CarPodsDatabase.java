@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CarPodsDatabase {
 
     private static final String CLASS_TAG = "CarPodsDatabase";
@@ -169,6 +172,39 @@ public class CarPodsDatabase {
         return cursor;
     }
 
+    public List<Person> getAllPeopleNames() {
+        this.open();
+        Cursor cursor = null;
+
+        String[] columns = {ROWID, FIRST_NAME, LAST_NAME};
+        String selection = null;
+        String[] selectionArgs = null;
+
+        List<Person> peopleList = new ArrayList<Person>();
+
+        this.open();
+        try {
+            cursor = database.query(PERSON_TABLE, columns, selection, selectionArgs, null, null, null, null);
+
+            if (cursor != null && cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    Person.Builder personBuilder = new Person.Builder();
+                    personBuilder.firstName(cursor.getString(cursor.getColumnIndex(FIRST_NAME)));
+                    personBuilder.lastName(cursor.getString(cursor.getColumnIndex(LAST_NAME)));
+                    peopleList.add(personBuilder.build());
+                    cursor.moveToNext();
+                }
+            }
+        }  finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        this.close();
+
+        return peopleList;
+    }
 
     private static class DBHelper extends SQLiteOpenHelper {
         private static final int DATABASE_VERSION = 1;
