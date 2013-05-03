@@ -35,4 +35,10 @@
             android:text="Start People ListView"
             android:layout_gravity="bottom"
             android:onClick="startPeopleList" />
+    <Button android:id="@+id/create_car_pod"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Pod"
+            android:layout_gravity="bottom"
+            android:onClick="startCreatePod" />
 </LinearLayout>

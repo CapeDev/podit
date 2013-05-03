@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+import com.thoughtworks.carpods.UI.CreatePod;
 import com.thoughtworks.carpods.UI.DisplayPerson;
 import com.thoughtworks.carpods.UI.EditPerson;
 import com.thoughtworks.carpods.UI.PeopleList;
@@ -37,5 +38,9 @@ public class ActivitySwitcher extends Activity {
 
     public void startPeopleList(View view) {
         startActivity(new Intent(this, PeopleList.class));
+    }
+
+    public void startCreatePod(View view) {
+        startActivity(new Intent(this, CreatePod.class));
     }
 }

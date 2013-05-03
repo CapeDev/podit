@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <!-- FIXME: convert this to a relative layout to avoid severely nested Linear Layouts -->
+    <LinearLayout android:orientation="horizontal"
+                  android:layout_width="fill_parent"
+                  android:layout_height="120dp"
+                  android:layout_gravity="left">
+        <ImageView android:id="@+id/car_photo"
+                   android:layout_width="100dp"
+                   android:layout_height="100dp"
+                   android:background="#ff0000"/>
+        <LinearLayout android:orientation="vertical"
+                      android:layout_width="fill_parent"
+                      android:layout_height="fill_parent">
+            <EditText android:id="@+id/pod_name"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:textSize="25sp"
+                      android:lines="1"
+                      android:singleLine="true"
+                      android:hint="@string/pod_name"/>
+            <Spinner android:id="@+id/home_location_spinner"
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:paddingBottom="0dp"
+                     android:paddingTop="0dp"
+                     android:entries="@array/home_locations"
+                     android:prompt="@string/choose" />
+            <!-- FIXME: check this out for implementation for the timepicker for the onclick functionality of the display times:
+                 FIXME: http://www.mkyong.com/android/android-time-picker-example/-->
+            <!--<TimePicker android:id="@+id/leave_time_picker"
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content" /> -->
+            <!-- FIXME: create a preferences activity to determine if the user perfers military or 12-hour time -->
+            <TextView android:id="@+id/leave_time_label"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:textSize="15sp"
+                      android:text="@string/default_time"/>
+            <TextView android:id="@+id/return_time"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:textSize="15sp"
+                      android:hint="@string/default_time"/>
+         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout android:orientation="vertical"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content">
+        <TextView android:id="@+id/about_pod_label"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="20sp"
+                  android:text="@string/about_pod_label" />
+        <EditText android:id="@+id/about_pod"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/tell_me_about_pod"
+                  android:lines="3"
+                  android:gravity="top"/>
+    </LinearLayout>
+
+    <LinearLayout android:orientation="vertical"
+                  android:gravity="left"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent">
+        <TextView android:id="@+id/my_pod_members_label"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="20sp"
+                  android:background="#0000ff"
+                  android:text="@string/pod_members_label"/>
+
+        <ListView android:id="@+id/people_list"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:background="#00ff00"/>
+    </LinearLayout>
+
+    <!-- FIXME: I can't get these buttons to show up on the UI.  Even better would be to get them to show up in the top bar similar to adding a (phone number) contact -->
+    <LinearLayout android:orientation="horizontal"
+                  android:layout_height="fill_parent"
+                  android:layout_width="wrap_content"
+                  android:layout_gravity="bottom">
+        <Button android:id="@+id/save_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                android:onClick="savePodClick"/>
+        <Button android:id="@+id/cancel_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                android:onClick="cancelClick" />
+    </LinearLayout>
+
+</LinearLayout>
