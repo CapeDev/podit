@@ -15,10 +15,10 @@
 
       <activity android:name=".example.HelloAndroidActivity" />
 
-      <activity android:name=".UI.EditPerson" />
+      <activity android:name=".UI.EditPerson" android:label="@string/create_person"/>
       <activity android:name=".UI.DisplayPerson"/>
-      <activity android:name=".UI.PeopleList" android:label="This is the people list label"/>
-      <activity android:name=".UI.CreatePod" android:label="Create A Car Pod"/>
+      <activity android:name=".UI.PeopleList" android:label="@string/the_people_list"/>
+      <activity android:name=".UI.CreatePod" android:label="@string/create_a_pod"/>
   </application>
 </manifest>
 

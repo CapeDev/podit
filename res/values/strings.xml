@@ -18,4 +18,8 @@
     <string name="tell_me_about_pod">Tell me about your pod.</string>
     <string name="pod_members_label">Pod Members:</string>
     <string name="cancel">Cancel</string>
+    <string name="tell_me_about_yourself">Tell me about yourself...</string>
+    <string name="create_person">Create Person</string>
+    <string name="the_people_list">The People List</string>
+    <string name="create_a_pod">Create a Pod</string>
 </resources>
