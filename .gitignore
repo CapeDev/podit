@@ -12,3 +12,4 @@ tmp/*
 .idea/*
 *.iml
 out
+project.properties
