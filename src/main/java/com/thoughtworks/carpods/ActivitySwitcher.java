@@ -8,7 +8,6 @@ import android.widget.Toast;
 import com.thoughtworks.carpods.UI.DisplayPerson;
 import com.thoughtworks.carpods.UI.EditPerson;
 import com.thoughtworks.carpods.UI.PeopleList;
-import com.thoughtworks.carpods.UI.PeopleListLoader;
 import com.thoughtworks.carpods.data.PeoplePopulator;
 import com.thoughtworks.carpods.example.HelloAndroidActivity;
 
