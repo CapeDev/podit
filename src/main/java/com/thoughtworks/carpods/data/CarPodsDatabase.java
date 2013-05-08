@@ -28,7 +28,20 @@ public class CarPodsDatabase {
     private static final String HOME_LOCATION = "home_location";
     private static final String ABOUT_ME = "about_name";
 
+
+    private static final String POD_TABLE = "podTable";
+    private static final String POD_NAME = "pod_name";
+    private static final String POD_HOME_LOCATION = "pod_home";
+    private static final String POD_DEPARTURE_TIME = "pod_departure_time";
+    private static final String POD_RETURN_TIME = "pod_return_time";
+    private static final String ABOUT_POD = "about_pod";
+    private static final String MEMBER_ONE = "pod_member_one";
+    private static final String MEMBER_TWO = "pod_number_two";
+    private static final String MEMBER_THREE = "pod_number_three";
+    private static final String MEMBER_FOUR = "pod_number_four";
+
     private final Context context;
+
     private SQLiteDatabase database;
 
     private static final String EXAMPLE_TABLE_CREATE_STMT =
@@ -46,6 +59,21 @@ public class CarPodsDatabase {
                     + LAST_NAME + " text not null,"
                     + ABOUT_ME + " text not null,"
                     + HOME_LOCATION + " text not null"
+                    + ");";
+
+    private static final String POD_TABLE_CREATE_STMT =
+            "create table " + POD_TABLE
+                    + " ("
+                    + ROWID + " integer primary key autoincrement, "
+                    + POD_NAME + " text not null,"
+                    + POD_HOME_LOCATION + " text not null"
+                    + POD_DEPARTURE_TIME + " text not null,"
+                    + POD_RETURN_TIME + " text not null,"
+                    + ABOUT_POD + " text not null,"
+                    + MEMBER_ONE + " text not null,"
+                    + MEMBER_TWO + " text not null,"
+                    + MEMBER_THREE + " text not null,"
+                    + MEMBER_FOUR + " text not null,"
                     + ");";
 
     public CarPodsDatabase (Context context) {
@@ -217,6 +245,7 @@ public class CarPodsDatabase {
         public void onCreate (SQLiteDatabase db) {
             db.execSQL(EXAMPLE_TABLE_CREATE_STMT);
             db.execSQL(PERSON_TABLE_CREATE_STMT);
+            db.execSQL(POD_TABLE_CREATE_STMT);
         }
 
         @Override
@@ -224,6 +253,7 @@ public class CarPodsDatabase {
 
             Log.v(CLASS_TAG, "Upgrading database from version " + oldVersion + " to " + newVersion + " which will destroy all old data.");
             db.execSQL("DROP TABLE IF EXISTS " + PERSON_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + POD_TABLE);
             onCreate(db);
         }
 
