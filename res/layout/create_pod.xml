@@ -60,7 +60,7 @@
                          android:layout_width="fill_parent"
                          android:layout_height="wrap_content" /> -->
                 <!-- FIXME: create a preferences activity to determine if the user prefers military or 12-hour time -->
-                <TextView android:id="@+id/leave_time_label"
+                <TextView android:id="@+id/departure_time"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:layout_weight="1"
