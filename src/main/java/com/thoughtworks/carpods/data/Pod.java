@@ -24,19 +24,19 @@ public class Pod {
         }
     }
 
-    public String getPodName() {
+    public String getName() {
         return podName;
     }
 
-    public String getPodHomeLocation() {
+    public String getHomeLocation() {
         return podHomeLocation;
     }
 
-    public String getPodDepartureTime() {
+    public String getDepartureTime() {
         return podDepartureTime;
     }
 
-    public String getPodReturnTime() {
+    public String getReturnTime() {
         return podReturnTime;
     }
 

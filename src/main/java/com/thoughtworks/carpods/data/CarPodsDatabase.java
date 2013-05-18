@@ -231,10 +231,10 @@ public class CarPodsDatabase {
         String table = POD_TABLE;
 
         ContentValues podInfo = new ContentValues();
-        podInfo.put(POD_NAME, pod.getPodName());
-        podInfo.put(POD_HOME_LOCATION, pod.getPodHomeLocation());
-        podInfo.put(POD_DEPARTURE_TIME, pod.getPodDepartureTime());
-        podInfo.put(POD_RETURN_TIME, pod.getPodReturnTime());
+        podInfo.put(POD_NAME, pod.getName());
+        podInfo.put(POD_HOME_LOCATION, pod.getHomeLocation());
+        podInfo.put(POD_DEPARTURE_TIME, pod.getDepartureTime());
+        podInfo.put(POD_RETURN_TIME, pod.getReturnTime());
         podInfo.put(ABOUT_POD, pod.getAboutPod());
 
         this.open();
