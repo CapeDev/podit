@@ -151,13 +151,6 @@ public class CarPodsDatabase {
         return isOpen;
     }
 
-//    public Cursor getFirstPersonFromDatabaseAsCursor(){
-//        String[] columns = {ROWID, FIRST_NAME, LAST_NAME, HOME_LOCATION, ABOUT_ME};
-//        String whereClause = ROWID + " = ?";
-//        String[] whereArgs = {"1"};
-//        return database.query(PERSON_TABLE, columns, whereClause, whereArgs, null, null, null, null);
-//    }
-
     public Person getFirstPersonFromDatabase() {
         Cursor cursor = null;
 
