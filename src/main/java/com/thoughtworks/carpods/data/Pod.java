@@ -28,43 +28,19 @@ public class Pod {
         return podName;
     }
 
-    public void setPodName(String podName) {
-        this.podName = podName;
-    }
-
     public String getPodHomeLocation() {
         return podHomeLocation;
-    }
-
-    public void setPodHomeLocation(String podHomeLocation) {
-        this.podHomeLocation = podHomeLocation;
     }
 
     public String getPodDepartureTime() {
         return podDepartureTime;
     }
 
-    public void setPodDepartureTime(String podDepartureTime) {
-        this.podDepartureTime = podDepartureTime;
-    }
-
     public String getPodReturnTime() {
         return podReturnTime;
     }
 
-    public void setPodReturnTime(String podReturnTime) {
-        this.podReturnTime = podReturnTime;
-    }
-
     public String getAboutPod() {
         return aboutPod;
-    }
-
-    public void setAboutPod(String aboutPod) {
-        this.aboutPod = aboutPod;
-    }
-
-    public void addMember(Person member) {
-        this.members.add(member);
     }
 }
