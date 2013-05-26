@@ -24,27 +24,31 @@ public class CreatePod extends Activity {
     }
 
     private Pod getDataFromView() {
-        String podName = getPodNameFromView();
-        String homeLocation = getHomeLocationFromView();
-        // FIXME - should these be some kind of date object?
-        String departureTime = getDepartureTimeFromView();
-        String returnTime = getReturnTimeFromView();
-        String about = getAboutFromView();
-        // FIXME - how am I going to get the from the view?
+        Pod.Builder podBuilder = new Pod.Builder();
+        podBuilder.name(getPodNameFromView());
+        podBuilder.homeLocation(getHomeLocationFromView());
+        // FIXME - should these be some kind of date object instead of a integer?
+        podBuilder.departureTime(getDepartureTimeFromView());
+        podBuilder.returnTIme(getReturnTimeFromView());
+        podBuilder.about(getAboutFromView());
 
-        return null;
+        // FIXME - how am I going to get the members from the view?
+
+        return podBuilder.build();
     }
 
     private String getAboutFromView() {
         return ((EditText)findViewById(R.id.about_pod)).getText().toString();
     }
 
-    private String getReturnTimeFromView() {
-        return ((EditText)findViewById(R.id.return_time)).getText().toString();
+    private int getReturnTimeFromView() {
+        String rawReturnTime = ((EditText)findViewById(R.id.return_time)).getText().toString();
+        return Integer.parseInt(rawReturnTime);
     }
 
-    private String getDepartureTimeFromView() {
-        return ((EditText)findViewById(R.id.departure_time)).getText().toString();
+    private int getDepartureTimeFromView() {
+        String rawDepartureTime = ((EditText)findViewById(R.id.departure_time)).getText().toString();
+        return Integer.parseInt(rawDepartureTime);
     }
 
     private String getHomeLocationFromView() {
