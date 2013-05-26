@@ -7,21 +7,17 @@ public class Pod {
 
     private String podName;
     private String podHomeLocation;
-    private String podDepartureTime;
-    private String podReturnTime;
+    private int podDepartureTime;
+    private int podReturnTime;
     private String aboutPod;
     private List<Person> members;
 
-    public Pod(String podName, String podHomeLocation, String podDepartureTime, String podReturnTime, String aboutPod, Person... members) {
-        this.podName = podName;
-        this.podHomeLocation = podHomeLocation;
-        this.podDepartureTime = podDepartureTime;
-        this.podReturnTime = podReturnTime;
-        this.aboutPod = aboutPod;
-        this.members = new ArrayList<Person>();
-        for(Person member : members) {
-            this.members.add(member);
-        }
+    public Pod(Builder podBuilder) {
+        this.podName = podBuilder.name;
+        this.podHomeLocation = podBuilder.homeLocation;
+        this.podDepartureTime = podBuilder.departureTime;
+        this.podReturnTime = podBuilder.returnTime;
+        this.aboutPod = podBuilder.about;
     }
 
     public String getName() {
@@ -32,15 +28,52 @@ public class Pod {
         return podHomeLocation;
     }
 
-    public String getDepartureTime() {
+    public int getDepartureTime() {
         return podDepartureTime;
     }
 
-    public String getReturnTime() {
+    public int getReturnTime() {
         return podReturnTime;
     }
 
     public String getAboutPod() {
         return aboutPod;
+    }
+
+    public static class Builder {
+        private String name;
+        private String homeLocation;
+        private int departureTime;
+        private int returnTime;
+        private String about;
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder homeLocation(String homeLocation) {
+            this.homeLocation = homeLocation;
+            return this;
+        }
+
+        public Builder departureTime(int departureTime) {
+            this.departureTime = departureTime;
+            return this;
+        }
+
+        public Builder returnTIme(int returnTime) {
+            this.returnTime = returnTime;
+            return this;
+        }
+
+        public Builder about(String about) {
+            this.about = about;
+            return this;
+        }
+
+        public Pod build() {
+            return new Pod(this);
+        }
     }
 }
