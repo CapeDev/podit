@@ -41,7 +41,7 @@ public class ActivitySwitcher extends Activity {
         populate(new PeoplePopulator(applicationContext));
     }
 
-    public void popluatePods(View view) {
+    public void populatePods(View view) {
         populate(new PodPopulator(applicationContext));
     }
 

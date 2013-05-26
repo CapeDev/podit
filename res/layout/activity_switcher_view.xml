@@ -29,6 +29,12 @@
             android:text="Populate People"
             android:layout_gravity="bottom"
             android:onClick="populatePeople" />
+    <Button android:id="@+id/populate_pods"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Populate Pods"
+            android:layout_gravity="bottom"
+            android:onClick="populatePods" />
     <Button android:id="@+id/show_people_list"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
