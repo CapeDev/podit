@@ -6,6 +6,7 @@ public class Person {
     private String lastName;
     private String homeLocation;
     private String aboutMe;
+    private int id = -1;
 
     private Person(Builder personBuilder) {
         this.firstName = personBuilder.firstName;
@@ -28,6 +29,10 @@ public class Person {
 
     public String getAboutMe() {
         return aboutMe;
+    }
+
+    public int getId() {
+        return id;
     }
 
 

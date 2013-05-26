@@ -236,7 +236,7 @@ public class CarPodsDatabase {
         return peopleList;
     }
 
-    public void savePod(Pod pod) {
+    public long savePod(Pod pod) {
         String table = POD_TABLE;
 
         ContentValues podInfo = new ContentValues();
@@ -247,7 +247,23 @@ public class CarPodsDatabase {
         podInfo.put(ABOUT_POD, pod.getAboutPod());
 
         this.open();
-        database.insert(table, null, podInfo);
+        long podId = database.insert(table, null, podInfo);
+        this.close();
+
+        return podId;
+    }
+
+    public void savePodMembersToPod(List<Person> peopleToAdd, int podId) {
+
+        this.open();
+
+        for (Person newMember : peopleToAdd) {
+            ContentValues memberInfo = new ContentValues();
+            memberInfo.put(POD_ID, podId);
+            memberInfo.put(MEMBER_ID, newMember.getId());
+            database.insert(POD_MEMBER_TABLE, null, memberInfo);
+        }
+
         this.close();
     }
 
