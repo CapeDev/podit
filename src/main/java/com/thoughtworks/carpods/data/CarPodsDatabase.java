@@ -267,6 +267,36 @@ public class CarPodsDatabase {
         this.close();
     }
 
+    public Pod getFirstPodInDatabase() {
+        String[] columns = {ROWID, POD_NAME, POD_HOME_LOCATION, POD_DEPARTURE_TIME, POD_RETURN_TIME, ABOUT_POD};
+        String selection = ROWID + " = ?";
+        String[] selectionArgs = {"1"};
+
+        Cursor cursor = null;
+        Pod.Builder podBuilder = new Pod.Builder();
+        this.open();
+        try {
+            cursor = database.query(POD_TABLE, columns, selection, selectionArgs, null, null, null, null);
+
+            if (cursor != null && cursor.getCount() > 0) {
+                Log.v(CLASS_TAG, "retrieved " + cursor.getCount() + " Pods from the database");
+                cursor.moveToLast();
+                podBuilder.name(cursor.getString(cursor.getColumnIndex(POD_NAME)));
+                podBuilder.homeLocation(cursor.getString(cursor.getColumnIndex(POD_HOME_LOCATION)));
+                podBuilder.departureTime(cursor.getInt(cursor.getColumnIndex(POD_DEPARTURE_TIME)));
+                podBuilder.returnTIme(cursor.getInt(cursor.getColumnIndex(POD_RETURN_TIME)));
+                podBuilder.about(cursor.getString(cursor.getColumnIndex(ABOUT_POD)));
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return podBuilder.build();
+
+    }
+
     private static class DBHelper extends SQLiteOpenHelper {
         private static final int DATABASE_VERSION = 1;
 
