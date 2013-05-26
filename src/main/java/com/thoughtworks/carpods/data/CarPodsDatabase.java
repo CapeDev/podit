@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.sql.RowId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +36,10 @@ public class CarPodsDatabase {
     private static final String POD_DEPARTURE_TIME = "pod_departure_time";
     private static final String POD_RETURN_TIME = "pod_return_time";
     private static final String ABOUT_POD = "about_pod";
-    private static final String MEMBER_ONE = "pod_member_one";
-    private static final String MEMBER_TWO = "pod_number_two";
-    private static final String MEMBER_THREE = "pod_number_three";
-    private static final String MEMBER_FOUR = "pod_number_four";
+
+    private static final String POD_MEMBER_TABLE = "podMemberTable";
+    private static final String POD_ID = "podId";
+    private static final String MEMBER_ID = "memberId";
 
     private final Context context;
 
@@ -55,9 +56,9 @@ public class CarPodsDatabase {
             "create table " + PERSON_TABLE
                     + " ("
                     + ROWID + " integer primary key autoincrement, "
-                    + FIRST_NAME + " text not null,"
-                    + LAST_NAME + " text not null,"
-                    + ABOUT_ME + " text not null,"
+                    + FIRST_NAME + " text not null, "
+                    + LAST_NAME + " text not null, "
+                    + ABOUT_ME + " text, "
                     + HOME_LOCATION + " text not null"
                     + ");";
 
@@ -65,16 +66,24 @@ public class CarPodsDatabase {
             "create table " + POD_TABLE
                     + " ("
                     + ROWID + " integer primary key autoincrement, "
-                    + POD_NAME + " text not null,"
-                    + POD_HOME_LOCATION + " text not null"
-                    + POD_DEPARTURE_TIME + " text not null,"
-                    + POD_RETURN_TIME + " text not null,"
-                    + ABOUT_POD + " text not null,"
-                    + MEMBER_ONE + " text not null,"
-                    + MEMBER_TWO + " text not null,"
-                    + MEMBER_THREE + " text not null,"
-                    + MEMBER_FOUR + " text not null,"
+                    + POD_NAME + " text not null, "
+                    + POD_HOME_LOCATION + " text not null, "
+                    + POD_DEPARTURE_TIME + " text not null, "
+                    + POD_RETURN_TIME + " text not null, "
+                    + ABOUT_POD + " text "
                     + ");";
+
+    private static final String POD_MEMBER_CREATE_STMT =
+            "create table " + POD_MEMBER_TABLE
+                + " ("
+                + ROWID + " integer primary key autoincrement, "
+                + POD_ID + " integer not null, "
+                + MEMBER_ID + "integer, "
+                + "foreign key(" + POD_ID + ") references " + POD_TABLE + "(" + ROWID + "), "
+                + "foreign key(" + MEMBER_ID + ") references " + PERSON_TABLE + "(" + ROWID + ") "
+                + ");";
+
+
 
     public CarPodsDatabase (Context context) {
         this.context = context;
@@ -254,6 +263,7 @@ public class CarPodsDatabase {
             db.execSQL(EXAMPLE_TABLE_CREATE_STMT);
             db.execSQL(PERSON_TABLE_CREATE_STMT);
             db.execSQL(POD_TABLE_CREATE_STMT);
+            db.execSQL(POD_MEMBER_CREATE_STMT);
         }
 
         @Override
