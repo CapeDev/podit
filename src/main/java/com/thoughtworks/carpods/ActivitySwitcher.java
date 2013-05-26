@@ -10,6 +10,7 @@ import com.thoughtworks.carpods.UI.DisplayPerson;
 import com.thoughtworks.carpods.UI.EditPerson;
 import com.thoughtworks.carpods.UI.PeopleList;
 import com.thoughtworks.carpods.data.development.PeoplePopulator;
+import com.thoughtworks.carpods.data.development.PodPopulator;
 import com.thoughtworks.carpods.example.HelloAndroidActivity;
 
 public class ActivitySwitcher extends Activity {
@@ -34,6 +35,12 @@ public class ActivitySwitcher extends Activity {
         PeoplePopulator populator = new PeoplePopulator(getApplicationContext());
         populator.populate();
         Toast.makeText(getApplicationContext(), "Done populating People", Toast.LENGTH_SHORT).show();
+    }
+
+    public void popluatePods(View view) {
+        PodPopulator podPopulator = new PodPopulator(getApplicationContext());
+        podPopulator.populate();
+        Toast.makeText(getApplicationContext(), "Done populating", Toast.LENGTH_SHORT).show();
     }
 
     public void startPeopleList(View view) {
