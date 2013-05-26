@@ -52,7 +52,7 @@ public class ActivitySwitcher extends Activity {
     }
 
     public void startCreatePod(View view) {
-        startActivity(new Intent(this, CreatePod.class));
+        startActivity(new Intent(this, EditPod.class));
     }
 
     public void startDisplayPod(View view) {

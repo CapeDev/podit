@@ -10,7 +10,7 @@ import com.thoughtworks.carpods.data.Pod;
 import javax.swing.text.View;
 
 
-public class CreatePod extends Activity {
+public class EditPod extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
