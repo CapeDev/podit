@@ -19,6 +19,7 @@
       <activity android:name=".UI.DisplayPerson"/>
       <activity android:name=".UI.PeopleList" android:label="@string/the_people_list"/>
       <activity android:name=".UI.CreatePod" android:label="@string/create_a_pod"/>
+      <activity android:name=".UI.DisplayPod"/>
   </application>
 </manifest>
 
