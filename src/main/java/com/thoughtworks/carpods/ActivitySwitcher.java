@@ -1,6 +1,7 @@
 package com.thoughtworks.carpods;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,9 +16,13 @@ import com.thoughtworks.carpods.data.development.Populator;
 import com.thoughtworks.carpods.example.HelloAndroidActivity;
 
 public class ActivitySwitcher extends Activity {
+
+    private Context applicationContext;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_switcher_view);
+        applicationContext = getApplicationContext();
     }
 
     public void startExample(View view) {
@@ -33,11 +38,11 @@ public class ActivitySwitcher extends Activity {
     }
 
     public void populatePeople(View view) {
-        populate(new PeoplePopulator(getApplicationContext()));
+        populate(new PeoplePopulator(applicationContext));
     }
 
     public void popluatePods(View view) {
-        populate(new PodPopulator(getApplicationContext()));
+        populate(new PodPopulator(applicationContext));
     }
 
     private void populate(Populator populator) {
