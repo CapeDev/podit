@@ -4,7 +4,7 @@ import android.content.Context;
 import com.thoughtworks.carpods.data.CarPodsDatabase;
 import com.thoughtworks.carpods.data.Person;
 
-public class PeoplePopulator {
+public class PeoplePopulator implements Populator {
 
     Context context;
 

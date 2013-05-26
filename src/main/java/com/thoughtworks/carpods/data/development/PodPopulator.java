@@ -5,7 +5,7 @@ import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.CarPodsDatabase;
 import com.thoughtworks.carpods.data.Pod;
 
-public class PodPopulator {
+public class PodPopulator implements Populator {
 
     private final Context context;
 
@@ -13,6 +13,7 @@ public class PodPopulator {
         this.context = context;
     }
 
+    @Override
     public void populate() {
         CarPodsDatabase database = new CarPodsDatabase(context);
         database.open();
