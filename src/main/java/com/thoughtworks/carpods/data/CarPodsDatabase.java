@@ -76,11 +76,11 @@ public class CarPodsDatabase {
     private static final String POD_MEMBER_CREATE_STMT =
             "create table " + POD_MEMBER_TABLE
                 + " ("
-                + ROWID + " integer primary key autoincrement, "
                 + POD_ID + " integer not null, "
-                + MEMBER_ID + "integer, "
+                + MEMBER_ID + " integer not null, "
                 + "foreign key(" + POD_ID + ") references " + POD_TABLE + "(" + ROWID + "), "
-                + "foreign key(" + MEMBER_ID + ") references " + PERSON_TABLE + "(" + ROWID + ") "
+                + "foreign key(" + MEMBER_ID + ") references " + PERSON_TABLE + "(" + ROWID + "), "
+                + "primary key (" + POD_ID + ", " + MEMBER_ID + ") "
                 + ");";
 
 
