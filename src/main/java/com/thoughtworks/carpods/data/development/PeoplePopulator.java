@@ -1,6 +1,8 @@
-package com.thoughtworks.carpods.data;
+package com.thoughtworks.carpods.data.development;
 
 import android.content.Context;
+import com.thoughtworks.carpods.data.CarPodsDatabase;
+import com.thoughtworks.carpods.data.Person;
 
 public class PeoplePopulator {
 

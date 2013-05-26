@@ -9,7 +9,7 @@ import com.thoughtworks.carpods.UI.CreatePod;
 import com.thoughtworks.carpods.UI.DisplayPerson;
 import com.thoughtworks.carpods.UI.EditPerson;
 import com.thoughtworks.carpods.UI.PeopleList;
-import com.thoughtworks.carpods.data.PeoplePopulator;
+import com.thoughtworks.carpods.data.development.PeoplePopulator;
 import com.thoughtworks.carpods.example.HelloAndroidActivity;
 
 public class ActivitySwitcher extends Activity {
