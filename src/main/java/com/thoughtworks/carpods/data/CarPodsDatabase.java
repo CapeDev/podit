@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.sql.RowId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -284,7 +283,7 @@ public class CarPodsDatabase {
                 podBuilder.name(cursor.getString(cursor.getColumnIndex(POD_NAME)));
                 podBuilder.homeLocation(cursor.getString(cursor.getColumnIndex(POD_HOME_LOCATION)));
                 podBuilder.departureTime(cursor.getInt(cursor.getColumnIndex(POD_DEPARTURE_TIME)));
-                podBuilder.returnTIme(cursor.getInt(cursor.getColumnIndex(POD_RETURN_TIME)));
+                podBuilder.returnTime(cursor.getInt(cursor.getColumnIndex(POD_RETURN_TIME)));
                 podBuilder.about(cursor.getString(cursor.getColumnIndex(ABOUT_POD)));
             }
         } finally {

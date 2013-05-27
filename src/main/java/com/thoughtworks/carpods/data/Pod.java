@@ -62,7 +62,7 @@ public class Pod {
             return this;
         }
 
-        public Builder returnTIme(int returnTime) {
+        public Builder returnTime(int returnTime) {
             this.returnTime = returnTime;
             return this;
         }

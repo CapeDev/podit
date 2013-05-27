@@ -15,7 +15,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/save"
-                android:onClick="savePodClick"/>
+                android:onClick="savePod"/>
         <Button android:id="@+id/cancel_button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
                           android:layout_height="wrap_content"
                           android:layout_weight="1"
                           android:textSize="15sp"
-                          android:hint="@string/default_time"/>
+                          android:text="@string/default_time"/>
             </LinearLayout>
          </LinearLayout>
     </LinearLayout>

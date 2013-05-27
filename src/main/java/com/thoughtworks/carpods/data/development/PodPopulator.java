@@ -1,7 +1,6 @@
 package com.thoughtworks.carpods.data.development;
 
 import android.content.Context;
-import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.CarPodsDatabase;
 import com.thoughtworks.carpods.data.Pod;
 
@@ -28,7 +27,7 @@ public class PodPopulator implements Populator {
         newPod.name(name);
         newPod.homeLocation(homeLocation);
         newPod.departureTime(departurnTime);
-        newPod.returnTIme(returnTime);
+        newPod.returnTime(returnTime);
         newPod.about(about);
         return newPod.build();
     }
