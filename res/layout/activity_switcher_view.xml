@@ -11,6 +11,12 @@
           android:text="Start Example"
           android:layout_gravity="bottom"
           android:onClick="startExample" />
+    <Button android:id="@+id/start_scrollview_example"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Start ScrollView Example"
+            android:layout_gravity="bottom"
+            android:onClick="startScrollViewExample" />
 
     <View android:layout_width="fill_parent"
           android:layout_height="2dp"

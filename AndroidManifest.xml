@@ -14,6 +14,7 @@
       </activity>
 
       <activity android:name=".example.HelloAndroidActivity" />
+      <activity android:name=".example.HelloScrollView" />
 
       <activity android:name=".UI.EditPerson" android:label="@string/create_person"/>
       <activity android:name=".UI.DisplayPerson"/>
@@ -22,4 +23,3 @@
       <activity android:name=".UI.DisplayPod"/>
   </application>
 </manifest>
-
