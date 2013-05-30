@@ -202,7 +202,6 @@ public class CarPodsDatabase {
     }
 
     public List<Person> getAllPeopleNames() {
-        this.open();
         Cursor cursor = null;
 
         String[] columns = {ROWID, FIRST_NAME, LAST_NAME};
@@ -233,6 +232,39 @@ public class CarPodsDatabase {
         this.close();
 
         return peopleList;
+    }
+
+    public List<Pod> getAllPodNames() {
+        Cursor cursor = null;
+
+        String[] columns = {ROWID, POD_NAME};
+        String selection = null;
+        String[] selectionArgs = null;
+
+        List<Pod> podList = new ArrayList<Pod>();
+
+        this.open();
+        try {
+            cursor = database.query(POD_TABLE, columns, selection, selectionArgs, null, null, null);
+
+            if (cursor != null && cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    Pod.Builder podBuilder = new Pod.Builder();
+                    podBuilder.name(cursor.getString(cursor.getColumnIndex(POD_NAME)));
+                    podBuilder.id(cursor.getInt(cursor.getColumnIndex(ROWID)));
+                    podList.add(podBuilder.build());
+                    cursor.moveToNext();
+                }
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        this.close();
+
+        return podList;
     }
 
     public long savePod(Pod pod) {
@@ -295,6 +327,8 @@ public class CarPodsDatabase {
         return podBuilder.build();
 
     }
+
+
 
     private static class DBHelper extends SQLiteOpenHelper {
         private static final int DATABASE_VERSION = 1;

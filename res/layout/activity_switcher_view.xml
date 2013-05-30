@@ -67,5 +67,11 @@
             android:text="Display Pod"
             android:layout_gravity="bottom"
             android:onClick="startDisplayPod" />
+    <Button android:id="@+id/start_pod_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Pod List"
+            android:layout_gravity="bottom"
+            android:onClick="startPodList" />
 
 </LinearLayout>

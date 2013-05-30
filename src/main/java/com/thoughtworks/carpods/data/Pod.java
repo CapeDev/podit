@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Pod {
 
+    private final int id;
     private String podName;
     private String podHomeLocation;
     private int podDepartureTime;
@@ -18,6 +19,7 @@ public class Pod {
         this.podDepartureTime = podBuilder.departureTime;
         this.podReturnTime = podBuilder.returnTime;
         this.aboutPod = podBuilder.about;
+        this.id = podBuilder.id;
     }
 
     public String getName() {
@@ -46,6 +48,7 @@ public class Pod {
         private int departureTime;
         private int returnTime;
         private String about;
+        private int id = -1;
 
         public Builder name(String name) {
             this.name = name;
@@ -69,6 +72,11 @@ public class Pod {
 
         public Builder about(String about) {
             this.about = about;
+            return this;
+        }
+
+        public Builder id(int id) {
+            this.id = id;
             return this;
         }
 
