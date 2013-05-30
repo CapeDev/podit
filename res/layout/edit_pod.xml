@@ -92,21 +92,25 @@
                   android:gravity="top"/>
     </LinearLayout>
 
-    <LinearLayout android:orientation="vertical"
-                  android:gravity="left"
+    <LinearLayout android:orientation="horizontal"
                   android:layout_width="fill_parent"
-                  android:layout_height="fill_parent">
+                  android:layout_height="fill_parent"
+                  android:layout_gravity="right"
+                  android:gravity="right">
         <TextView android:id="@+id/my_pod_members_label"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
                   android:textSize="20sp"
-                  android:background="#0000ff"
-                  android:text="@string/pod_members_label"/>
-
-        <ListView android:id="@+id/people_list"
-                  android:layout_width="fill_parent"
-                  android:layout_height="fill_parent"
-                  android:background="#00ff00"/>
+                  android:text="@string/pod_members_label"
+                  android:layout_weight="1"/>
+        <ImageView android:id="@+id/add_member"
+                   android:layout_height="20sp"
+                   android:layout_width="wrap_content"
+                   android:src="@android:drawable/ic_input_add"
+                   android:layout_weight="1"
+                   android:clickable="true"
+                   android:onClick="beenClicked"
+                   android:gravity="center"/>
     </LinearLayout>
 
 </LinearLayout>

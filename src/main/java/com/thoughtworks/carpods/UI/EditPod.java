@@ -1,12 +1,14 @@
 package com.thoughtworks.carpods.UI;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.CarPodsDatabase;
 import com.thoughtworks.carpods.data.Pod;
@@ -82,5 +84,9 @@ public class EditPod extends Activity {
 
     public void cancelClick(View v) {
         finish();
+    }
+
+    public void beenClicked(View view) {
+        Toast.makeText(getApplicationContext(), "I've been Clicked!", Toast.LENGTH_SHORT).show();
     }
 }
