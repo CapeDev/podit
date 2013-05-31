@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.Pod;
@@ -18,7 +17,7 @@ public class PodAdapter extends ArrayAdapter {
     private final List<Pod> podNames;
 
     public PodAdapter(Context context, List<Pod> podNames) {
-        super(context, R.layout.pod_list_view);
+        super(context, R.layout.pod_list);
         this.context = context;
         this.podNames = podNames;
     }

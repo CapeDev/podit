@@ -18,7 +18,7 @@ public class ActivitySwitcher extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_switcher_view);
+        setContentView(R.layout.activity_switcher);
         applicationContext = getApplicationContext();
     }
 

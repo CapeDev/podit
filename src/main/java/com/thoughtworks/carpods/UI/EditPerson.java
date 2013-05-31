@@ -22,7 +22,7 @@ public class EditPerson extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.edit_person_view);
+        setContentView(R.layout.edit_person);
 
         getDatabaseConnection();
     }

@@ -11,7 +11,7 @@ public class DisplayPerson extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.display_person_view);
+        setContentView(R.layout.display_person);
         CarPodsDatabase carPodsDatabase = new CarPodsDatabase(this);
         Person person = carPodsDatabase.getFirstPersonFromDatabase();
         setFirstName(person.getFirstName());

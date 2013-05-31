@@ -16,7 +16,7 @@ public class PodList extends ListActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pod_list_view);
+        setContentView(R.layout.pod_list);
 
         if (database == null) {
             database = new CarPodsDatabase(this);

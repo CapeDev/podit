@@ -12,7 +12,7 @@ public class DisplayPod extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.display_pod_view);
+        setContentView(R.layout.display_pod);
 
         CarPodsDatabase carPodsDatabase = new CarPodsDatabase(this);
         Pod pod = carPodsDatabase.getFirstPodInDatabase();
