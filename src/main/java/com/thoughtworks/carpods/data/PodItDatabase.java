@@ -12,26 +12,26 @@ public class PodItDatabase extends SQLiteOpenHelper {
 
     public static final String ROWID = "_ID";
 
-    private static final String EXAMPLE_TABLE = "exampleTable";
+    public static final String EXAMPLE_TABLE = "exampleTable";
     public static final String PERSON_TABLE = "personTable";
 
-    private static final String EXAMPLE_STRING = "example_string";
+    public static final String EXAMPLE_STRING = "example_string";
     public static final String FIRST_NAME = "first_name";
     public static final String LAST_NAME = "last_name";
-    private static final String HOME_LOCATION = "home_location";
-    private static final String ABOUT_ME = "about_name";
+    public static final String HOME_LOCATION = "home_location";
+    public static final String ABOUT_ME = "about_name";
 
 
-    private static final String POD_TABLE = "podTable";
-    private static final String POD_NAME = "pod_name";
-    private static final String POD_HOME_LOCATION = "pod_home";
-    private static final String POD_DEPARTURE_TIME = "pod_departure_time";
-    private static final String POD_RETURN_TIME = "pod_return_time";
-    private static final String ABOUT_POD = "about_pod";
+    public static final String POD_TABLE = "podTable";
+    public static final String POD_NAME = "pod_name";
+    public static final String POD_HOME_LOCATION = "pod_home";
+    public static final String POD_DEPARTURE_TIME = "pod_departure_time";
+    public static final String POD_RETURN_TIME = "pod_return_time";
+    public static final String ABOUT_POD = "about_pod";
 
-    private static final String POD_MEMBER_TABLE = "podMemberTable";
-    private static final String POD_ID = "podId";
-    private static final String MEMBER_ID = "memberId";
+    public static final String POD_MEMBER_TABLE = "podMemberTable";
+    public static final String POD_ID = "podId";
+    public static final String MEMBER_ID = "memberId";
 
     private static final String EXAMPLE_TABLE_CREATE_STMT =
             "create table " + EXAMPLE_TABLE

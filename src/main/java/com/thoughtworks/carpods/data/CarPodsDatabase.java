@@ -15,27 +15,6 @@ public class CarPodsDatabase {
 
     private static final String CLASS_TAG = "CarPodsDatabase";
 
-    private static final String EXAMPLE_TABLE = "exampleTable";
-    public static final String PERSON_TABLE = "personTable";
-
-    private static final String EXAMPLE_STRING = "example_string";
-    public static final String FIRST_NAME = "first_name";
-    public static final String LAST_NAME = "last_name";
-    private static final String HOME_LOCATION = "home_location";
-    private static final String ABOUT_ME = "about_name";
-
-
-    private static final String POD_TABLE = "podTable";
-    private static final String POD_NAME = "pod_name";
-    private static final String POD_HOME_LOCATION = "pod_home";
-    private static final String POD_DEPARTURE_TIME = "pod_departure_time";
-    private static final String POD_RETURN_TIME = "pod_return_time";
-    private static final String ABOUT_POD = "about_pod";
-
-    private static final String POD_MEMBER_TABLE = "podMemberTable";
-    private static final String POD_ID = "podId";
-    private static final String MEMBER_ID = "memberId";
-
     private final Context context;
 
     private SQLiteDatabase database;
@@ -55,10 +34,10 @@ public class CarPodsDatabase {
     }
 
     public void saveStringExample(String personsName) {
-        String table = EXAMPLE_TABLE;
+        String table = PodItDatabase.EXAMPLE_TABLE;
 
         ContentValues info = new ContentValues();
-        info.put(EXAMPLE_STRING, personsName);
+        info.put(PodItDatabase.EXAMPLE_STRING, personsName);
         this.open();
         database.insert(table, null, info);
         this.close();
@@ -68,17 +47,17 @@ public class CarPodsDatabase {
         String exampleString = "";
         Cursor cursor = null;
 
-        String[] columns = {PodItDatabase.ROWID, EXAMPLE_STRING};
+        String[] columns = {PodItDatabase.ROWID, PodItDatabase.EXAMPLE_STRING};
         String whereClause = PodItDatabase.ROWID + " > ?";
         String[] whereArgs = {"0"};
 
         this.open();
         try {
-            cursor = this.database.query(EXAMPLE_TABLE, columns, whereClause, whereArgs, null, null, null, null);
+            cursor = this.database.query(PodItDatabase.EXAMPLE_TABLE, columns, whereClause, whereArgs, null, null, null, null);
 
             if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToLast();
-                exampleString = cursor.getString(cursor.getColumnIndex(EXAMPLE_STRING));
+                exampleString = cursor.getString(cursor.getColumnIndex(PodItDatabase.EXAMPLE_STRING));
             }
 
         }  finally {
@@ -92,13 +71,13 @@ public class CarPodsDatabase {
     }
 
     public void savePerson(Person person) {
-        String table = PERSON_TABLE;
+        String table = PodItDatabase.PERSON_TABLE;
 
         ContentValues info = new ContentValues();
-        info.put(FIRST_NAME, person.getFirstName());
-        info.put(LAST_NAME, person.getLastName());
-        info.put(HOME_LOCATION, person.getHomeLocation());
-        info.put(ABOUT_ME, person.getAboutMe());
+        info.put(PodItDatabase.FIRST_NAME, person.getFirstName());
+        info.put(PodItDatabase.LAST_NAME, person.getLastName());
+        info.put(PodItDatabase.HOME_LOCATION, person.getHomeLocation());
+        info.put(PodItDatabase.ABOUT_ME, person.getAboutMe());
 
         this.open();
         database.insert(table, null, info);
@@ -118,7 +97,7 @@ public class CarPodsDatabase {
     public Person getFirstPersonFromDatabase() {
         Cursor cursor = null;
 
-        String[] columns = {PodItDatabase.ROWID, FIRST_NAME, LAST_NAME, HOME_LOCATION, ABOUT_ME};
+        String[] columns = {PodItDatabase.ROWID, PodItDatabase.FIRST_NAME, PodItDatabase.LAST_NAME, PodItDatabase.HOME_LOCATION, PodItDatabase.ABOUT_ME};
         String selection = PodItDatabase.ROWID + " = ?";
         String[] selectionArgs = {"1"};
 
@@ -126,14 +105,14 @@ public class CarPodsDatabase {
 
         this.open();
         try {
-            cursor = database.query(PERSON_TABLE, columns, selection, selectionArgs, null, null, null, null);
+            cursor = database.query(PodItDatabase.PERSON_TABLE, columns, selection, selectionArgs, null, null, null, null);
 
             if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToLast();
-                personBuilder.firstName(cursor.getString(cursor.getColumnIndex(FIRST_NAME)));
-                personBuilder.lastName(cursor.getString(cursor.getColumnIndex(LAST_NAME)));
-                personBuilder.homeLocation(cursor.getString(cursor.getColumnIndex(HOME_LOCATION)));
-                personBuilder.aboutMe(cursor.getString(cursor.getColumnIndex(ABOUT_ME)));
+                personBuilder.firstName(cursor.getString(cursor.getColumnIndex(PodItDatabase.FIRST_NAME)));
+                personBuilder.lastName(cursor.getString(cursor.getColumnIndex(PodItDatabase.LAST_NAME)));
+                personBuilder.homeLocation(cursor.getString(cursor.getColumnIndex(PodItDatabase.HOME_LOCATION)));
+                personBuilder.aboutMe(cursor.getString(cursor.getColumnIndex(PodItDatabase.ABOUT_ME)));
             }
 
         }  finally {
@@ -149,8 +128,8 @@ public class CarPodsDatabase {
     public Cursor getCursorWithAllPeople() {
         Cursor cursor;
 
-        String table = PERSON_TABLE;
-        String[] columns = {PodItDatabase.ROWID, FIRST_NAME, LAST_NAME, HOME_LOCATION, ABOUT_ME};
+        String table = PodItDatabase.PERSON_TABLE;
+        String[] columns = {PodItDatabase.ROWID, PodItDatabase.FIRST_NAME, PodItDatabase.LAST_NAME, PodItDatabase.HOME_LOCATION, PodItDatabase.ABOUT_ME};
 
         cursor = database.query(table, columns, null, null, null, null, null, null);
 
@@ -160,7 +139,7 @@ public class CarPodsDatabase {
     public List<Person> getAllPeopleNames() {
         Cursor cursor = null;
 
-        String[] columns = {PodItDatabase.ROWID, FIRST_NAME, LAST_NAME};
+        String[] columns = {PodItDatabase.ROWID, PodItDatabase.FIRST_NAME, PodItDatabase.LAST_NAME};
         String selection = null;
         String[] selectionArgs = null;
 
@@ -168,14 +147,14 @@ public class CarPodsDatabase {
 
         this.open();
         try {
-            cursor = database.query(PERSON_TABLE, columns, selection, selectionArgs, null, null, null, null);
+            cursor = database.query(PodItDatabase.PERSON_TABLE, columns, selection, selectionArgs, null, null, null, null);
 
             if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
                     Person.Builder personBuilder = new Person.Builder();
-                    personBuilder.firstName(cursor.getString(cursor.getColumnIndex(FIRST_NAME)));
-                    personBuilder.lastName(cursor.getString(cursor.getColumnIndex(LAST_NAME)));
+                    personBuilder.firstName(cursor.getString(cursor.getColumnIndex(PodItDatabase.FIRST_NAME)));
+                    personBuilder.lastName(cursor.getString(cursor.getColumnIndex(PodItDatabase.LAST_NAME)));
                     peopleList.add(personBuilder.build());
                     cursor.moveToNext();
                 }
@@ -193,7 +172,7 @@ public class CarPodsDatabase {
     public List<Pod> getAllPodNames() {
         Cursor cursor = null;
 
-        String[] columns = {PodItDatabase.ROWID, POD_NAME};
+        String[] columns = {PodItDatabase.ROWID, PodItDatabase.POD_NAME};
         String selection = null;
         String[] selectionArgs = null;
 
@@ -201,13 +180,13 @@ public class CarPodsDatabase {
 
         this.open();
         try {
-            cursor = database.query(POD_TABLE, columns, selection, selectionArgs, null, null, null);
+            cursor = database.query(PodItDatabase.POD_TABLE, columns, selection, selectionArgs, null, null, null);
 
             if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
                     Pod.Builder podBuilder = new Pod.Builder();
-                    podBuilder.name(cursor.getString(cursor.getColumnIndex(POD_NAME)));
+                    podBuilder.name(cursor.getString(cursor.getColumnIndex(PodItDatabase.POD_NAME)));
                     podBuilder.id(cursor.getInt(cursor.getColumnIndex(PodItDatabase.ROWID)));
                     podList.add(podBuilder.build());
                     cursor.moveToNext();
@@ -224,14 +203,14 @@ public class CarPodsDatabase {
     }
 
     public long savePod(Pod pod) {
-        String table = POD_TABLE;
+        String table = PodItDatabase.POD_TABLE;
 
         ContentValues podInfo = new ContentValues();
-        podInfo.put(POD_NAME, pod.getName());
-        podInfo.put(POD_HOME_LOCATION, pod.getHomeLocation());
-        podInfo.put(POD_DEPARTURE_TIME, pod.getDepartureTime());
-        podInfo.put(POD_RETURN_TIME, pod.getReturnTime());
-        podInfo.put(ABOUT_POD, pod.getAboutPod());
+        podInfo.put(PodItDatabase.POD_NAME, pod.getName());
+        podInfo.put(PodItDatabase.POD_HOME_LOCATION, pod.getHomeLocation());
+        podInfo.put(PodItDatabase.POD_DEPARTURE_TIME, pod.getDepartureTime());
+        podInfo.put(PodItDatabase.POD_RETURN_TIME, pod.getReturnTime());
+        podInfo.put(PodItDatabase.ABOUT_POD, pod.getAboutPod());
 
         this.open();
         long podId = database.insert(table, null, podInfo);
@@ -246,16 +225,16 @@ public class CarPodsDatabase {
 
         for (Person newMember : peopleToAdd) {
             ContentValues memberInfo = new ContentValues();
-            memberInfo.put(POD_ID, podId);
-            memberInfo.put(MEMBER_ID, newMember.getId());
-            database.insert(POD_MEMBER_TABLE, null, memberInfo);
+            memberInfo.put(PodItDatabase.POD_ID, podId);
+            memberInfo.put(PodItDatabase.MEMBER_ID, newMember.getId());
+            database.insert(PodItDatabase.POD_MEMBER_TABLE, null, memberInfo);
         }
 
         this.close();
     }
 
     public Pod getFirstPodInDatabase() {
-        String[] columns = {PodItDatabase.ROWID, POD_NAME, POD_HOME_LOCATION, POD_DEPARTURE_TIME, POD_RETURN_TIME, ABOUT_POD};
+        String[] columns = {PodItDatabase.ROWID, PodItDatabase.POD_NAME, PodItDatabase.POD_HOME_LOCATION, PodItDatabase.POD_DEPARTURE_TIME, PodItDatabase.POD_RETURN_TIME, PodItDatabase.ABOUT_POD};
         String selection = PodItDatabase.ROWID + " = ?";
         String[] selectionArgs = {"1"};
 
@@ -263,16 +242,16 @@ public class CarPodsDatabase {
         Pod.Builder podBuilder = new Pod.Builder();
         this.open();
         try {
-            cursor = database.query(POD_TABLE, columns, selection, selectionArgs, null, null, null, null);
+            cursor = database.query(PodItDatabase.POD_TABLE, columns, selection, selectionArgs, null, null, null, null);
 
             if (cursor != null && cursor.getCount() > 0) {
                 Log.v(CLASS_TAG, "retrieved " + cursor.getCount() + " Pods from the database");
                 cursor.moveToLast();
-                podBuilder.name(cursor.getString(cursor.getColumnIndex(POD_NAME)));
-                podBuilder.homeLocation(cursor.getString(cursor.getColumnIndex(POD_HOME_LOCATION)));
-                podBuilder.departureTime(cursor.getInt(cursor.getColumnIndex(POD_DEPARTURE_TIME)));
-                podBuilder.returnTime(cursor.getInt(cursor.getColumnIndex(POD_RETURN_TIME)));
-                podBuilder.about(cursor.getString(cursor.getColumnIndex(ABOUT_POD)));
+                podBuilder.name(cursor.getString(cursor.getColumnIndex(PodItDatabase.POD_NAME)));
+                podBuilder.homeLocation(cursor.getString(cursor.getColumnIndex(PodItDatabase.POD_HOME_LOCATION)));
+                podBuilder.departureTime(cursor.getInt(cursor.getColumnIndex(PodItDatabase.POD_DEPARTURE_TIME)));
+                podBuilder.returnTime(cursor.getInt(cursor.getColumnIndex(PodItDatabase.POD_RETURN_TIME)));
+                podBuilder.about(cursor.getString(cursor.getColumnIndex(PodItDatabase.ABOUT_POD)));
             }
         } finally {
             if (cursor != null) {
@@ -281,6 +260,5 @@ public class CarPodsDatabase {
         }
 
         return podBuilder.build();
-
     }
 }
