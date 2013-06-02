@@ -15,10 +15,6 @@ public class CarPodsDatabase {
 
     private static final String CLASS_TAG = "CarPodsDatabase";
 
-    private static final String DATABASE_NAME = "carpodsDatabase";
-
-    public static final String ROWID = "_id";
-
     private static final String EXAMPLE_TABLE = "exampleTable";
     public static final String PERSON_TABLE = "personTable";
 
@@ -44,53 +40,13 @@ public class CarPodsDatabase {
 
     private SQLiteDatabase database;
 
-    private static final String EXAMPLE_TABLE_CREATE_STMT =
-            "create table " + EXAMPLE_TABLE
-                    + " ("
-                    + ROWID + " integer primary key autoincrement, "
-                    + EXAMPLE_STRING + " text not null"
-                    + ");";
-
-    private static final String PERSON_TABLE_CREATE_STMT =
-            "create table " + PERSON_TABLE
-                    + " ("
-                    + ROWID + " integer primary key autoincrement, "
-                    + FIRST_NAME + " text not null, "
-                    + LAST_NAME + " text not null, "
-                    + ABOUT_ME + " text, "
-                    + HOME_LOCATION + " text not null"
-                    + ");";
-
-    private static final String POD_TABLE_CREATE_STMT =
-            "create table " + POD_TABLE
-                    + " ("
-                    + ROWID + " integer primary key autoincrement, "
-                    + POD_NAME + " text not null, "
-                    + POD_HOME_LOCATION + " text not null, "
-                    + POD_DEPARTURE_TIME + " text not null, "
-                    + POD_RETURN_TIME + " text not null, "
-                    + ABOUT_POD + " text "
-                    + ");";
-
-    private static final String POD_MEMBER_CREATE_STMT =
-            "create table " + POD_MEMBER_TABLE
-                + " ("
-                + POD_ID + " integer not null, "
-                + MEMBER_ID + " integer not null, "
-                + "foreign key(" + POD_ID + ") references " + POD_TABLE + "(" + ROWID + "), "
-                + "foreign key(" + MEMBER_ID + ") references " + PERSON_TABLE + "(" + ROWID + "), "
-                + "primary key (" + POD_ID + ", " + MEMBER_ID + ") "
-                + ");";
-
-
-
     public CarPodsDatabase (Context context) {
         this.context = context;
     }
 
     public CarPodsDatabase open() throws SQLException {
-        DBHelper dbHelper = new DBHelper(this.context);
-        database = dbHelper.getWritableDatabase();
+        PodItDatabase podItDatabase = new PodItDatabase(this.context);
+        database = podItDatabase.getWritableDatabase();
         return this;
     }
 
@@ -112,8 +68,8 @@ public class CarPodsDatabase {
         String exampleString = "";
         Cursor cursor = null;
 
-        String[] columns = {ROWID, EXAMPLE_STRING};
-        String whereClause = ROWID + " > ?";
+        String[] columns = {PodItDatabase.ROWID, EXAMPLE_STRING};
+        String whereClause = PodItDatabase.ROWID + " > ?";
         String[] whereArgs = {"0"};
 
         this.open();
@@ -162,8 +118,8 @@ public class CarPodsDatabase {
     public Person getFirstPersonFromDatabase() {
         Cursor cursor = null;
 
-        String[] columns = {ROWID, FIRST_NAME, LAST_NAME, HOME_LOCATION, ABOUT_ME};
-        String selection = ROWID + " = ?";
+        String[] columns = {PodItDatabase.ROWID, FIRST_NAME, LAST_NAME, HOME_LOCATION, ABOUT_ME};
+        String selection = PodItDatabase.ROWID + " = ?";
         String[] selectionArgs = {"1"};
 
         Person.Builder personBuilder = new Person.Builder();
@@ -194,7 +150,7 @@ public class CarPodsDatabase {
         Cursor cursor;
 
         String table = PERSON_TABLE;
-        String[] columns = {ROWID, FIRST_NAME, LAST_NAME, HOME_LOCATION, ABOUT_ME};
+        String[] columns = {PodItDatabase.ROWID, FIRST_NAME, LAST_NAME, HOME_LOCATION, ABOUT_ME};
 
         cursor = database.query(table, columns, null, null, null, null, null, null);
 
@@ -204,7 +160,7 @@ public class CarPodsDatabase {
     public List<Person> getAllPeopleNames() {
         Cursor cursor = null;
 
-        String[] columns = {ROWID, FIRST_NAME, LAST_NAME};
+        String[] columns = {PodItDatabase.ROWID, FIRST_NAME, LAST_NAME};
         String selection = null;
         String[] selectionArgs = null;
 
@@ -237,7 +193,7 @@ public class CarPodsDatabase {
     public List<Pod> getAllPodNames() {
         Cursor cursor = null;
 
-        String[] columns = {ROWID, POD_NAME};
+        String[] columns = {PodItDatabase.ROWID, POD_NAME};
         String selection = null;
         String[] selectionArgs = null;
 
@@ -252,7 +208,7 @@ public class CarPodsDatabase {
                 while (!cursor.isAfterLast()) {
                     Pod.Builder podBuilder = new Pod.Builder();
                     podBuilder.name(cursor.getString(cursor.getColumnIndex(POD_NAME)));
-                    podBuilder.id(cursor.getInt(cursor.getColumnIndex(ROWID)));
+                    podBuilder.id(cursor.getInt(cursor.getColumnIndex(PodItDatabase.ROWID)));
                     podList.add(podBuilder.build());
                     cursor.moveToNext();
                 }
@@ -299,8 +255,8 @@ public class CarPodsDatabase {
     }
 
     public Pod getFirstPodInDatabase() {
-        String[] columns = {ROWID, POD_NAME, POD_HOME_LOCATION, POD_DEPARTURE_TIME, POD_RETURN_TIME, ABOUT_POD};
-        String selection = ROWID + " = ?";
+        String[] columns = {PodItDatabase.ROWID, POD_NAME, POD_HOME_LOCATION, POD_DEPARTURE_TIME, POD_RETURN_TIME, ABOUT_POD};
+        String selection = PodItDatabase.ROWID + " = ?";
         String[] selectionArgs = {"1"};
 
         Cursor cursor = null;
@@ -326,36 +282,5 @@ public class CarPodsDatabase {
 
         return podBuilder.build();
 
-    }
-
-
-
-    private static class DBHelper extends SQLiteOpenHelper {
-        private static final int DATABASE_VERSION = 1;
-
-        DBHelper (Context context) {
-            super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        }
-
-        @Override
-        public void onCreate (SQLiteDatabase db) {
-            db.execSQL(EXAMPLE_TABLE_CREATE_STMT);
-            db.execSQL(PERSON_TABLE_CREATE_STMT);
-            db.execSQL(POD_TABLE_CREATE_STMT);
-            db.execSQL(POD_MEMBER_CREATE_STMT);
-        }
-
-        @Override
-        public void onUpgrade (SQLiteDatabase db, int oldVersion, int newVersion) {
-
-            Log.v(CLASS_TAG, "Upgrading database from version " + oldVersion + " to " + newVersion + " which will destroy all old data.");
-            db.execSQL("DROP TABLE IF EXISTS " + PERSON_TABLE);
-            db.execSQL("DROP TABLE IF EXISTS " + POD_TABLE);
-            onCreate(db);
-        }
-
-        public synchronized void close() {
-            super.close();
-        }
     }
 }
