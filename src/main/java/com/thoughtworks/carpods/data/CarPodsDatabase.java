@@ -30,43 +30,6 @@ public class CarPodsDatabase {
         database.close();
     }
 
-    public void saveStringExample(String personsName) {
-        String table = PodItDatabase.EXAMPLE_TABLE;
-
-        ContentValues info = new ContentValues();
-        info.put(PodItDatabase.EXAMPLE_STRING, personsName);
-        this.open();
-        database.insert(table, null, info);
-        this.close();
-    }
-
-    public String getExampleString() {
-        String exampleString = "";
-        Cursor cursor = null;
-
-        String[] columns = {PodItDatabase.ROWID, PodItDatabase.EXAMPLE_STRING};
-        String whereClause = PodItDatabase.ROWID + " > ?";
-        String[] whereArgs = {"0"};
-
-        this.open();
-        try {
-            cursor = this.database.query(PodItDatabase.EXAMPLE_TABLE, columns, whereClause, whereArgs, null, null, null, null);
-
-            if (cursor != null && cursor.getCount() > 0) {
-                cursor.moveToLast();
-                exampleString = cursor.getString(cursor.getColumnIndex(PodItDatabase.EXAMPLE_STRING));
-            }
-
-        }  finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-            this.close();
-        }
-
-        return exampleString;
-    }
-
     public void savePerson(Person person) {
         String table = PodItDatabase.PERSON_TABLE;
 
