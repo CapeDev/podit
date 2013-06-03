@@ -5,18 +5,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import com.thoughtworks.carpods.R;
-import com.thoughtworks.carpods.data.CarPodsDatabase;
+import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
 
 public class EditPerson extends Activity {
-    protected CarPodsDatabase carPodsDatabase;
+    protected PeopleDataAccess peopleDataAccess;
 
     public EditPerson() {
         super();
     }
 
-    public EditPerson(CarPodsDatabase carPodsDatabase) {
-        this.carPodsDatabase = carPodsDatabase;
+    public EditPerson(PeopleDataAccess peopleDataAccess) {
+        this.peopleDataAccess = peopleDataAccess;
     }
 
     public void onCreate(Bundle savedInstanceState) {
@@ -28,19 +28,18 @@ public class EditPerson extends Activity {
     }
 
     protected void getDatabaseConnection() {
-        if (carPodsDatabase == null) {
-            carPodsDatabase = new CarPodsDatabase(this);
+        if (peopleDataAccess == null) {
+            peopleDataAccess = new PeopleDataAccess(this);
         }
     }
 
     public void savePerson(View v) {
         Person person = getDataFromView();
-        carPodsDatabase.savePerson(person);
+        peopleDataAccess.savePerson(person);
         finish();
     }
 
     protected Person getDataFromView() {
-
         return new Person.Builder().firstName(getFirstNameFromView())
                                    .lastName(getLastNameFromView())
                                    .homeLocation(getHomeLocationFromView())
@@ -63,6 +62,4 @@ public class EditPerson extends Activity {
     protected String getAboutMeFromView() {
         return ((EditText)findViewById(R.id.about_me_input)).getText().toString();
     }
-
-
 }

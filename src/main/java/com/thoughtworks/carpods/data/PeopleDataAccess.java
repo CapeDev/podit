@@ -3,31 +3,21 @@ package com.thoughtworks.carpods.data;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarPodsDatabase {
+public class PeopleDataAccess {
 
-    private final Context context;
+    private static final String CLASS_TAG = "PeopleDataAccess";
 
     private SQLiteDatabase database;
+    private final PodItDatabase podItDatabase;
 
-    public CarPodsDatabase (Context context) {
-        this.context = context;
-    }
-
-    public CarPodsDatabase open() throws SQLException {
-        PodItDatabase podItDatabase = PodItDatabase.getInstance(this.context);
-        database = podItDatabase.getWritableDatabase();
-        return this;
-    }
-
-    public void close() {
-        database.close();
+    public PeopleDataAccess(Context context) {
+        podItDatabase = PodItDatabase.getInstance(context);
     }
 
     public void savePerson(Person person) {
@@ -39,11 +29,11 @@ public class CarPodsDatabase {
         info.put(PodItDatabase.HOME_LOCATION, person.getHomeLocation());
         info.put(PodItDatabase.ABOUT_ME, person.getAboutMe());
 
-        this.open();
+        database = podItDatabase.getWritableDatabase();
         database.insert(table, null, info);
-        this.close();
+        database.close();
 
-        Log.d("CarPodsDatabase", "saved " + person.getFirstName() + " to the local database");
+        Log.d(CLASS_TAG, "saved " + person.getFirstName() + " to the local database");
     }
 
     public Person getFirstPersonFromDatabase() {
@@ -55,7 +45,7 @@ public class CarPodsDatabase {
 
         Person.Builder personBuilder = new Person.Builder();
 
-        this.open();
+        database = podItDatabase.getWritableDatabase();
         try {
             cursor = database.query(PodItDatabase.PERSON_TABLE, columns, selection, selectionArgs, null, null, null, null);
 
@@ -71,7 +61,7 @@ public class CarPodsDatabase {
             if (cursor != null) {
                 cursor.close();
             }
-            this.close();
+            database.close();
         }
 
         return personBuilder.build();
@@ -86,7 +76,7 @@ public class CarPodsDatabase {
 
         List<Person> peopleList = new ArrayList<Person>();
 
-        this.open();
+        database = podItDatabase.getWritableDatabase();
         try {
             cursor = database.query(PodItDatabase.PERSON_TABLE, columns, selection, selectionArgs, null, null, null, null);
 
@@ -105,7 +95,7 @@ public class CarPodsDatabase {
                 cursor.close();
             }
         }
-        this.close();
+        database.close();
 
         return peopleList;
     }

@@ -1,7 +1,7 @@
 package com.thoughtworks.carpods.data.development;
 
 import android.content.Context;
-import com.thoughtworks.carpods.data.CarPodsDatabase;
+import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
 
 public class PeoplePopulator implements Populator {
@@ -13,8 +13,7 @@ public class PeoplePopulator implements Populator {
     }
 
     public void populate() {
-        CarPodsDatabase database = new CarPodsDatabase(context);
-        database.open();
+        PeopleDataAccess database = new PeopleDataAccess(context);
         database.savePerson(createPerson("Alice", "Jones", "Residence Inn", "Silly"));
         database.savePerson(createPerson("Bob", "Smith", "Residence Inn", "Smart"));
         database.savePerson(createPerson("Charlie", "White", "Renaissance Hotel", "Kind"));
@@ -23,7 +22,6 @@ public class PeoplePopulator implements Populator {
         database.savePerson(createPerson("Luke", "Skywalker", "Hilton Anatole", "Young Jedi"));
         database.savePerson(createPerson("Princess", "Leia", "Hilton Anatole", "Luke's Sister"));
         database.savePerson(createPerson("Darth", "Vader", "Hilton Anatole", "Luke's Father"));
-        database.close();
     }
 
     private Person createPerson(String firstname, String lastName, String location, String about) {

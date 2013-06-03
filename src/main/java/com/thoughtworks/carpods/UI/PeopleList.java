@@ -6,14 +6,14 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.thoughtworks.carpods.R;
-import com.thoughtworks.carpods.data.CarPodsDatabase;
+import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
 
 import java.util.List;
 
 public class PeopleList extends ListActivity {
 
-    CarPodsDatabase database;
+    PeopleDataAccess database;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +21,7 @@ public class PeopleList extends ListActivity {
         setContentView(R.layout.people_list);
 
         if (database == null) {
-            database = new CarPodsDatabase(this);
+            database = new PeopleDataAccess(this);
         }
 
         List<Person> peopleNames = database.getAllPeopleNames();

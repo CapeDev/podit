@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 import com.thoughtworks.carpods.R;
-import com.thoughtworks.carpods.data.CarPodsDatabase;
+import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
 
 public class DisplayPerson extends Activity {
@@ -12,8 +12,8 @@ public class DisplayPerson extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.display_person);
-        CarPodsDatabase carPodsDatabase = new CarPodsDatabase(this);
-        Person person = carPodsDatabase.getFirstPersonFromDatabase();
+        PeopleDataAccess peopleDataAccess = new PeopleDataAccess(this);
+        Person person = peopleDataAccess.getFirstPersonFromDatabase();
         setFirstName(person.getFirstName());
         setLastName(person.getLastName());
         setHomeLocation(person.getHomeLocation());

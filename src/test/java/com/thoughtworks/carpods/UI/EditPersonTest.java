@@ -14,24 +14,24 @@
 //@RunWith(RobolectricTestRunner.class)
 //public class EditPersonTest {
 //
-//    private CarPodsDatabase carPodsDatabase;
+//    private CarPodsDatabase peopleDataAccess;
 //
 //    @Before
 //    public void setUp() {
-//        carPodsDatabase = mock(CarPodsDatabase.class);
+//        peopleDataAccess = mock(CarPodsDatabase.class);
 //    }
 //
 //    @Test
 //    public void shouldSavePersonToDatabase() {
-//        EditPerson editPerson = new EditPerson(carPodsDatabase);
+//        EditPerson editPerson = new EditPerson(peopleDataAccess);
 //        editPerson.onCreate(null);
 //        editPerson.savePerson(null);
-//        verify(carPodsDatabase, times(1)).savePerson(any(Person.class));
+//        verify(peopleDataAccess, times(1)).savePerson(any(Person.class));
 //    }
 //
 //    @Test
 //    public void shouldGetPersonFromTheView(){
-//        EditPerson editPerson = spy(new EditPerson(carPodsDatabase));
+//        EditPerson editPerson = spy(new EditPerson(peopleDataAccess));
 //        editPerson.onCreate(null);
 //        editPerson.savePerson(null);
 //
@@ -56,7 +56,7 @@
 //
 //    @Test
 //    public void shouldCallFinishAfterSavingPerson(){
-//        EditPerson editPerson = spy(new EditPerson(carPodsDatabase));
+//        EditPerson editPerson = spy(new EditPerson(peopleDataAccess));
 //        editPerson.onCreate(null);
 //        editPerson.savePerson(null);
 //
