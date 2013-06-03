@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 import com.thoughtworks.carpods.R;
-import com.thoughtworks.carpods.data.CarPodsDatabase;
 import com.thoughtworks.carpods.data.Pod;
+import com.thoughtworks.carpods.data.PodDataAccess;
 
 
 public class DisplayPod extends Activity {
@@ -14,7 +14,7 @@ public class DisplayPod extends Activity {
 
         setContentView(R.layout.display_pod);
 
-        CarPodsDatabase carPodsDatabase = new CarPodsDatabase(this);
+        PodDataAccess carPodsDatabase = new PodDataAccess(this);
         Pod pod = carPodsDatabase.getFirstPodInDatabase();
         setPodName(pod.getName());
         setPodHomeLocation(pod.getHomeLocation());

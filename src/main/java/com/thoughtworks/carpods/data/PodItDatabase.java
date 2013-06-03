@@ -71,7 +71,16 @@ public class PodItDatabase extends SQLiteOpenHelper {
                     + "primary key (" + POD_ID + ", " + MEMBER_ID + ") "
                     + ");";
 
-    PodItDatabase(Context context) {
+    private static PodItDatabase podItDatabase = null;
+
+    public static PodItDatabase getInstance(Context context) {
+        if (null == podItDatabase) {
+            podItDatabase = new PodItDatabase(context);
+        }
+        return podItDatabase;
+    }
+
+    private PodItDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
