@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.thoughtworks.carpods.R;
-import com.thoughtworks.carpods.data.CarPodsDatabase;
+import com.thoughtworks.carpods.data.example.ExampleDataAccess;
 
 //example class based on Kris Gonzalez's myTW screencast
 public class HelloAndroidActivity extends Activity {
@@ -17,7 +17,7 @@ public class HelloAndroidActivity extends Activity {
     LongRunningOperationExecutor operationExecutor = new LongRunningOperationExecutor();
 
     private Context context;
-    private CarPodsDatabase carPodsDatabase;
+    private ExampleDataAccess exampleDataAccess;
 
     /**
      * Called when the activity is first created.
@@ -33,8 +33,8 @@ public class HelloAndroidActivity extends Activity {
 
         this.context = this;
 
-        if(carPodsDatabase == null) {
-            carPodsDatabase = new CarPodsDatabase(context);
+        if(exampleDataAccess == null) {
+            exampleDataAccess = new ExampleDataAccess(context);
         }
 
         TextView view_database_field = (TextView)findViewById(R.id.view_database_field);
@@ -43,7 +43,7 @@ public class HelloAndroidActivity extends Activity {
     }
 
     private String getexampleStringFromDatabase() {
-        return carPodsDatabase.getExampleString();
+        return exampleDataAccess.getExampleString();
     }
 
     @Override
@@ -70,6 +70,6 @@ public class HelloAndroidActivity extends Activity {
 
         editTextView.setText("");
 
-        carPodsDatabase.saveStringExample(newText);
+        exampleDataAccess.saveStringExample(newText);
     }
 }
