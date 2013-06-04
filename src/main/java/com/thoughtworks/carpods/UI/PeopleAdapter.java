@@ -17,7 +17,7 @@ public class PeopleAdapter extends ArrayAdapter<Person> {
     private final List<Person> people;
 
     public PeopleAdapter (Context context, List<Person> people) {
-        super(context, R.layout.people_list_view);
+        super(context, R.layout.people_list);
         this.context = context;
         this.people = people;
     }

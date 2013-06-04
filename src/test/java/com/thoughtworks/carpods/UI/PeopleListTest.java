@@ -7,11 +7,11 @@
 //import static org.mockito.Mockito.mock;
 //
 //public class PeopleListTest {
-//    private CarPodsDatabase carPodsDatabase;
+//    private CarPodsDatabase peopleDataAccess;
 //
 //    @Before
 //    public void setUp() {
-//        carPodsDatabase = mock(CarPodsDatabase.class);
+//        peopleDataAccess = mock(CarPodsDatabase.class);
 //    }
 //
 //    @Test

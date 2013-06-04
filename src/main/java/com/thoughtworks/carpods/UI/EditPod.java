@@ -8,15 +8,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.thoughtworks.carpods.R;
-import com.thoughtworks.carpods.data.CarPodsDatabase;
 import com.thoughtworks.carpods.data.Pod;
-
+import com.thoughtworks.carpods.data.PodDataAccess;
 
 
 public class EditPod extends Activity {
 
-    private CarPodsDatabase carPodsDatabase;
-    private String CLAZZ_TAG = "EditPod";;
+    private PodDataAccess podDataAccess;
+    private String CLAZZ_TAG = "EditPod";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,14 +28,14 @@ public class EditPod extends Activity {
     }
 
     private void getDatabaseConnection() {
-        if (carPodsDatabase == null) {
-            carPodsDatabase = new CarPodsDatabase(this);
+        if (podDataAccess == null) {
+            podDataAccess = new PodDataAccess(this);
         }
     }
 
     public void savePod(View v) {
         Pod pod = getDataFromView();
-        carPodsDatabase.savePod(pod);
+        podDataAccess.savePod(pod);
         finish();
     }
 

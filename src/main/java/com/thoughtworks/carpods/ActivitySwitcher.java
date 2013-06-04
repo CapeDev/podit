@@ -19,7 +19,7 @@ public class ActivitySwitcher extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_switcher_view);
+        setContentView(R.layout.activity_switcher);
         applicationContext = getApplicationContext();
     }
 
@@ -62,6 +62,10 @@ public class ActivitySwitcher extends Activity {
 
     public void startDisplayPod(View view) {
         startActivity(new Intent(this, DisplayPod.class));
+    }
+
+    public void startPodList(View view) {
+        startActivity(new Intent(this, PodList.class));
     }
 
 }
