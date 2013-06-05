@@ -37,34 +37,7 @@ public class PeopleDataAccess {
     }
 
     public Person getFirstPersonFromDatabase() {
-        Cursor cursor = null;
-
-        String[] columns = {PodItDatabase.ROWID, PodItDatabase.FIRST_NAME, PodItDatabase.LAST_NAME, PodItDatabase.HOME_LOCATION, PodItDatabase.ABOUT_ME};
-        String selection = PodItDatabase.ROWID + " = ?";
-        String[] selectionArgs = {"1"};
-
-        Person.Builder personBuilder = new Person.Builder();
-
-        database = podItDatabase.getWritableDatabase();
-        try {
-            cursor = database.query(PodItDatabase.PERSON_TABLE, columns, selection, selectionArgs, null, null, null, null);
-
-            if (cursor != null && cursor.getCount() > 0) {
-                cursor.moveToLast();
-                personBuilder.firstName(cursor.getString(cursor.getColumnIndex(PodItDatabase.FIRST_NAME)));
-                personBuilder.lastName(cursor.getString(cursor.getColumnIndex(PodItDatabase.LAST_NAME)));
-                personBuilder.homeLocation(cursor.getString(cursor.getColumnIndex(PodItDatabase.HOME_LOCATION)));
-                personBuilder.aboutMe(cursor.getString(cursor.getColumnIndex(PodItDatabase.ABOUT_ME)));
-            }
-
-        }  finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-            database.close();
-        }
-
-        return personBuilder.build();
+        return getPersonFromDatabaseWithId(1);
     }
 
     public List<Person> getAllPeopleNames() {
@@ -98,5 +71,36 @@ public class PeopleDataAccess {
         database.close();
 
         return peopleList;
+    }
+
+    public Person getPersonFromDatabaseWithId(long personId) {
+        Cursor cursor = null;
+
+        String[] columns = {PodItDatabase.ROWID, PodItDatabase.FIRST_NAME, PodItDatabase.LAST_NAME, PodItDatabase.HOME_LOCATION, PodItDatabase.ABOUT_ME};
+        String selection = PodItDatabase.ROWID + " = ?";
+        String[] selectionArgs = {Long.toString(personId)};
+
+        Person.Builder personBuilder = new Person.Builder();
+
+        database = podItDatabase.getWritableDatabase();
+        try {
+            cursor = database.query(PodItDatabase.PERSON_TABLE, columns, selection, selectionArgs, null, null, null, null);
+
+            if (cursor != null && cursor.getCount() > 0) {
+                cursor.moveToLast();
+                personBuilder.firstName(cursor.getString(cursor.getColumnIndex(PodItDatabase.FIRST_NAME)));
+                personBuilder.lastName(cursor.getString(cursor.getColumnIndex(PodItDatabase.LAST_NAME)));
+                personBuilder.homeLocation(cursor.getString(cursor.getColumnIndex(PodItDatabase.HOME_LOCATION)));
+                personBuilder.aboutMe(cursor.getString(cursor.getColumnIndex(PodItDatabase.ABOUT_ME)));
+            }
+
+        }  finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            database.close();
+        }
+
+        return personBuilder.build();
     }
 }

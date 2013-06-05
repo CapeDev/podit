@@ -109,7 +109,7 @@
                    android:src="@android:drawable/ic_input_add"
                    android:layout_weight="1"
                    android:clickable="true"
-                   android:onClick="beenClicked"
+                   android:onClick="addMemberClick"
                    android:gravity="center"/>
     </LinearLayout>
 
