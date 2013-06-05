@@ -1,4 +1,4 @@
-package com.thoughtworks.carpods.UI;
+package com.thoughtworks.carpods.UI.people;
 
 import android.content.Context;
 import android.view.LayoutInflater;

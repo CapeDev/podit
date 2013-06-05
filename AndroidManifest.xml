@@ -16,9 +16,9 @@
       <activity android:name=".example.HelloAndroidActivity" />
       <activity android:name=".example.HelloScrollView" />
 
-      <activity android:name=".UI.EditPerson" android:label="@string/create_person"/>
-      <activity android:name=".UI.DisplayPerson"/>
-      <activity android:name=".UI.PeopleList" android:label="@string/the_people_list"/>
+      <activity android:name=".UI.people.EditPerson" android:label="@string/create_person"/>
+      <activity android:name=".UI.people.DisplayPerson"/>
+      <activity android:name=".UI.people.PeopleList" android:label="@string/the_people_list"/>
       <activity android:name=".UI.EditPod" android:label="@string/create_a_pod"/>
       <activity android:name=".UI.DisplayPod"/>
       <activity android:name=".UI.PodList"/>
