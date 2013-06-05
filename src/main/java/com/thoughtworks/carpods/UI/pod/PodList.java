@@ -1,4 +1,4 @@
-package com.thoughtworks.carpods.UI;
+package com.thoughtworks.carpods.UI.pod;
 
 import android.app.ListActivity;
 import android.os.Bundle;
