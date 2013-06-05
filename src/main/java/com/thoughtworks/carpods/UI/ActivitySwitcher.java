@@ -1,4 +1,4 @@
-package com.thoughtworks.carpods;
+package com.thoughtworks.carpods.UI;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,7 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-import com.thoughtworks.carpods.UI.*;
+import com.thoughtworks.carpods.R;
+import com.thoughtworks.carpods.UI.people.DisplayPerson;
+import com.thoughtworks.carpods.UI.people.EditPerson;
+import com.thoughtworks.carpods.UI.people.PeopleList;
+import com.thoughtworks.carpods.UI.pod.DisplayPod;
+import com.thoughtworks.carpods.UI.pod.EditPod;
+import com.thoughtworks.carpods.UI.pod.PodList;
 import com.thoughtworks.carpods.data.development.PeoplePopulator;
 import com.thoughtworks.carpods.data.development.PodPopulator;
 import com.thoughtworks.carpods.data.development.Populator;

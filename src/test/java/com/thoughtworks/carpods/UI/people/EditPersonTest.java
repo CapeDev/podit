@@ -1,4 +1,4 @@
-package com.thoughtworks.carpods.UI;
+package com.thoughtworks.carpods.UI.people;
 
 import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;

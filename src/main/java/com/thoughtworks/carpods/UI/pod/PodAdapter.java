@@ -1,5 +1,6 @@
-package com.thoughtworks.carpods.UI;
+package com.thoughtworks.carpods.UI.pod;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,6 @@ import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.Pod;
 
 import java.util.List;
-import android.content.Context;
 
 public class PodAdapter extends ArrayAdapter {
 
