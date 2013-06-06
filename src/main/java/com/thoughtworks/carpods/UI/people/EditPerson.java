@@ -35,7 +35,7 @@ public class EditPerson extends Activity {
         }
     }
 
-    public void savePerson(MenuItem item) {
+    public void save(MenuItem item) {
         Person person = getDataFromView();
         peopleDataAccess.savePerson(person);
         finish();
