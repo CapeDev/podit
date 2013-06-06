@@ -1,87 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_alignParentLeft="true"
-              android:layout_alignParentTop="true"
-              android:layout_gravity="left">
-
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="center">
-        <EditText android:id="@+id/first_name_input"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:textSize="25sp"
-                  android:hint="@string/first_name_label"
-                  android:background="#CCCCCC"
-                  android:textColor="#000000"
-                  android:layout_margin="5sp"/>
-    </LinearLayout>
-
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="center">
-        <EditText android:id="@+id/last_name_input"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:textSize="25sp"
-                  android:hint="@string/last_name_label"
-                  android:background="#CCCCCC"
-                  android:textColor="#000000"
-                  android:layout_margin="5sp" />
-    </LinearLayout>
-
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="center">
-        <!-- FIXME: this should be a spinner element -->
-        <EditText android:id="@+id/home_location_input"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:textSize="25sp"
-                  android:hint="@string/home_location_label"
-                  android:background="#CCCCCC"
-                  android:textColor="#000000"
-                  android:layout_margin="5sp"/>
-    </LinearLayout>
-
-    <LinearLayout android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="center">
-        <TextView android:id = "@+id/about_me_label"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:textSize="25sp"
-                  android:textColor="#000000"
-                  android:text="@string/about_me_label" />
-        <EditText android:id="@+id/about_me_input"
-                  android:layout_width="fill_parent"
-                  android:layout_height="fill_parent"
-                  android:textSize="25sp"
-                  android:minLines="3"
-                  android:background="#CCCCCC"
-                  android:textColor="#000000"
-                  android:hint="@string/tell_me_about_yourself"
-                  android:gravity="top"
-                  android:layout_margin="5sp" />
-    </LinearLayout>
-
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="fill_parent" >
-        <Button android:id="@+id/save_button"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/save"
-                android:layout_gravity="bottom"
-                android:onClick="savePerson"/>
-    </LinearLayout>
-
+              android:layout_height="match_parent">
+    <EditText android:id="@+id/first_name_input"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:hint="@string/first_name_label"
+              android:layout_margin="5sp"/>
+    <EditText android:id="@+id/last_name_input"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:hint="@string/last_name_label"
+              android:layout_margin="5sp" />
+    <EditText android:id="@+id/home_location_input"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:hint="@string/home_location_label"
+              android:layout_margin="5sp"/>
+    <EditText android:id="@+id/about_me_input"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:minLines="3"
+              android:hint="@string/tell_me_about_yourself"
+              android:layout_margin="5sp" />
 </LinearLayout>

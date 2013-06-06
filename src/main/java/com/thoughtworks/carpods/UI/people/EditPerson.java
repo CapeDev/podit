@@ -2,7 +2,9 @@ package com.thoughtworks.carpods.UI.people;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.EditText;
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
@@ -33,7 +35,7 @@ public class EditPerson extends Activity {
         }
     }
 
-    public void savePerson(View v) {
+    public void savePerson(MenuItem item) {
         Person person = getDataFromView();
         peopleDataAccess.savePerson(person);
         finish();
@@ -61,5 +63,12 @@ public class EditPerson extends Activity {
 
     protected String getAboutMeFromView() {
         return ((EditText)findViewById(R.id.about_me_input)).getText().toString();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.edit_person, menu);
+        return true;
     }
 }
