@@ -6,15 +6,9 @@ Using: android version 14 (specified in POM file) - version must be past 4.0.3
 To get dependencies and run tests:
 	mvn test
 
-To get maven on osx: 
-	brew install maven
-
-To install your app on a running emulator:
-	mvn install android:deploy
-(look for it in the emulators apps)
-
-
-To start an android virtual device (emulator) from the command line, use:
-android
-# Tools > manage AVDs > pick AVD > start 
+To open the list of all simulators you have set up:
+	android avd
 (note: adt-bundle-mac-x86_64/sdk/tools must be on your path for this to work)
+
+To build, run tests, package, and deploy to the simulator:
+	mvn clean package android:deploy android:run

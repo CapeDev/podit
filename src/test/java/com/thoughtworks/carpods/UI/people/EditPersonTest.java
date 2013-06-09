@@ -25,7 +25,7 @@ public class EditPersonTest {
     public void shouldSavePersonToDatabase() {
         EditPerson editPerson = new EditPerson(peopleDataAccess);
         editPerson.onCreate(null);
-        editPerson.savePerson(null);
+        editPerson.save(null);
         verify(peopleDataAccess, times(1)).savePerson(any(Person.class));
     }
 
@@ -33,7 +33,7 @@ public class EditPersonTest {
     public void shouldGetPersonFromTheView(){
         EditPerson editPerson = spy(new EditPerson(peopleDataAccess));
         editPerson.onCreate(null);
-        editPerson.savePerson(null);
+        editPerson.save(null);
 
 
         String firstName = "Bob";
@@ -58,7 +58,7 @@ public class EditPersonTest {
     public void shouldCallFinishAfterSavingPerson(){
         EditPerson editPerson = spy(new EditPerson(peopleDataAccess));
         editPerson.onCreate(null);
-        editPerson.savePerson(null);
+        editPerson.save(null);
 
         verify(editPerson, times(1)).finish();
     }
