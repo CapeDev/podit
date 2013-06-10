@@ -1,65 +1,61 @@
 package com.thoughtworks.carpods.UI.people;
 
+import android.widget.EditText;
+import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(RobolectricTestRunner.class)
 public class EditPersonTest {
 
-    private PeopleDataAccess peopleDataAccess;
+    @Mock private PeopleDataAccess dataAccess;
+
+    private EditPerson activity;
+    private Person bob = new Person.Builder()
+            .firstName("Bob")
+            .lastName("Murray")
+            .homeLocation("Renaissance")
+            .aboutMe("Just an awesome person")
+            .build();
 
     @Before
     public void setUp() {
-        peopleDataAccess = mock(PeopleDataAccess.class);
+        initMocks(this);
+        activity = new EditPerson(dataAccess);
+        activity.onCreate(null);
     }
 
     @Test
     public void shouldSavePersonToDatabase() {
-        EditPerson editPerson = new EditPerson(peopleDataAccess);
-        editPerson.onCreate(null);
-        editPerson.save(null);
-        verify(peopleDataAccess, times(1)).savePerson(any(Person.class));
-    }
-
-    @Test
-    public void shouldGetPersonFromTheView(){
-        EditPerson editPerson = spy(new EditPerson(peopleDataAccess));
-        editPerson.onCreate(null);
-        editPerson.save(null);
-
-
-        String firstName = "Bob";
-        String lastName = "Murray";
-        String homeLocation = "Home";
-        String aboutMe = "about me, yo!";
-
-        when(editPerson.getFirstNameFromView()).thenReturn(firstName);
-        when(editPerson.getLastNameFromView()).thenReturn(lastName);
-        when(editPerson.getHomeLocationFromView()).thenReturn(homeLocation);
-        when(editPerson.getAboutMeFromView()).thenReturn(aboutMe);
-
-        Person actualPerson = editPerson.getDataFromView();
-
-        assertThat(actualPerson.getFirstName(), is(firstName));
-        assertThat(actualPerson.getLastName(), is(lastName));
-        assertThat(actualPerson.getHomeLocation(), is(homeLocation));
-        assertThat(actualPerson.getAboutMe(), is(aboutMe));
+        addBobToView();
+        activity.save(null);
+        verify(dataAccess, times(1)).savePerson(refEq(bob));
     }
 
     @Test
     public void shouldCallFinishAfterSavingPerson(){
-        EditPerson editPerson = spy(new EditPerson(peopleDataAccess));
-        editPerson.onCreate(null);
-        editPerson.save(null);
+        activity.save(null);
+        assertThat(activity.isFinishing(), is(true));
+    }
 
-        verify(editPerson, times(1)).finish();
+    private void addBobToView() {
+        viewOf(R.id.first_name_input, EditText.class).setText(bob.getFirstName());
+        viewOf(R.id.last_name_input, EditText.class).setText(bob.getLastName());
+        viewOf(R.id.home_location_input, EditText.class).setText(bob.getHomeLocation());
+        viewOf(R.id.about_me_input, EditText.class).setText(bob.getAboutMe());
+    }
+
+    private <T> T viewOf(int viewId, Class<T> type) {
+        return type.cast(activity.findViewById(viewId));
     }
 }
