@@ -39,15 +39,11 @@ public class PeopleDataAccess {
     public Person getFirstPersonFromDatabase() {
         Cursor cursor = null;
 
-        String[] columns = {PodItDatabase.ROWID, PodItDatabase.FIRST_NAME, PodItDatabase.LAST_NAME, PodItDatabase.HOME_LOCATION, PodItDatabase.ABOUT_ME};
-        String selection = PodItDatabase.ROWID + " = ?";
-        String[] selectionArgs = {"1"};
-
         Person.Builder personBuilder = new Person.Builder();
 
         database = podItDatabase.getWritableDatabase();
         try {
-            cursor = database.query(PodItDatabase.PERSON_TABLE, columns, selection, selectionArgs, null, null, null, null);
+            cursor = database.rawQuery(String.format("select * from %s limit 1", PodItDatabase.PERSON_TABLE), new String[]{});
 
             if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToLast();

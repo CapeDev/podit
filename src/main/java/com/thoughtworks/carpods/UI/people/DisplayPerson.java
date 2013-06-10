@@ -20,20 +20,10 @@ public class DisplayPerson extends Activity {
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Someone");
+        actionBar.setTitle(String.format("%s %s", person.getFirstName(), person.getLastName()));
 
-        setFirstName(person.getFirstName());
-        setLastName(person.getLastName());
         setHomeLocation(person.getHomeLocation());
         setAboutMe(person.getAboutMe());
-    }
-
-    private void setFirstName(String firstName) {
-        ((TextView)findViewById(R.id.first_name)).setText(firstName);
-    }
-
-    private void setLastName(String lastName) {
-        ((TextView)findViewById(R.id.last_name)).setText(lastName);
     }
 
     private void setHomeLocation(String homeLocation) {

@@ -6,85 +6,59 @@
               android:layout_height="match_parent"
               android:layout_alignParentLeft="true"
               android:layout_alignParentTop="true"
-              android:background="#ffffff"
-              android:layout_gravity="left">
+              android:padding="5dp">
 
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_alignParentLeft="true"
-                  android:layout_alignParentTop="true"
-                  android:background="#ffffff"
-                  android:layout_gravity="center">
-        <TextView android:id = "@+id/firstNameLabel"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:textSize="25sp"
-                  android:textColor="#000000"
-                  android:text="@string/first_name_label" />
-        <TextView android:id="@+id/first_name"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:textSize="25sp" />
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:orientation="vertical"
+            android:paddingBottom="15dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_location_label"
+                android:textAllCaps="true"
+                android:id="@+id/textView"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:textStyle="bold"/>
+
+        <View android:layout_width="fill_parent"
+              android:layout_height="1dip"
+              android:background="@android:color/holo_blue_bright" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:id="@+id/home_location"/>
     </LinearLayout>
 
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_alignParentLeft="true"
-                  android:layout_alignParentTop="true"
-                  android:background="#ffffff"
-                  android:layout_gravity="center">
-        <TextView android:id = "@+id/lastNameLabel"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:textSize="25sp"
-                  android:textColor="#000000"
-                  android:text="@string/last_name_label" />
-        <TextView android:id="@+id/last_name"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:textSize="25sp" />
-    </LinearLayout>
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:orientation="vertical"
+            >
 
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_alignParentLeft="true"
-                  android:layout_alignParentTop="true"
-                  android:background="#ffffff"
-                  android:layout_gravity="center">
-        <TextView android:id = "@+id/home_location_label"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:textSize="25sp"
-                  android:textColor="#000000"
-                  android:text="@string/home_location_label" />
-        <TextView android:id="@+id/home_location"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:textSize="25sp" />
-    </LinearLayout>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_me_label"
+                android:textAllCaps="true"
+                android:id="@+id/textView2"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
 
-    <LinearLayout android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_alignParentLeft="true"
-                  android:layout_alignParentTop="true"
-                  android:background="#ffffff"
-                  android:layout_gravity="center">
-        <TextView android:id = "@+id/about_me_label"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:textSize="25sp"
-                  android:textColor="#000000"
-                  android:text="@string/about_me_label" />
-        <TextView android:id="@+id/about_me"
-                  android:layout_width="fill_parent"
-                  android:layout_height="fill_parent"
-                  android:textSize="25sp"
-                  android:minLines="3"
-                />
-    </LinearLayout>
+        <View android:layout_width="fill_parent"
+              android:layout_height="1dip"
+              android:background="@android:color/holo_blue_bright" />
 
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:id="@+id/about_me"/>
+
+    </LinearLayout>
 </LinearLayout>
