@@ -1,9 +1,9 @@
 package com.thoughtworks.carpods.UI.people;
 
-import android.widget.EditText;
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
+import com.thoughtworks.carpods.fun.ViewCast;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +20,7 @@ public class EditPersonTest {
 
     @Mock private PeopleDataAccess dataAccess;
 
+    private ViewCast viewCast;
     private EditPerson activity;
     private Person bob = new Person.Builder()
             .firstName("Bob")
@@ -33,6 +34,7 @@ public class EditPersonTest {
         initMocks(this);
         activity = new EditPerson(dataAccess);
         activity.onCreate(null);
+        viewCast = new ViewCast(activity);
     }
 
     @Test
@@ -49,13 +51,10 @@ public class EditPersonTest {
     }
 
     private void addBobToView() {
-        viewOf(R.id.first_name_input, EditText.class).setText(bob.getFirstName());
-        viewOf(R.id.last_name_input, EditText.class).setText(bob.getLastName());
-        viewOf(R.id.home_location_input, EditText.class).setText(bob.getHomeLocation());
-        viewOf(R.id.about_me_input, EditText.class).setText(bob.getAboutMe());
-    }
-
-    private <T> T viewOf(int viewId, Class<T> type) {
-        return type.cast(activity.findViewById(viewId));
+        viewCast.editText(R.id.first_name_input).setText(bob.getFirstName());
+        viewCast.editText(R.id.first_name_input).setText(bob.getFirstName());
+        viewCast.editText(R.id.last_name_input).setText(bob.getLastName());
+        viewCast.editText(R.id.home_location_input).setText(bob.getHomeLocation());
+        viewCast.editText(R.id.about_me_input).setText(bob.getAboutMe());
     }
 }
