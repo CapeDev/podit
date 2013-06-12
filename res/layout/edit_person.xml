@@ -3,11 +3,36 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <EditText android:id="@+id/first_name_input"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:hint="@string/first_name_label"
-              android:layout_margin="5sp"/>
+
+    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+        <EditText android:id="@+id/first_name_input"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/first_name_label"
+                  android:layout_toLeftOf="@+id/imageButton"
+                  android:layout_centerVertical="true"/>
+
+        <ImageButton
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/imageButton"
+                android:layout_gravity="center"
+                android:src="@drawable/default_picture"
+                android:maxWidth="48dp"
+                android:maxHeight="48dp"
+                android:baselineAlignBottom="false"
+                android:scaleType="centerCrop"
+                android:layout_alignParentRight="true"
+                style="@android:style/Widget.DeviceDefault.Button.Borderless"
+                android:adjustViewBounds="false"
+                android:layout_margin="10dp"
+                android:contentDescription="@string/picture"/>
+    </RelativeLayout>
+
     <EditText android:id="@+id/last_name_input"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
@@ -24,4 +49,5 @@
               android:minLines="3"
               android:hint="@string/tell_me_about_yourself"
               android:layout_margin="5sp" />
+
 </LinearLayout>

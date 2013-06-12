@@ -5,13 +5,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.EditText;
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
+import com.thoughtworks.carpods.fun.ViewCast;
 
 public class EditPerson extends Activity {
-    protected PeopleDataAccess peopleDataAccess;
+    private PeopleDataAccess peopleDataAccess;
+    private ViewCast viewCast;
 
     public EditPerson() {
         super();
@@ -23,6 +24,7 @@ public class EditPerson extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.viewCast = new ViewCast(this);
 
         setContentView(R.layout.edit_person);
 
@@ -50,19 +52,19 @@ public class EditPerson extends Activity {
     }
 
     protected String getLastNameFromView() {
-        return ((EditText)findViewById(R.id.last_name_input)).getText().toString();
+        return viewCast.editText(R.id.last_name_input).getText().toString();
     }
 
     protected String getFirstNameFromView() {
-        return ((EditText)findViewById(R.id.first_name_input)).getText().toString();
+        return viewCast.editText(R.id.first_name_input).getText().toString();
     }
 
     protected String getHomeLocationFromView() {
-        return ((EditText)findViewById(R.id.home_location_input)).getText().toString();
+        return viewCast.editText(R.id.home_location_input).getText().toString();
     }
 
     protected String getAboutMeFromView() {
-        return ((EditText)findViewById(R.id.about_me_input)).getText().toString();
+        return viewCast.editText(R.id.about_me_input).getText().toString();
     }
 
     @Override

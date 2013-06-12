@@ -24,22 +24,24 @@ public class PeopleAdapter extends ArrayAdapter<Person> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         View rowView = inflater.inflate(R.layout.person_row, parent, false);
 
-        TextView firstName = (TextView)rowView.findViewById(R.id.first_name_label);
-        firstName.setText(people.get(position).getFirstName());
+        Person person = people.get(position);
 
-        TextView lastName = (TextView)rowView.findViewById(R.id.last_name_label);
-        lastName.setText(people.get(position).getLastName());
+        TextView firstName = (TextView)rowView.findViewById(R.id.first_name_label);
+        firstName.setText(String.format("%s %s", person.getFirstName(), person.getLastName()));
 
         return rowView;
     }
 
-    // apparently, you need to override getCount in order for a custom arrayadapter to work
+    @Override
     public int getCount() {
         return people.size();
+    }
+
+    @Override
+    public Person getItem(int position) {
+        return people.get(position);
     }
 }

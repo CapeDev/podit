@@ -23,4 +23,5 @@
     <string name="the_people_list">The People List</string>
     <string name="create_a_pod">Create a Pod</string>
     <string name="desc_user_photo">User Photo</string>
+    <string name="picture">Picture</string>
 </resources>
