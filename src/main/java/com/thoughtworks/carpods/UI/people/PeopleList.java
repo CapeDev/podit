@@ -1,6 +1,7 @@
 package com.thoughtworks.carpods.UI.people;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -33,6 +34,9 @@ public class PeopleList extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView listView, View view, int position, long id) {
-        Toast.makeText(this, "hey hey kids! I clicked position " + position, Toast.LENGTH_LONG).show();
+        Person item = (Person) listView.getAdapter().getItem(position);
+        Intent intent = new Intent(this, DisplayPerson.class);
+        intent.putExtra("id", item.getId());
+        startActivity(intent);
     }
 }

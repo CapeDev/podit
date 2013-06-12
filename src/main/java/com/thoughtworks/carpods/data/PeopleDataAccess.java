@@ -63,6 +63,33 @@ public class PeopleDataAccess {
         return personBuilder.build();
     }
 
+    public Person findById(int id) {
+        Cursor cursor = null;
+
+        Person.Builder personBuilder = new Person.Builder();
+
+        database = podItDatabase.getWritableDatabase();
+        try {
+            cursor = database.rawQuery(String.format("select * from %s where %s=%d", PodItDatabase.PERSON_TABLE, PodItDatabase.ROWID, id), new String[]{});
+
+            if (cursor != null && cursor.getCount() > 0) {
+                cursor.moveToLast();
+                personBuilder.firstName(cursor.getString(cursor.getColumnIndex(PodItDatabase.FIRST_NAME)));
+                personBuilder.lastName(cursor.getString(cursor.getColumnIndex(PodItDatabase.LAST_NAME)));
+                personBuilder.homeLocation(cursor.getString(cursor.getColumnIndex(PodItDatabase.HOME_LOCATION)));
+                personBuilder.aboutMe(cursor.getString(cursor.getColumnIndex(PodItDatabase.ABOUT_ME)));
+            }
+
+        }  finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            database.close();
+        }
+
+        return personBuilder.build();
+    }
+
     public List<Person> getAllPeopleNames() {
         Cursor cursor = null;
 
@@ -80,6 +107,7 @@ public class PeopleDataAccess {
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
                     Person.Builder personBuilder = new Person.Builder();
+                    personBuilder.id(cursor.getInt(cursor.getColumnIndex(PodItDatabase.ROWID)));
                     personBuilder.firstName(cursor.getString(cursor.getColumnIndex(PodItDatabase.FIRST_NAME)));
                     personBuilder.lastName(cursor.getString(cursor.getColumnIndex(PodItDatabase.LAST_NAME)));
                     peopleList.add(personBuilder.build());

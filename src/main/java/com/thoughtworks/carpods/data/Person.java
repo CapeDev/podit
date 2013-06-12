@@ -13,6 +13,7 @@ public class Person {
         this.lastName = personBuilder.lastName;
         this.homeLocation = personBuilder.homeLocation;
         this.aboutMe = personBuilder.aboutMe;
+        this.id = personBuilder.id;
     }
 
     public String getFirstName() {
@@ -37,6 +38,7 @@ public class Person {
 
 
     public static class Builder {
+        private int id;
         private String firstName;
         private String lastName;
         private String homeLocation;
@@ -59,6 +61,11 @@ public class Person {
 
         public Builder aboutMe(String aboutMe) {
             this.aboutMe = (aboutMe == null) ? "" : aboutMe ;
+            return this;
+        }
+
+        public Builder id(int id) {
+            this.id = id;
             return this;
         }
 
