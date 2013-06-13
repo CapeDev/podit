@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.UI.people.PeopleList;
@@ -65,17 +65,20 @@ public class EditPod extends Activity {
     }
 
     private int getReturnTimeFromView() {
-        String rawReturnTime = ((TextView)findViewById(R.id.return_time)).getText().toString();
-        rawReturnTime = rawReturnTime.replace(":", "");
-        Log.v(CLAZZ_TAG, "Read the raw return time as: \"" + rawReturnTime + "\"");
-        return Integer.parseInt(rawReturnTime);
+        TimePicker returnTimePicker = (TimePicker) findViewById(R.id.return_time_picker);
+
+        int returnTime = Integer.parseInt(returnTimePicker.getCurrentHour() + "" + returnTimePicker.getCurrentMinute());
+        Log.v(CLAZZ_TAG, "Read the raw return time as: \"" + returnTime + "\"");
+        return returnTime;
     }
 
     private int getDepartureTimeFromView() {
-        String rawDepartureTime = ((TextView)findViewById(R.id.departure_time)).getText().toString();
-        rawDepartureTime = rawDepartureTime.replace(":", "");
-        Log.v(CLAZZ_TAG, "Read the raw departure time as: \"" + rawDepartureTime + "\"");
-        return Integer.parseInt(rawDepartureTime);
+        TimePicker departureTime = (TimePicker) findViewById(R.id.departure_time_picker);
+
+        int returnVal = Integer.parseInt(departureTime.getCurrentHour() + "" + departureTime.getCurrentMinute());
+
+        Log.v(CLAZZ_TAG, "Read the raw departure time as: \"" + returnVal + "\"");
+        return returnVal;
     }
 
     private String getHomeLocationFromView() {
