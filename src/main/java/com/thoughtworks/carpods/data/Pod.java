@@ -45,10 +45,10 @@ public class Pod {
     public static class Builder {
         private String name;
         private String homeLocation;
-        private int departureTime;
-        private int returnTime;
         private String about;
         private int id = -1;
+        public int departureTime;
+        public int returnTime;
 
         public Builder name(String name) {
             this.name = name;
