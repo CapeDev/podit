@@ -1,6 +1,8 @@
 package com.thoughtworks.carpods.UI.people;
 
+import android.content.Context;
 import com.thoughtworks.carpods.R;
+import com.thoughtworks.carpods.data.DataAccessFactory;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
 import com.thoughtworks.carpods.fun.ViewCast;
@@ -12,6 +14,7 @@ import org.mockito.Mock;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -19,6 +22,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 public class EditPersonTest {
 
     @Mock private PeopleDataAccess dataAccess;
+    @Mock private DataAccessFactory dataAccessFactory;
 
     private ViewCast viewCast;
     private EditPerson activity;
@@ -32,7 +36,10 @@ public class EditPersonTest {
     @Before
     public void setUp() {
         initMocks(this);
-        activity = new EditPerson(dataAccess);
+        given(dataAccessFactory.people(any(Context.class))).willReturn(dataAccess);
+
+        activity = new EditPerson();
+        activity.dataAccessFor = dataAccessFactory;
         activity.onCreate(null);
         viewCast = new ViewCast(activity);
     }

@@ -1,28 +1,27 @@
 package com.thoughtworks.carpods.UI.people;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import com.thoughtworks.carpods.PodActivity;
 import com.thoughtworks.carpods.R;
+import com.thoughtworks.carpods.data.DataAccessFactory;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
 import com.thoughtworks.carpods.fun.ViewCast;
 
-public class DisplayPerson extends Activity {
+import javax.inject.Inject;
+
+public class DisplayPerson extends PodActivity {
+    @Inject DataAccessFactory dataAccessFor;
 
     private PeopleDataAccess dataAccess;
     private ViewCast viewCast;
 
-    public DisplayPerson() { }
-
-    public DisplayPerson(PeopleDataAccess dataAccess) {
-        this.dataAccess = dataAccess;
-    }
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewCast = new ViewCast(this);
+        dataAccess = dataAccessFor.people(this);
 
         setContentView(R.layout.display_person);
 
@@ -38,17 +37,10 @@ public class DisplayPerson extends Activity {
 
     private Person person() {
         if (getIntent().hasExtra("id")) {
-            return dataAccess().getPersonFromDatabaseWithId(getIntent().getIntExtra("id", 0));
+            return dataAccess.getPersonFromDatabaseWithId(getIntent().getIntExtra("id", 0));
         }
 
-        return dataAccess().getFirstPersonFromDatabase();
-    }
-
-    private PeopleDataAccess dataAccess() {
-        if (dataAccess == null) {
-            dataAccess = new PeopleDataAccess(this);
-        }
-        return dataAccess;
+        return dataAccess.getFirstPersonFromDatabase();
     }
 
     private void setHomeLocation(String homeLocation) {

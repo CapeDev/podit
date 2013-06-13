@@ -1,26 +1,24 @@
 package com.thoughtworks.carpods.UI.people;
 
-import android.app.Activity;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import com.thoughtworks.carpods.PodActivity;
 import com.thoughtworks.carpods.R;
+import com.thoughtworks.carpods.data.DataAccessFactory;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
 import com.thoughtworks.carpods.fun.ViewCast;
 
-public class EditPerson extends Activity {
+import javax.inject.Inject;
+
+public class EditPerson extends PodActivity {
+    @Inject DataAccessFactory dataAccessFor;
+
     private PeopleDataAccess peopleDataAccess;
     private ViewCast viewCast;
-
-    public EditPerson() {
-        super();
-    }
-
-    public EditPerson(PeopleDataAccess peopleDataAccess) {
-        this.peopleDataAccess = peopleDataAccess;
-    }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,13 +26,7 @@ public class EditPerson extends Activity {
 
         setContentView(R.layout.edit_person);
 
-        getDatabaseConnection();
-    }
-
-    protected void getDatabaseConnection() {
-        if (peopleDataAccess == null) {
-            peopleDataAccess = new PeopleDataAccess(this);
-        }
+        peopleDataAccess = dataAccessFor.people(this);
     }
 
     public void save(MenuItem item) {

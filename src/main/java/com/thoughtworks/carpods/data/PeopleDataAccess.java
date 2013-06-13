@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -14,10 +15,14 @@ public class PeopleDataAccess {
     private static final String CLASS_TAG = "PeopleDataAccess";
 
     private SQLiteDatabase database;
-    private final PodItDatabase podItDatabase;
+    private final SQLiteOpenHelper podItDatabase;
 
     public PeopleDataAccess(Context context) {
         podItDatabase = PodItDatabase.getInstance(context);
+    }
+
+    public PeopleDataAccess(SQLiteOpenHelper database) {
+        this.podItDatabase = database;
     }
 
     public void savePerson(Person person) {
@@ -57,6 +62,7 @@ public class PeopleDataAccess {
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
                     Person.Builder personBuilder = new Person.Builder();
+                    personBuilder.id(cursor.getInt(cursor.getColumnIndex(PodItDatabase.ROWID)));
                     personBuilder.firstName(cursor.getString(cursor.getColumnIndex(PodItDatabase.FIRST_NAME)));
                     personBuilder.lastName(cursor.getString(cursor.getColumnIndex(PodItDatabase.LAST_NAME)));
                     peopleList.add(personBuilder.build());
