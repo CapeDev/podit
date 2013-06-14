@@ -20,11 +20,11 @@ public class PodPopulator implements Populator {
         database.savePod(createPod("The Original Ren", "Residence Inn", 700, 1900, "Is there really anything better?"));
     }
 
-    private Pod createPod(String name, String homeLocation, int departureTime, int returnTime, String about) {
+    private Pod createPod(String name, String homeLocation, int departurnTime, int returnTime, String about) {
         Pod.Builder newPod = new Pod.Builder();
         newPod.name(name);
         newPod.homeLocation(homeLocation);
-        newPod.departureTime(departureTime);
+        newPod.departureTime(departurnTime);
         newPod.returnTime(returnTime);
         newPod.about(about);
         return newPod.build();
