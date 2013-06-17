@@ -2,6 +2,7 @@ package com.thoughtworks.carpods.fun;
 
 import android.app.Activity;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import org.junit.Before;
@@ -39,5 +40,10 @@ public class ViewCastTest {
     public void shouldCastViewToTextView() throws Exception {
         given(activity.findViewById(eq(1))).willReturn(new TextView(null));
         assertThat(viewCast.textView(1), is(instanceOf(TextView.class)));
+    }
+    @Test
+    public void shouldCastViewToImageButton() throws Exception {
+        given(activity.findViewById(eq(1))).willReturn(new ImageButton(null));
+        assertThat(viewCast.imageButton(1), is(instanceOf(ImageButton.class)));
     }
 }
