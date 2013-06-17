@@ -6,23 +6,23 @@
               android:layout_height="match_parent">
 
     <!-- FIXME: I can't get these buttons to show up on the UI.  Even better would be to get them to show up in the top bar similar to adding a (phone number) contact -->
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_height="wrap_content"
-                  android:layout_width="fill_parent"
-                  android:layout_gravity="bottom">
-        <Button android:id="@+id/save_button"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/save"
-                android:onClick="savePod"/>
-        <Button android:id="@+id/cancel_button"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/cancel"
-                android:onClick="cancelClick" />
-    </LinearLayout>
+    <!--<LinearLayout android:orientation="horizontal"-->
+                  <!--android:layout_height="wrap_content"-->
+                  <!--android:layout_width="fill_parent"-->
+                  <!--android:layout_gravity="bottom">-->
+        <!--<Button android:id="@+id/save_button"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="@string/save"-->
+                <!--android:onClick="save"/>-->
+        <!--<Button android:id="@+id/cancel_button"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="@string/cancel"-->
+                <!--android:onClick="cancelClick" />-->
+    <!--</LinearLayout>-->
 
     <!-- FIXME: convert this to a relative layout to avoid severely nested Linear Layouts -->
     <LinearLayout android:orientation="horizontal"

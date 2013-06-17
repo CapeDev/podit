@@ -3,7 +3,10 @@ package com.thoughtworks.carpods.UI.pod;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -23,6 +26,7 @@ public class EditPod extends Activity {
 
     private PodDataAccess podDataAccess;
     private String CLAZZ_TAG = "EditPod";
+    private Pod.Builder podBuilder;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +34,8 @@ public class EditPod extends Activity {
         setContentView(R.layout.edit_pod);
 
         getDatabaseConnection();
+
+        podBuilder = new Pod.Builder();
 
         Log.v(CLAZZ_TAG, "Done with onCreate in EditPod");
     }
@@ -40,7 +46,8 @@ public class EditPod extends Activity {
         }
     }
 
-    public void savePod(View v) {
+    public void save(MenuItem item) {
+        showToast("I'm saving a pod from the menu!");
         Pod pod = getDataFromView();
         podDataAccess.savePod(pod);
         finish();
@@ -103,17 +110,62 @@ public class EditPod extends Activity {
                 long personId = data.getLongExtra("personId", -1);
                 String message = "I've returned with personID: " + personId;
                 Log.v(CLAZZ_TAG, "..........................> returned with personId: " + personId);
-                showToast(message);
+//                showToast(message);
 
                 PeopleDataAccess personDataAccess = new PeopleDataAccess(this);
-                // FIXME - I bet there's a better way to handle the +1 for the personId
                 Person newPodMember = personDataAccess.getPersonFromDatabaseWithId(personId);
-                showToast(newPodMember.getFirstName());
+
+                Log.v(CLAZZ_TAG, "First name of new pod member: " + newPodMember.getFirstName());
+
+
+                if (podBuilder == null) {
+                    Log.v(CLAZZ_TAG, "podbuilder is null");
+                } else {
+                    Log.v(CLAZZ_TAG, "podbuilder is not null");
+                }
+
+                if (newPodMember == null) {
+                    Log.v(CLAZZ_TAG, "newPodMember is null");
+                } else {
+                    Log.v(CLAZZ_TAG, "newPodMember is not null");
+                }
+
+//                podBuilder = new Pod.Builder();
+                // FIXME - this next line is where the problem is.
+                podBuilder.member(newPodMember);
+                Log.v(CLAZZ_TAG, "created a new podBuilder!");
+
+//                if (podBuilder == null || newPodMember == null) {
+//                    Log.v(CLAZZ_TAG, "something is null");
+//                } else {
+//                    podBuilder = new Pod.Builder();
+//                    // FIXME - this next line is where the problem is.
+//                    podBuilder.member(newPodMember);
+//                    Log.v(CLAZZ_TAG, "created a new podBuilder!");
+//                }
+
+                Log.v(CLAZZ_TAG, "I'm done doing whatever");
             }
         }
     }
 
     private void showToast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.edit_person, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
