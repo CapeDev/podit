@@ -35,23 +35,23 @@ public class PeopleList extends ListActivity {
         setListAdapter(new PeopleAdapter(this, peopleNames));
     }
 
-    @Override
-    protected void onListItemClick(ListView listView, View view, int position, long id) {
-        Person item = (Person) listView.getAdapter().getItem(position);
-        Intent intent = new Intent(this, DisplayPerson.class);
-        intent.putExtra("id", item.getId());
-        startActivity(intent);
-    }
-
 //    @Override
 //    protected void onListItemClick(ListView listView, View view, int position, long id) {
-//        Toast.makeText(this, "hey hey kids! I clicked position " + position, Toast.LENGTH_LONG).show();
-//        Intent intent = new Intent();
-//        // FIXME - what happens when there is a big list?  what id gets returned? i.e. whats the difference between 'position' and 'id'?
-//        intent.putExtra("personId", id + 1);
-//        setResult(Activity.RESULT_OK, intent);
-//        finish();
+//        Person item = (Person) listView.getAdapter().getItem(position);
+//        Intent intent = new Intent(this, DisplayPerson.class);
+//        intent.putExtra("id", (item.getId() + 1));
+//        startActivity(intent);
 //    }
+
+    @Override
+    protected void onListItemClick(ListView listView, View view, int position, long id) {
+        Toast.makeText(this, "hey hey kids! I clicked position " + position, Toast.LENGTH_LONG).show();
+        Intent intent = new Intent();
+        // FIXME - what happens when there is a big list?  what id gets returned? i.e. whats the difference between 'position' and 'id'?
+        intent.putExtra("personId", id + 1);
+        setResult(Activity.RESULT_OK, intent);
+        finish();
+    }
 
     @Override
     public void onPause() {

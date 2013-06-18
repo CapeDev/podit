@@ -15,6 +15,7 @@ public class PodDataAccess {
 
     private SQLiteDatabase database;
     private final PodItDatabase podItDatabase;
+    private String podTableName = PodItDatabase.POD_TABLE;
 
     public PodDataAccess(Context context) {
         podItDatabase = PodItDatabase.getInstance(context);
@@ -31,7 +32,7 @@ public class PodDataAccess {
 
         database = podItDatabase.getWritableDatabase();
         try {
-            cursor = database.query(PodItDatabase.POD_TABLE, columns, selection, selectionArgs, null, null, null);
+            cursor = database.query(podTableName, columns, selection, selectionArgs, null, null, null);
 
             if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToFirst();
@@ -54,7 +55,6 @@ public class PodDataAccess {
     }
 
     public long savePod(Pod pod) {
-        String table = PodItDatabase.POD_TABLE;
 
         ContentValues podInfo = new ContentValues();
         podInfo.put(PodItDatabase.POD_NAME, pod.getName());
@@ -64,7 +64,7 @@ public class PodDataAccess {
         podInfo.put(PodItDatabase.ABOUT_POD, pod.getAboutPod());
 
         database = podItDatabase.getWritableDatabase();
-        long podId = database.insert(table, null, podInfo);
+        long podId = database.insert(podTableName, null, podInfo);
         database.close();
 
         return podId;

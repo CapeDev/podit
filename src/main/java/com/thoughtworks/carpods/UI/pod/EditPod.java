@@ -35,8 +35,6 @@ public class EditPod extends Activity {
 
         getDatabaseConnection();
 
-        podBuilder = new Pod.Builder();
-
         Log.v(CLAZZ_TAG, "Done with onCreate in EditPod");
     }
 
@@ -110,7 +108,7 @@ public class EditPod extends Activity {
                 long personId = data.getLongExtra("personId", -1);
                 String message = "I've returned with personID: " + personId;
                 Log.v(CLAZZ_TAG, "..........................> returned with personId: " + personId);
-//                showToast(message);
+                showToast(message);
 
                 PeopleDataAccess personDataAccess = new PeopleDataAccess(this);
                 Person newPodMember = personDataAccess.getPersonFromDatabaseWithId(personId);
