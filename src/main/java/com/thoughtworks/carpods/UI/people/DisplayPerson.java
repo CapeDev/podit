@@ -1,9 +1,10 @@
 package com.thoughtworks.carpods.UI.people;
 
 import android.app.ActionBar;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
-import com.thoughtworks.carpods.PodActivity;
+import com.thoughtworks.carpods.plumb.PodActivity;
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.DataAccessFactory;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
@@ -11,6 +12,7 @@ import com.thoughtworks.carpods.data.Person;
 import com.thoughtworks.carpods.fun.ViewCast;
 
 import javax.inject.Inject;
+import java.io.File;
 
 public class DisplayPerson extends PodActivity {
     @Inject DataAccessFactory dataAccessFor;
@@ -31,8 +33,16 @@ public class DisplayPerson extends PodActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(String.format("%s %s", person.getFirstName(), person.getLastName()));
 
+        setPicture(person.getPicture());
         setHomeLocation(person.getHomeLocation());
         setAboutMe(person.getAboutMe());
+    }
+
+    private void setPicture(String picture) {
+        File imageFile = new File(getFilesDir(), picture);
+        if (imageFile.exists() && imageFile.isFile()) {
+            viewCast.imageView(R.id.profile_picture).setImageURI(Uri.fromFile(imageFile));
+        }
     }
 
     private Person person() {

@@ -1,13 +1,13 @@
 package com.thoughtworks.carpods.fun;
 
 import android.app.Activity;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
-import com.xtremelabs.robolectric.RobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -15,11 +15,12 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-@RunWith(RobolectricTestRunner.class)
 public class ViewCastTest {
 
+    public static final int AN_ID = 1;
     @Mock private Activity activity;
 
     private ViewCast viewCast;
@@ -32,18 +33,29 @@ public class ViewCastTest {
 
     @Test
     public void shouldCastViewToEditText() throws Exception {
-        given(activity.findViewById(eq(1))).willReturn(new EditText(null));
-        assertThat(viewCast.editText(1), is(instanceOf(EditText.class)));
+        mockFindViewFor(EditText.class);
+        assertThat(viewCast.editText(AN_ID), is(instanceOf(EditText.class)));
     }
 
     @Test
     public void shouldCastViewToTextView() throws Exception {
-        given(activity.findViewById(eq(1))).willReturn(new TextView(null));
-        assertThat(viewCast.textView(1), is(instanceOf(TextView.class)));
+        mockFindViewFor(TextView.class);
+        assertThat(viewCast.textView(AN_ID), is(instanceOf(TextView.class)));
     }
+
     @Test
     public void shouldCastViewToImageButton() throws Exception {
-        given(activity.findViewById(eq(1))).willReturn(new ImageButton(null));
-        assertThat(viewCast.imageButton(1), is(instanceOf(ImageButton.class)));
+        mockFindViewFor(ImageButton.class);
+        assertThat(viewCast.imageButton(AN_ID), is(instanceOf(ImageButton.class)));
+    }
+
+    @Test
+    public void shouldCastViewToImageView() throws Exception {
+        mockFindViewFor(ImageView.class);
+        assertThat(viewCast.imageView(AN_ID), is(instanceOf(ImageView.class)));
+    }
+
+    private <T extends View> void mockFindViewFor(Class<T> clazz) {
+        given(activity.findViewById(eq(AN_ID))).willReturn(mock(clazz));
     }
 }

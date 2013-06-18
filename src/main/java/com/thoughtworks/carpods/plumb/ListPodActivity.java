@@ -1,9 +1,10 @@
-package com.thoughtworks.carpods;
+package com.thoughtworks.carpods.plumb;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Bundle;
+import com.thoughtworks.carpods.PodApplication;
 
-public abstract class PodActivity extends Activity {
+public abstract class ListPodActivity extends ListActivity   {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((PodApplication) getApplication()).inject(this);

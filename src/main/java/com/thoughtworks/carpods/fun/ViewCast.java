@@ -3,6 +3,7 @@ package com.thoughtworks.carpods.fun;
 import android.app.Activity;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ViewCast {
@@ -22,6 +23,10 @@ public class ViewCast {
 
     public ImageButton imageButton(int viewId) {
         return viewOf(viewId, ImageButton.class);
+    }
+
+    public ImageView imageView(int viewId) {
+        return viewOf(viewId, ImageView.class);
     }
 
     private <T> T viewOf(int viewId, Class<T> type) {

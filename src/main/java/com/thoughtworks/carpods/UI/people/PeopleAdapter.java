@@ -1,14 +1,17 @@
 package com.thoughtworks.carpods.UI.people;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.Person;
 
+import java.io.File;
 import java.util.List;
 
 public class PeopleAdapter extends ArrayAdapter<Person> {
@@ -31,6 +34,12 @@ public class PeopleAdapter extends ArrayAdapter<Person> {
 
         TextView firstName = (TextView)rowView.findViewById(R.id.first_name_label);
         firstName.setText(String.format("%s %s", person.getFirstName(), person.getLastName()));
+
+        ImageView picture = (ImageView) rowView.findViewById(R.id.profile_picture);
+        File imageFile = new File(context.getFilesDir(), person.getPicture());
+        if (imageFile.exists() && imageFile.isFile()) {
+            picture.setImageURI(Uri.fromFile(imageFile));
+        }
 
         return rowView;
     }

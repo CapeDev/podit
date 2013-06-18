@@ -33,6 +33,7 @@ public class PeopleDataAccess {
         info.put(PodItDatabase.LAST_NAME, person.getLastName());
         info.put(PodItDatabase.HOME_LOCATION, person.getHomeLocation());
         info.put(PodItDatabase.ABOUT_ME, person.getAboutMe());
+        info.put(PodItDatabase.PICTURE, person.getPicture());
 
         database = podItDatabase.getWritableDatabase();
         database.insert(table, null, info);
@@ -48,7 +49,7 @@ public class PeopleDataAccess {
     public List<Person> getAllPeopleNames() {
         Cursor cursor = null;
 
-        String[] columns = {PodItDatabase.ROWID, PodItDatabase.FIRST_NAME, PodItDatabase.LAST_NAME};
+        String[] columns = {PodItDatabase.ROWID, PodItDatabase.FIRST_NAME, PodItDatabase.LAST_NAME, PodItDatabase.PICTURE};
         String selection = null;
         String[] selectionArgs = null;
 
@@ -65,6 +66,7 @@ public class PeopleDataAccess {
                     personBuilder.id(cursor.getInt(cursor.getColumnIndex(PodItDatabase.ROWID)));
                     personBuilder.firstName(cursor.getString(cursor.getColumnIndex(PodItDatabase.FIRST_NAME)));
                     personBuilder.lastName(cursor.getString(cursor.getColumnIndex(PodItDatabase.LAST_NAME)));
+                    personBuilder.picture(cursor.getString(cursor.getColumnIndex(PodItDatabase.PICTURE)));
                     peopleList.add(personBuilder.build());
                     cursor.moveToNext();
                 }
@@ -82,7 +84,7 @@ public class PeopleDataAccess {
     public Person getPersonFromDatabaseWithId(long personId) {
         Cursor cursor = null;
 
-        String[] columns = {PodItDatabase.ROWID, PodItDatabase.FIRST_NAME, PodItDatabase.LAST_NAME, PodItDatabase.HOME_LOCATION, PodItDatabase.ABOUT_ME};
+        String[] columns = {PodItDatabase.ROWID, PodItDatabase.FIRST_NAME, PodItDatabase.LAST_NAME, PodItDatabase.HOME_LOCATION, PodItDatabase.ABOUT_ME, PodItDatabase.PICTURE};
         String selection = PodItDatabase.ROWID + " = ?";
         String[] selectionArgs = {Long.toString(personId)};
 
@@ -98,6 +100,7 @@ public class PeopleDataAccess {
                 personBuilder.lastName(cursor.getString(cursor.getColumnIndex(PodItDatabase.LAST_NAME)));
                 personBuilder.homeLocation(cursor.getString(cursor.getColumnIndex(PodItDatabase.HOME_LOCATION)));
                 personBuilder.aboutMe(cursor.getString(cursor.getColumnIndex(PodItDatabase.ABOUT_ME)));
+                personBuilder.picture(cursor.getString(cursor.getColumnIndex(PodItDatabase.PICTURE)));
             }
 
         }  finally {

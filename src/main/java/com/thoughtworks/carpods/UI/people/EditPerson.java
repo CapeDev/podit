@@ -1,19 +1,21 @@
 package com.thoughtworks.carpods.UI.people;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
-import com.thoughtworks.carpods.PodActivity;
+import com.thoughtworks.carpods.plumb.PodActivity;
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.DataAccessFactory;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
@@ -21,21 +23,26 @@ import com.thoughtworks.carpods.data.Person;
 import com.thoughtworks.carpods.fun.ViewCast;
 
 import javax.inject.Inject;
+import java.io.FileOutputStream;
+import java.util.Calendar;
 
 public class EditPerson extends PodActivity {
+    public static final String PICTURE_PREFIX = "person_";
+    protected static final int SELECT_PICTURE = 1;
+
     @Inject DataAccessFactory dataAccessFor;
 
     private PeopleDataAccess peopleDataAccess;
     private ViewCast viewCast;
+    private Bitmap bitmap;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.viewCast = new ViewCast(this);
+        peopleDataAccess = dataAccessFor.people(this);
 
         setContentView(R.layout.edit_person);
         setUpImagePicker();
-
-        peopleDataAccess = dataAccessFor.people(this);
     }
 
     private void setUpImagePicker() {
@@ -46,7 +53,7 @@ public class EditPerson extends PodActivity {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
             }
         });
     }
@@ -57,11 +64,26 @@ public class EditPerson extends PodActivity {
         finish();
     }
 
+    private String savePictureToDisk() {
+        String pictureName = String.format("%s_%d.jpg", PICTURE_PREFIX, Calendar.getInstance().getTimeInMillis()).toLowerCase();
+
+        try {
+            FileOutputStream outputStream = openFileOutput(pictureName, Context.MODE_PRIVATE);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
+            return pictureName;
+        } catch (Exception e) {
+            Log.d(getClass().getName(), e.getMessage());
+        }
+
+        return "";
+    }
+
     protected Person getDataFromView() {
         return new Person.Builder().firstName(getFirstNameFromView())
                                    .lastName(getLastNameFromView())
                                    .homeLocation(getHomeLocationFromView())
                                    .aboutMe(getAboutMeFromView())
+                                   .picture(savePictureToDisk())
                                    .build();
     }
 
@@ -83,10 +105,10 @@ public class EditPerson extends PodActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-            if (requestCode == 1) {
+            if (requestCode == SELECT_PICTURE) {
                 Uri selectedImageUri = data.getData();
-                Toast.makeText(this, getPath(selectedImageUri), Toast.LENGTH_SHORT).show();
-                viewCast.imageButton(R.id.profile_picture).setImageBitmap(BitmapFactory.decodeFile(getPath(selectedImageUri)));
+                bitmap = BitmapFactory.decodeFile(getPath(selectedImageUri));
+                viewCast.imageButton(R.id.profile_picture).setImageBitmap(bitmap);
             }
         }
     }
