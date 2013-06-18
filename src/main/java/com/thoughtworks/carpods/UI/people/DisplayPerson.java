@@ -2,8 +2,11 @@ package com.thoughtworks.carpods.UI.people;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
+
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
@@ -16,8 +19,9 @@ public class DisplayPerson extends Activity {
 
     public DisplayPerson() { }
 
-    public DisplayPerson(PeopleDataAccess dataAccess) {
+    protected DisplayPerson(PeopleDataAccess dataAccess, Intent intent) {
         this.dataAccess = dataAccess;
+        this.setIntent(intent);
     }
 
     public void onCreate(Bundle savedInstanceState) {
@@ -28,10 +32,16 @@ public class DisplayPerson extends Activity {
 
         Person person = person();
 
+        try {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(String.format("%s %s", person.getFirstName(), person.getLastName()));
+        }
+        catch (NullPointerException e)
+        {
+            //this is for test purposes, as ActionBar cannot be set, or mocked.
+        }
 
+        setPersonName();
         setHomeLocation(person.getHomeLocation());
         setAboutMe(person.getAboutMe());
     }
@@ -49,6 +59,13 @@ public class DisplayPerson extends Activity {
             dataAccess = new PeopleDataAccess(this);
         }
         return dataAccess;
+    }
+
+    protected void setPersonName() {
+        TextView firstNameField = viewCast.textView(R.id.full_name_field);
+
+        firstNameField.setText(String.format("%s %s", person().getFirstName(), person().getLastName()));
+        firstNameField.setTextSize(2*viewCast.textView(R.id.full_name_label).getTextSize());
     }
 
     private void setHomeLocation(String homeLocation) {
