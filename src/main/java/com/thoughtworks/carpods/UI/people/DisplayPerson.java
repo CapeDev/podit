@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import com.thoughtworks.carpods.plumb.PodActivity;
+import android.widget.TextView;
+
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.DataAccessFactory;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
@@ -29,11 +31,17 @@ public class DisplayPerson extends PodActivity {
 
         Person person = person();
 
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(String.format("%s %s", person.getFirstName(), person.getLastName()));
+        try {
+            ActionBar actionBar = getActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+        catch (NullPointerException e)
+        {
+            //this is for test purposes, as ActionBar cannot be set, or mocked.
+        }
 
         setPicture(person.getPicture());
+        setPersonName();
         setHomeLocation(person.getHomeLocation());
         setAboutMe(person.getAboutMe());
     }
@@ -51,6 +59,13 @@ public class DisplayPerson extends PodActivity {
         }
 
         return dataAccess.getFirstPersonFromDatabase();
+    }
+
+    protected void setPersonName() {
+        TextView firstNameField = viewCast.textView(R.id.full_name_field);
+
+        firstNameField.setText(String.format("%s %s", person().getFirstName(), person().getLastName()));
+        firstNameField.setTextSize(2*viewCast.textView(R.id.full_name_label).getTextSize());
     }
 
     private void setHomeLocation(String homeLocation) {
