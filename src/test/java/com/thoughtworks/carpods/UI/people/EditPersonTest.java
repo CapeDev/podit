@@ -2,13 +2,12 @@ package com.thoughtworks.carpods.UI.people;
 
 import android.content.Context;
 import android.os.Bundle;
-import com.thoughtworks.carpods.plumb.AndroidModule;
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.DataAccessFactory;
 import com.thoughtworks.carpods.data.DatabaseFactory;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
-import com.thoughtworks.carpods.fun.ViewCast;
+import com.thoughtworks.carpods.plumb.AndroidModule;
 import dagger.Module;
 import dagger.ObjectGraph;
 import dagger.Provides;
@@ -23,6 +22,8 @@ import org.robolectric.shadows.ShadowActivity;
 import javax.inject.Inject;
 
 import static com.thoughtworks.carpods.UI.people.EditPerson.SELECT_PICTURE;
+import static com.thoughtworks.carpods.fun.ViewCast.editText;
+import static com.thoughtworks.carpods.fun.ViewCast.imageButton;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -40,7 +41,6 @@ public class EditPersonTest {
 
     @Inject EditPerson activity;
 
-    private ViewCast viewCast;
     private Person bob = new Person.Builder()
             .firstName("Bob")
             .lastName("Murray")
@@ -57,7 +57,6 @@ public class EditPersonTest {
         ObjectGraph.create(new AndroidModule(Robolectric.application), new TestModule()).inject(this);
 
         activity.onCreate(new Bundle());
-        viewCast = new ViewCast(activity);
     }
 
     @Test
@@ -75,7 +74,7 @@ public class EditPersonTest {
 
     @Test
     public void shouldOpenGallerySoUserCanPickAnPicture() throws Exception {
-        viewCast.imageButton(R.id.profile_picture).performClick();
+        imageButton(activity, R.id.profile_picture).performClick();
         ShadowActivity shadowActivity = shadowOf(activity);
         ShadowActivity.IntentForResult activityForResult = shadowActivity.getNextStartedActivityForResult();
 
@@ -83,11 +82,11 @@ public class EditPersonTest {
     }
 
     private void addBobToView() {
-        viewCast.editText(R.id.first_name_input).setText(bob.getFirstName());
-        viewCast.editText(R.id.first_name_input).setText(bob.getFirstName());
-        viewCast.editText(R.id.last_name_input).setText(bob.getLastName());
-        viewCast.editText(R.id.home_location_input).setText(bob.getHomeLocation());
-        viewCast.editText(R.id.about_me_input).setText(bob.getAboutMe());
+        editText(activity, R.id.first_name_input).setText(bob.getFirstName());
+        editText(activity, R.id.first_name_input).setText(bob.getFirstName());
+        editText(activity, R.id.last_name_input).setText(bob.getLastName());
+        editText(activity, R.id.home_location_input).setText(bob.getHomeLocation());
+        editText(activity, R.id.about_me_input).setText(bob.getAboutMe());
     }
 
     @Module(

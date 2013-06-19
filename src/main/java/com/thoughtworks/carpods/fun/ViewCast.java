@@ -7,29 +7,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ViewCast {
-    private final Activity activity;
 
-    public ViewCast(Activity activity) {
-        this.activity = activity;
+    public static EditText editText(Activity activity, int id) {
+        return viewOf(id, EditText.class, activity);
     }
 
-    public EditText editText(int viewId) {
-        return viewOf(viewId, EditText.class);
+    public static TextView textView(Activity activity, int id) {
+        return viewOf(id, TextView.class, activity);
     }
 
-    public TextView textView(int viewId) {
-        return viewOf(viewId, TextView.class);
+    public static ImageButton imageButton(Activity activity, int id) {
+        return viewOf(id, ImageButton.class, activity);
     }
 
-    public ImageButton imageButton(int viewId) {
-        return viewOf(viewId, ImageButton.class);
+    public static ImageView imageView(Activity activity, int id) {
+        return viewOf(id, ImageView.class, activity);
     }
 
-    public ImageView imageView(int viewId) {
-        return viewOf(viewId, ImageView.class);
-    }
-
-    private <T> T viewOf(int viewId, Class<T> type) {
-        return type.cast(activity.findViewById(viewId));
+    private static <T> T viewOf(int id, Class<T> type, Activity activity) {
+        return type.cast(activity.findViewById(id));
     }
 }

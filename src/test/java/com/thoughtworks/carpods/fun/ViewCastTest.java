@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import static com.thoughtworks.carpods.fun.ViewCast.*;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -23,36 +24,33 @@ public class ViewCastTest {
     public static final int AN_ID = 1;
     @Mock private Activity activity;
 
-    private ViewCast viewCast;
-
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        viewCast = new ViewCast(activity);
     }
 
     @Test
     public void shouldCastViewToEditText() throws Exception {
         mockFindViewFor(EditText.class);
-        assertThat(viewCast.editText(AN_ID), is(instanceOf(EditText.class)));
+        assertThat(editText(activity, AN_ID), is(instanceOf(EditText.class)));
     }
 
     @Test
     public void shouldCastViewToTextView() throws Exception {
         mockFindViewFor(TextView.class);
-        assertThat(viewCast.textView(AN_ID), is(instanceOf(TextView.class)));
+        assertThat(textView(activity, AN_ID), is(instanceOf(TextView.class)));
     }
 
     @Test
     public void shouldCastViewToImageButton() throws Exception {
         mockFindViewFor(ImageButton.class);
-        assertThat(viewCast.imageButton(AN_ID), is(instanceOf(ImageButton.class)));
+        assertThat(imageButton(activity, AN_ID), is(instanceOf(ImageButton.class)));
     }
 
     @Test
     public void shouldCastViewToImageView() throws Exception {
         mockFindViewFor(ImageView.class);
-        assertThat(viewCast.imageView(AN_ID), is(instanceOf(ImageView.class)));
+        assertThat(imageView(activity, AN_ID), is(instanceOf(ImageView.class)));
     }
 
     private <T extends View> void mockFindViewFor(Class<T> clazz) {

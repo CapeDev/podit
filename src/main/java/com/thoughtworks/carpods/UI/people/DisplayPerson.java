@@ -4,27 +4,26 @@ import android.app.ActionBar;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
-import com.thoughtworks.carpods.plumb.PodActivity;
 import android.widget.TextView;
-
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.DataAccessFactory;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
-import com.thoughtworks.carpods.fun.ViewCast;
+import com.thoughtworks.carpods.plumb.PodActivity;
 
 import javax.inject.Inject;
 import java.io.File;
+
+import static com.thoughtworks.carpods.fun.ViewCast.imageView;
+import static com.thoughtworks.carpods.fun.ViewCast.textView;
 
 public class DisplayPerson extends PodActivity {
     @Inject DataAccessFactory dataAccessFor;
 
     private PeopleDataAccess dataAccess;
-    private ViewCast viewCast;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewCast = new ViewCast(this);
         dataAccess = dataAccessFor.people(this);
 
         setContentView(R.layout.display_person);
@@ -49,7 +48,7 @@ public class DisplayPerson extends PodActivity {
     private void setPicture(String picture) {
         File imageFile = new File(getFilesDir(), picture);
         if (imageFile.exists() && imageFile.isFile()) {
-            viewCast.imageView(R.id.profile_picture).setImageURI(Uri.fromFile(imageFile));
+            imageView(this, R.id.profile_picture).setImageURI(Uri.fromFile(imageFile));
         }
     }
 
@@ -62,18 +61,18 @@ public class DisplayPerson extends PodActivity {
     }
 
     protected void setPersonName() {
-        TextView firstNameField = viewCast.textView(R.id.full_name_field);
+        TextView firstNameField = textView(this, R.id.full_name_field);
 
         firstNameField.setText(String.format("%s %s", person().getFirstName(), person().getLastName()));
-        firstNameField.setTextSize(2*viewCast.textView(R.id.full_name_label).getTextSize());
+        firstNameField.setTextSize(2* textView(this, R.id.full_name_label).getTextSize());
     }
 
     private void setHomeLocation(String homeLocation) {
-        viewCast.textView(R.id.home_location).setText(homeLocation);
+        textView(this, R.id.home_location).setText(homeLocation);
     }
 
     private void setAboutMe(String aboutMe) {
-        viewCast.textView(R.id.about_me).setText(aboutMe);
+        textView(this, R.id.about_me).setText(aboutMe);
     }
 
     @Override

@@ -3,28 +3,24 @@ package com.thoughtworks.carpods.UI.people;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.TextView;
-
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.DataAccessFactory;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
-import com.thoughtworks.carpods.fun.ViewCast;
 import com.thoughtworks.carpods.plumb.AndroidModule;
-
+import dagger.Module;
+import dagger.ObjectGraph;
+import dagger.Provides;
 import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import javax.inject.Inject;
 
-import dagger.Module;
-import dagger.ObjectGraph;
-import dagger.Provides;
-
+import static com.thoughtworks.carpods.fun.ViewCast.textView;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -58,7 +54,7 @@ public class DisplayPersonTest {
         displayPerson.setIntent(mockIntent);
         displayPerson.onCreate(null);
 
-        TextView fullNameField = new ViewCast(displayPerson).textView(R.id.full_name_field);
+        TextView fullNameField = textView(displayPerson, R.id.full_name_field);
         assertThat(fullNameField.getText().toString(),
                 is(equalTo(person.getFirstName() + " " + person.getLastName())));
     }

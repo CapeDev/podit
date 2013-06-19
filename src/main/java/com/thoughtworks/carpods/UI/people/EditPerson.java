@@ -15,16 +15,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import com.thoughtworks.carpods.plumb.PodActivity;
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.DataAccessFactory;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
-import com.thoughtworks.carpods.fun.ViewCast;
+import com.thoughtworks.carpods.plumb.PodActivity;
 
 import javax.inject.Inject;
 import java.io.FileOutputStream;
 import java.util.Calendar;
+
+import static com.thoughtworks.carpods.fun.ViewCast.editText;
+import static com.thoughtworks.carpods.fun.ViewCast.imageButton;
 
 public class EditPerson extends PodActivity {
     public static final String PICTURE_PREFIX = "person_";
@@ -33,12 +35,10 @@ public class EditPerson extends PodActivity {
     @Inject DataAccessFactory dataAccessFor;
 
     private PeopleDataAccess peopleDataAccess;
-    private ViewCast viewCast;
     private Bitmap bitmap;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.viewCast = new ViewCast(this);
         peopleDataAccess = dataAccessFor.people(this);
 
         setContentView(R.layout.edit_person);
@@ -46,7 +46,7 @@ public class EditPerson extends PodActivity {
     }
 
     private void setUpImagePicker() {
-        ImageButton imageButton = viewCast.imageButton(R.id.profile_picture);
+        ImageButton imageButton = imageButton(this, R.id.profile_picture);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,19 +88,19 @@ public class EditPerson extends PodActivity {
     }
 
     protected String getLastNameFromView() {
-        return viewCast.editText(R.id.last_name_input).getText().toString();
+        return editText(this, R.id.last_name_input).getText().toString();
     }
 
     protected String getFirstNameFromView() {
-        return viewCast.editText(R.id.first_name_input).getText().toString();
+        return editText(this, R.id.first_name_input).getText().toString();
     }
 
     protected String getHomeLocationFromView() {
-        return viewCast.editText(R.id.home_location_input).getText().toString();
+        return editText(this, R.id.home_location_input).getText().toString();
     }
 
     protected String getAboutMeFromView() {
-        return viewCast.editText(R.id.about_me_input).getText().toString();
+        return editText(this, R.id.about_me_input).getText().toString();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -108,7 +108,7 @@ public class EditPerson extends PodActivity {
             if (requestCode == SELECT_PICTURE) {
                 Uri selectedImageUri = data.getData();
                 bitmap = BitmapFactory.decodeFile(getPath(selectedImageUri));
-                viewCast.imageButton(R.id.profile_picture).setImageBitmap(bitmap);
+                imageButton(this, R.id.profile_picture).setImageBitmap(bitmap);
             }
         }
     }
