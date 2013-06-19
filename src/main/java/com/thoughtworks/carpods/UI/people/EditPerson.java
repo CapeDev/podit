@@ -29,6 +29,8 @@ import static com.thoughtworks.carpods.fun.ViewCast.editText;
 import static com.thoughtworks.carpods.fun.ViewCast.imageButton;
 
 public class EditPerson extends PodActivity {
+    private static final String TAG = "EditPerson";
+
     public static final String PICTURE_PREFIX = "person_";
     protected static final int SELECT_PICTURE = 1;
 
@@ -72,7 +74,7 @@ public class EditPerson extends PodActivity {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
             return pictureName;
         } catch (Exception e) {
-            Log.d(getClass().getName(), e.getMessage());
+            Log.d(TAG, "User has no profile picture");
         }
 
         return "";

@@ -30,19 +30,19 @@ public class DisplayPerson extends PodActivity {
 
         Person person = person();
 
-        try {
-            ActionBar actionBar = getActionBar();
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-        catch (NullPointerException e)
-        {
-            //this is for test purposes, as ActionBar cannot be set, or mocked.
-        }
-
+        populateActionBar(person);
         setPicture(person.getPicture());
         setPersonName();
         setHomeLocation(person.getHomeLocation());
         setAboutMe(person.getAboutMe());
+    }
+
+    private void populateActionBar(Person person) {
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle(String.format("%s %s", person.getFirstName(), person.getLastName()));
+        }
     }
 
     private void setPicture(String picture) {

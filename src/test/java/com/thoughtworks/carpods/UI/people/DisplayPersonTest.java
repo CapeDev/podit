@@ -31,16 +31,16 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(RobolectricTestRunner.class)
 public class DisplayPersonTest {
-
-    @Inject DisplayPerson displayPerson;
     @Mock DataAccessFactory dataAccessFactory;
     @Mock PeopleDataAccess dataAccess;
+
+    @Inject DisplayPerson displayPerson;
 
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        ObjectGraph.create(new AndroidModule(Robolectric.application), new TestModule()).inject(this);
         when(dataAccessFactory.people(any(Context.class))).thenReturn(dataAccess);
+        ObjectGraph.create(new AndroidModule(Robolectric.application), new TestModule()).inject(this);
     }
 
     @Test
