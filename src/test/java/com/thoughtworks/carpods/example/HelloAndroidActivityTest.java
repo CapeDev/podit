@@ -3,11 +3,11 @@ package com.thoughtworks.carpods.example;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.thoughtworks.carpods.R;
-import com.xtremelabs.robolectric.RobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
