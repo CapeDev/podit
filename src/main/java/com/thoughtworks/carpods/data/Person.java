@@ -7,6 +7,7 @@ public class Person {
     private String homeLocation;
     private String aboutMe;
     private int id = -1;
+    private String picture;
 
     private Person(Builder personBuilder) {
         this.firstName = personBuilder.firstName;
@@ -14,6 +15,7 @@ public class Person {
         this.homeLocation = personBuilder.homeLocation;
         this.aboutMe = personBuilder.aboutMe;
         this.id = personBuilder.id;
+        this.picture = personBuilder.picture;
     }
 
     public String getFirstName() {
@@ -36,6 +38,9 @@ public class Person {
         return id;
     }
 
+    public String getPicture() {
+        return picture;
+    }
 
     public static class Builder {
         private int id;
@@ -43,6 +48,7 @@ public class Person {
         private String lastName;
         private String homeLocation;
         private String aboutMe;
+        private String picture;
 
         public Builder firstName(String firstName) {
             this.firstName = (firstName == null) ? "" : firstName ;
@@ -71,6 +77,11 @@ public class Person {
 
         public Person build() {
             return new Person(this);
+        }
+
+        public Builder picture(String path) {
+            this.picture = path;
+            return this;
         }
     }
 }

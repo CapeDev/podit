@@ -13,13 +13,13 @@
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
                   android:hint="@string/first_name_label"
-                  android:layout_toLeftOf="@+id/imageButton"
+                  android:layout_toLeftOf="@+id/profile_picture"
                   android:layout_centerVertical="true"/>
 
         <ImageButton
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:id="@+id/imageButton"
+                android:id="@+id/profile_picture"
                 android:layout_gravity="center"
                 android:src="@drawable/default_picture"
                 android:maxWidth="48dp"

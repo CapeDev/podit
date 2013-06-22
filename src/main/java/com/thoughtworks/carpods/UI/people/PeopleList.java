@@ -1,7 +1,6 @@
 package com.thoughtworks.carpods.UI.people;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,26 +8,26 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.thoughtworks.carpods.R;
+import com.thoughtworks.carpods.data.DataAccessFactory;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
+import com.thoughtworks.carpods.plumb.ListPodActivity;
 
+import javax.inject.Inject;
 import java.util.List;
 
-public class PeopleList extends ListActivity {
+public class PeopleList extends ListPodActivity {
     static final private String CLASS_TAG = "PeopleList";
 
-    PeopleDataAccess database;
+    @Inject DataAccessFactory dataAccessFor;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.people_list);
 
-        if (database == null) {
-            database = new PeopleDataAccess(this);
-        }
-
-        List<Person> peopleNames = database.getAllPeopleNames();
+        PeopleDataAccess dataAccess = dataAccessFor.people(this);
+        List<Person> peopleNames = dataAccess.getAllPeopleNames();
 
         Toast.makeText(this, "I've got " + peopleNames.size() + " from the database.", Toast.LENGTH_LONG).show();
 

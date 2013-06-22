@@ -111,14 +111,14 @@ public class EditPod extends Activity {
                 podBuilder = new Pod.Builder();
                 podBuilder.member(newPodMember);
 
-                addUserToView(newPodMember);
+                addMemberToView(newPodMember);
             }
         }
     }
 
-    private void addUserToView(Person memberToAdd) {
+    private void addMemberToView(Person memberToAdd) {
         LinearLayout memberLayout = (LinearLayout) findViewById(R.id.member_list);
-        EditText memberNameView = new EditText(this);
+        TextView memberNameView = new TextView(this);
         memberNameView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         memberNameView.setText(memberToAdd.getFirstName() + " " + memberToAdd.getLastName());
         memberLayout.addView(memberNameView);

@@ -30,6 +30,7 @@ public class PeoplePopulator implements Populator {
                                   .lastName(lastName)
                                   .homeLocation(location)
                                   .aboutMe(about)
+                                  .picture("")
                                   .build();
     }
 }

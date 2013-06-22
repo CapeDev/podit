@@ -1,62 +1,78 @@
 package com.thoughtworks.carpods.UI.people;
 
 import android.app.ActionBar;
-import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 import com.thoughtworks.carpods.R;
+import com.thoughtworks.carpods.data.DataAccessFactory;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
-import com.thoughtworks.carpods.fun.ViewCast;
+import com.thoughtworks.carpods.plumb.PodActivity;
 
-public class DisplayPerson extends Activity {
+import javax.inject.Inject;
+import java.io.File;
+
+import static com.thoughtworks.carpods.fun.ViewCast.imageView;
+import static com.thoughtworks.carpods.fun.ViewCast.textView;
+
+public class DisplayPerson extends PodActivity {
+    @Inject DataAccessFactory dataAccessFor;
 
     private PeopleDataAccess dataAccess;
-    private ViewCast viewCast;
-
-    public DisplayPerson() { }
-
-    public DisplayPerson(PeopleDataAccess dataAccess) {
-        this.dataAccess = dataAccess;
-    }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewCast = new ViewCast(this);
+        dataAccess = dataAccessFor.people(this);
 
         setContentView(R.layout.display_person);
 
         Person person = person();
 
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(String.format("%s %s", person.getFirstName(), person.getLastName()));
-
+        populateActionBar(person);
+        setPicture(person.getPicture());
+        setPersonName();
         setHomeLocation(person.getHomeLocation());
         setAboutMe(person.getAboutMe());
     }
 
-    private Person person() {
-        if (getIntent().hasExtra("id")) {
-            return dataAccess().getPersonFromDatabaseWithId(getIntent().getIntExtra("id", 0));
+    private void populateActionBar(Person person) {
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle(String.format("%s %s", person.getFirstName(), person.getLastName()));
         }
-
-        return dataAccess().getFirstPersonFromDatabase();
     }
 
-    private PeopleDataAccess dataAccess() {
-        if (dataAccess == null) {
-            dataAccess = new PeopleDataAccess(this);
+    private void setPicture(String picture) {
+        File imageFile = new File(getFilesDir(), picture);
+        if (imageFile.exists() && imageFile.isFile()) {
+            imageView(this, R.id.profile_picture).setImageURI(Uri.fromFile(imageFile));
         }
-        return dataAccess;
+    }
+
+    private Person person() {
+        if (getIntent().hasExtra("id")) {
+            return dataAccess.getPersonFromDatabaseWithId(getIntent().getIntExtra("id", 0));
+        }
+
+        return dataAccess.getFirstPersonFromDatabase();
+    }
+
+    protected void setPersonName() {
+        TextView firstNameField = textView(this, R.id.full_name_field);
+
+        firstNameField.setText(String.format("%s %s", person().getFirstName(), person().getLastName()));
+        firstNameField.setTextSize(2* textView(this, R.id.full_name_label).getTextSize());
     }
 
     private void setHomeLocation(String homeLocation) {
-        viewCast.textView(R.id.home_location).setText(homeLocation);
+        textView(this, R.id.home_location).setText(homeLocation);
     }
 
     private void setAboutMe(String aboutMe) {
-        viewCast.textView(R.id.about_me).setText(aboutMe);
+        textView(this, R.id.about_me).setText(aboutMe);
     }
 
     @Override
