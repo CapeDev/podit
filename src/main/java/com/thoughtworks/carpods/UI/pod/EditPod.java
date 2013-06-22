@@ -106,43 +106,13 @@ public class EditPod extends Activity {
         if (resultCode == RESULT_OK) {
             if (requestCode == PICK_CONTACT_REQUEST) {
                 long personId = data.getLongExtra("personId", -1);
-                String message = "I've returned with personID: " + personId;
-                Log.v(CLAZZ_TAG, "..........................> returned with personId: " + personId);
-                showToast(message);
 
                 PeopleDataAccess personDataAccess = new PeopleDataAccess(this);
                 Person newPodMember = personDataAccess.getPersonFromDatabaseWithId(personId);
 
-                Log.v(CLAZZ_TAG, "First name of new pod member: " + newPodMember.getFirstName());
-
-
-                if (podBuilder == null) {
-                    Log.v(CLAZZ_TAG, "podbuilder is null");
-                } else {
-                    Log.v(CLAZZ_TAG, "podbuilder is not null");
-                }
-
-                if (newPodMember == null) {
-                    Log.v(CLAZZ_TAG, "newPodMember is null");
-                } else {
-                    Log.v(CLAZZ_TAG, "newPodMember is not null");
-                }
-
-//                podBuilder = new Pod.Builder();
-                // FIXME - this next line is where the problem is.
+                // FIXME - what if the activity is editing a pod instead of creating a new one?
+                podBuilder = new Pod.Builder();
                 podBuilder.member(newPodMember);
-                Log.v(CLAZZ_TAG, "created a new podBuilder!");
-
-//                if (podBuilder == null || newPodMember == null) {
-//                    Log.v(CLAZZ_TAG, "something is null");
-//                } else {
-//                    podBuilder = new Pod.Builder();
-//                    // FIXME - this next line is where the problem is.
-//                    podBuilder.member(newPodMember);
-//                    Log.v(CLAZZ_TAG, "created a new podBuilder!");
-//                }
-
-                Log.v(CLAZZ_TAG, "I'm done doing whatever");
             }
         }
     }
