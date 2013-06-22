@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -14,7 +15,12 @@ public class PodDataAccess {
     private static final String CLASS_TAG = "PodDataAccess";
 
     private SQLiteDatabase database;
-    private final PodItDatabase podItDatabase;
+    private SQLiteOpenHelper podItDatabase;
+    private String podTableName = PodItDatabase.POD_TABLE;
+
+    public PodDataAccess(SQLiteOpenHelper database) {
+        this.podItDatabase = database;
+    }
 
     public PodDataAccess(Context context) {
         podItDatabase = PodItDatabase.getInstance(context);
@@ -31,7 +37,7 @@ public class PodDataAccess {
 
         database = podItDatabase.getWritableDatabase();
         try {
-            cursor = database.query(PodItDatabase.POD_TABLE, columns, selection, selectionArgs, null, null, null);
+            cursor = database.query(podTableName, columns, selection, selectionArgs, null, null, null);
 
             if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToFirst();
@@ -54,7 +60,6 @@ public class PodDataAccess {
     }
 
     public long savePod(Pod pod) {
-        String table = PodItDatabase.POD_TABLE;
 
         ContentValues podInfo = new ContentValues();
         podInfo.put(PodItDatabase.POD_NAME, pod.getName());
@@ -64,7 +69,7 @@ public class PodDataAccess {
         podInfo.put(PodItDatabase.ABOUT_POD, pod.getAboutPod());
 
         database = podItDatabase.getWritableDatabase();
-        long podId = database.insert(table, null, podInfo);
+        long podId = database.insert(podTableName, null, podInfo);
         database.close();
 
         return podId;

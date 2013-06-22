@@ -11,4 +11,8 @@ public class DataAccessFactory {
     public PeopleDataAccess people(Context context) {
         return new PeopleDataAccess(database.instance(context));
     }
+
+    public PodDataAccess pods(Context context) {
+        return new PodDataAccess(database.instance(context));
+    }
 }

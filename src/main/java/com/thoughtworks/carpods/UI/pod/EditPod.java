@@ -1,47 +1,43 @@
 package com.thoughtworks.carpods.UI.pod;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.UI.people.PeopleList;
-import com.thoughtworks.carpods.data.PeopleDataAccess;
-import com.thoughtworks.carpods.data.Person;
-import com.thoughtworks.carpods.data.Pod;
-import com.thoughtworks.carpods.data.PodDataAccess;
+import com.thoughtworks.carpods.data.*;
+import com.thoughtworks.carpods.plumb.PodActivity;
+
+import javax.inject.Inject;
 
 
-public class EditPod extends Activity {
+public class EditPod extends PodActivity {
+
+    @Inject
+    DataAccessFactory dataAccessFor;
 
     private static final int PICK_CONTACT_REQUEST = 1;
 
-    private PodDataAccess podDataAccess;
     private String CLAZZ_TAG = "EditPod";
+    private Pod.Builder podBuilder;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.edit_pod);
 
-        getDatabaseConnection();
-
         Log.v(CLAZZ_TAG, "Done with onCreate in EditPod");
     }
 
-    private void getDatabaseConnection() {
-        if (podDataAccess == null) {
-            podDataAccess = new PodDataAccess(this);
-        }
-    }
-
-    public void savePod(View v) {
+    public void save(MenuItem item) {
+        showToast("I'm saving a pod from the menu!");
         Pod pod = getDataFromView();
+        PodDataAccess podDataAccess = dataAccessFor.pods(this);
         podDataAccess.savePod(pod);
         finish();
     }
@@ -101,19 +97,44 @@ public class EditPod extends Activity {
         if (resultCode == RESULT_OK) {
             if (requestCode == PICK_CONTACT_REQUEST) {
                 long personId = data.getLongExtra("personId", -1);
-                String message = "I've returned with personID: " + personId;
-                Log.v(CLAZZ_TAG, "..........................> returned with personId: " + personId);
-                showToast(message);
 
-                PeopleDataAccess personDataAccess = new PeopleDataAccess(this);
-                // FIXME - I bet there's a better way to handle the +1 for the personId
+                PeopleDataAccess personDataAccess = dataAccessFor.people(this);
                 Person newPodMember = personDataAccess.getPersonFromDatabaseWithId(personId);
-                showToast(newPodMember.getFirstName());
+
+                // FIXME - what if the activity is editing a pod instead of creating a new one?
+                podBuilder = new Pod.Builder();
+                podBuilder.member(newPodMember);
+
+                addMemberToView(newPodMember);
             }
         }
     }
 
+    private void addMemberToView(Person memberToAdd) {
+        LinearLayout memberLayout = (LinearLayout) findViewById(R.id.member_list);
+        TextView memberNameView = new TextView(this);
+        memberNameView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        memberNameView.setText(memberToAdd.getFirstName() + " " + memberToAdd.getLastName());
+        memberLayout.addView(memberNameView);
+    }
+
     private void showToast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.edit_person, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

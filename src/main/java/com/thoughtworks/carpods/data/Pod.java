@@ -1,5 +1,7 @@
 package com.thoughtworks.carpods.data;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,7 @@ public class Pod {
         this.podReturnTime = podBuilder.returnTime;
         this.aboutPod = podBuilder.about;
         this.id = podBuilder.id;
+        this.members = podBuilder.podMembers;
     }
 
     public String getName() {
@@ -43,6 +46,7 @@ public class Pod {
     }
 
     public static class Builder {
+        private static final String CLAZZ_TAG = "Pod.Builder";
         private String name;
         private String homeLocation;
         private int departureTime;
