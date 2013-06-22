@@ -20,6 +20,7 @@ public class PodItDatabase extends SQLiteOpenHelper {
     public static final String LAST_NAME = "last_name";
     public static final String HOME_LOCATION = "home_location";
     public static final String ABOUT_ME = "about_name";
+    public static final String PICTURE = "picture";
 
 
     public static final String POD_TABLE = "podTable";
@@ -47,7 +48,8 @@ public class PodItDatabase extends SQLiteOpenHelper {
                     + FIRST_NAME + " text not null, "
                     + LAST_NAME + " text not null, "
                     + ABOUT_ME + " text, "
-                    + HOME_LOCATION + " text not null"
+                    + HOME_LOCATION + " text not null,"
+                    + PICTURE + " text not null default ''"
                     + ");";
 
     private static final String POD_TABLE_CREATE_STMT =
@@ -94,7 +96,6 @@ public class PodItDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade (SQLiteDatabase db, int oldVersion, int newVersion) {
-
         Log.v(CLASS_TAG, "Upgrading database from version " + oldVersion + " to " + newVersion + " which will destroy all old data.");
         db.execSQL("DROP TABLE IF EXISTS " + PERSON_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + POD_TABLE);
