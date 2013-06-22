@@ -49,6 +49,7 @@ public class Pod {
         private int returnTime;
         private String about;
         private int id = -1;
+        private List<Person> podMembers = new ArrayList<Person>();
 
         public Builder name(String name) {
             this.name = name;
@@ -77,6 +78,11 @@ public class Pod {
 
         public Builder id(int id) {
             this.id = id;
+            return this;
+        }
+
+        public Builder member(Person newPodMember) {
+            podMembers.add(newPodMember);
             return this;
         }
 
