@@ -1,6 +1,5 @@
 package com.thoughtworks.carpods.UI.pod;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -11,17 +10,19 @@ import android.view.View;
 import android.widget.*;
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.UI.people.PeopleList;
-import com.thoughtworks.carpods.data.PeopleDataAccess;
-import com.thoughtworks.carpods.data.Person;
-import com.thoughtworks.carpods.data.Pod;
-import com.thoughtworks.carpods.data.PodDataAccess;
+import com.thoughtworks.carpods.data.*;
+import com.thoughtworks.carpods.plumb.PodActivity;
+
+import javax.inject.Inject;
 
 
-public class EditPod extends Activity {
+public class EditPod extends PodActivity {
+
+    @Inject
+    DataAccessFactory dataAccessFor;
 
     private static final int PICK_CONTACT_REQUEST = 1;
 
-    private PodDataAccess podDataAccess;
     private String CLAZZ_TAG = "EditPod";
     private Pod.Builder podBuilder;
 
@@ -30,20 +31,13 @@ public class EditPod extends Activity {
 
         setContentView(R.layout.edit_pod);
 
-        getDatabaseConnection();
-
         Log.v(CLAZZ_TAG, "Done with onCreate in EditPod");
-    }
-
-    private void getDatabaseConnection() {
-        if (podDataAccess == null) {
-            podDataAccess = new PodDataAccess(this);
-        }
     }
 
     public void save(MenuItem item) {
         showToast("I'm saving a pod from the menu!");
         Pod pod = getDataFromView();
+        PodDataAccess podDataAccess = dataAccessFor.pods(this);
         podDataAccess.savePod(pod);
         finish();
     }
@@ -104,7 +98,7 @@ public class EditPod extends Activity {
             if (requestCode == PICK_CONTACT_REQUEST) {
                 long personId = data.getLongExtra("personId", -1);
 
-                PeopleDataAccess personDataAccess = new PeopleDataAccess(this);
+                PeopleDataAccess personDataAccess = dataAccessFor.people(this);
                 Person newPodMember = personDataAccess.getPersonFromDatabaseWithId(personId);
 
                 // FIXME - what if the activity is editing a pod instead of creating a new one?

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.thoughtworks.carpods.UI.people.DisplayPerson;
 import com.thoughtworks.carpods.UI.people.EditPerson;
 import com.thoughtworks.carpods.UI.people.PeopleList;
+import com.thoughtworks.carpods.UI.pod.EditPod;
 import com.thoughtworks.carpods.data.DataAccessFactory;
 import dagger.Module;
 import dagger.Provides;
@@ -17,7 +18,8 @@ import javax.inject.Singleton;
         injects = {
                 EditPerson.class,
                 DisplayPerson.class,
-                PeopleList.class
+                PeopleList.class,
+                EditPod.class
         }
 )
 public class AndroidModule {

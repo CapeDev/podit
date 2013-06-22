@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -14,8 +15,12 @@ public class PodDataAccess {
     private static final String CLASS_TAG = "PodDataAccess";
 
     private SQLiteDatabase database;
-    private final PodItDatabase podItDatabase;
+    private SQLiteOpenHelper podItDatabase;
     private String podTableName = PodItDatabase.POD_TABLE;
+
+    public PodDataAccess(SQLiteOpenHelper database) {
+        this.podItDatabase = database;
+    }
 
     public PodDataAccess(Context context) {
         podItDatabase = PodItDatabase.getInstance(context);
