@@ -8,10 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.UI.people.PeopleList;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
@@ -113,8 +110,18 @@ public class EditPod extends Activity {
                 // FIXME - what if the activity is editing a pod instead of creating a new one?
                 podBuilder = new Pod.Builder();
                 podBuilder.member(newPodMember);
+
+                addUserToView(newPodMember);
             }
         }
+    }
+
+    private void addUserToView(Person memberToAdd) {
+        LinearLayout memberLayout = (LinearLayout) findViewById(R.id.member_list);
+        EditText memberNameView = new EditText(this);
+        memberNameView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        memberNameView.setText(memberToAdd.getFirstName() + " " + memberToAdd.getLastName());
+        memberLayout.addView(memberNameView);
     }
 
     private void showToast(String message) {
