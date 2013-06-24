@@ -1,7 +1,5 @@
 package com.thoughtworks.carpods.data;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +41,14 @@ public class Pod {
 
     public String getAboutPod() {
         return aboutPod;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public List<Person> getMembers() {
+        return members;
     }
 
     public static class Builder {

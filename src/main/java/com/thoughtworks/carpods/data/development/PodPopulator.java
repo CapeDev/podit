@@ -1,6 +1,7 @@
 package com.thoughtworks.carpods.data.development;
 
 import android.content.Context;
+import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
 import com.thoughtworks.carpods.data.Pod;
 import com.thoughtworks.carpods.data.PodDataAccess;
@@ -18,24 +19,32 @@ public class PodPopulator implements Populator {
 
     @Override
     public void populate() {
-        PodDataAccess database = new PodDataAccess(context);
-        List<Person> renRunnersMembers = Arrays.asList(
-            createPerson("Alice", "Jones", "Residence Inn", "Silly"),
-            createPerson("Bob", "Smith", "Residence Inn", "Smart"),
-            createPerson("Charlie", "White", "Renaissance Hotel", "Kind")
+        populatePeople();
+        PodDataAccess podDataAccess = new PodDataAccess(context);
+
+        List<Person> renRunnersMembers = getMembersStartingWithId(1);
+        podDataAccess.savePod(createPod("Ren Runners", "The Renaissance", 800, 1800, "We run. a lot.", renRunnersMembers));
+
+        List<Person> kidsInTheResMembers = getMembersStartingWithId(4);
+        podDataAccess.savePod(createPod("The kids in the Res", "Residence Inn", 745, 1800, "We're all staying at the Residence Inn.", kidsInTheResMembers));
+
+        List<Person> originalRenMembers = getMembersStartingWithId(7);
+        podDataAccess.savePod(createPod("The Original Ren", "Residence Inn", 700, 1900, "Is there really anything better?", originalRenMembers));
+    }
+
+    private List<Person> getMembersStartingWithId(int id) {
+        PeopleDataAccess peopleDataAccess = new PeopleDataAccess(context);
+        return Arrays.asList(
+            peopleDataAccess.getPersonFromDatabaseWithId(id++),
+            peopleDataAccess.getPersonFromDatabaseWithId(id++),
+            peopleDataAccess.getPersonFromDatabaseWithId(id++)
         );
-        database.savePod(createPod("Ren Runners", "The Renaissance", 800, 1800, "We run. a lot.", renRunnersMembers));
-        List<Person> kidsInTheResMembers = Arrays.asList(
-            createPerson("David", "Washington", "Renaissance Hotel", "Caring"),
-            createPerson("Han", "Solo", "Hilton Anatole", "Scruffy Nerf Herder"),
-            createPerson("Luke", "Skywalker", "Hilton Anatole", "Young Jedi")
-        );
-        database.savePod(createPod("The kids in the Res", "Residence Inn", 745, 1800, "We're all staying at the Residence Inn.", kidsInTheResMembers));
-        List<Person> originalRenMembers = Arrays.asList(
-            createPerson("Princess", "Leia", "Hilton Anatole", "Luke's Sister"),
-            createPerson("Darth", "Vader", "Hilton Anatole", "Luke's Father")
-        );
-        database.savePod(createPod("The Original Ren", "Residence Inn", 700, 1900, "Is there really anything better?", originalRenMembers));
+
+    }
+
+    private void populatePeople() {
+        Populator peoplePopulator = new PeoplePopulator(context);
+        peoplePopulator.populate();
     }
 
     private Pod createPod(String name, String homeLocation, int departureTime, int returnTime, String about, List<Person> members) {

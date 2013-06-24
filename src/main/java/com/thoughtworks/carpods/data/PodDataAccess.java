@@ -72,7 +72,19 @@ public class PodDataAccess {
         long podId = database.insert(podTableName, null, podInfo);
         database.close();
 
+        savePodMembers(pod);
+
         return podId;
+    }
+
+    private void savePodMembers(Pod pod) {
+        PodMemberDataAccess podMemberDataAccess = new PodMemberDataAccess(podItDatabase);
+        List<Person> members = pod.getMembers();
+        List<Integer> memberIds = new ArrayList<Integer>();
+        for (Person member : members) {
+            memberIds.add(member.getId());
+        }
+        podMemberDataAccess.addMembersToPod(memberIds, pod.getId());
     }
 
     public Pod getFirstPodInDatabase() {
