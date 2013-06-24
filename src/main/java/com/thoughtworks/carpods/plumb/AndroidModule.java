@@ -5,6 +5,7 @@ import android.content.Context;
 import com.thoughtworks.carpods.UI.people.DisplayPerson;
 import com.thoughtworks.carpods.UI.people.EditPerson;
 import com.thoughtworks.carpods.UI.people.PeopleList;
+import com.thoughtworks.carpods.UI.pod.DisplayPod;
 import com.thoughtworks.carpods.UI.pod.EditPod;
 import com.thoughtworks.carpods.data.DataAccessFactory;
 import dagger.Module;
@@ -19,7 +20,8 @@ import javax.inject.Singleton;
                 EditPerson.class,
                 DisplayPerson.class,
                 PeopleList.class,
-                EditPod.class
+                EditPod.class,
+                DisplayPod.class
         }
 )
 public class AndroidModule {

@@ -1,20 +1,27 @@
 package com.thoughtworks.carpods.UI.pod;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 import com.thoughtworks.carpods.R;
+import com.thoughtworks.carpods.data.DataAccessFactory;
 import com.thoughtworks.carpods.data.Pod;
 import com.thoughtworks.carpods.data.PodDataAccess;
+import com.thoughtworks.carpods.plumb.PodActivity;
+
+import javax.inject.Inject;
 
 
-public class DisplayPod extends Activity {
+public class DisplayPod extends PodActivity {
+
+    @Inject
+    DataAccessFactory dataAccessFor;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.display_pod);
 
-        PodDataAccess carPodsDatabase = new PodDataAccess(this);
+        PodDataAccess carPodsDatabase = dataAccessFor.pods(this);
         Pod pod = carPodsDatabase.getFirstPodInDatabase();
         setPodName(pod.getName());
         setPodHomeLocation(pod.getHomeLocation());
