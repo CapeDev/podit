@@ -2,7 +2,6 @@ package com.thoughtworks.carpods.UI.pod;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +29,7 @@ public class EditPod extends PodActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.edit_pod);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         Log.v(CLAZZ_TAG, "Done with onCreate in EditPod");
     }
@@ -132,7 +132,7 @@ public class EditPod extends PodActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
