@@ -1,6 +1,7 @@
 package com.thoughtworks.carpods.UI.pod;
 
 import android.app.ActionBar;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.MenuItem;
@@ -14,7 +15,10 @@ import com.thoughtworks.carpods.data.PodDataAccess;
 import com.thoughtworks.carpods.plumb.PodActivity;
 
 import javax.inject.Inject;
+import java.io.File;
 import java.util.List;
+
+import static com.thoughtworks.carpods.fun.ViewCast.imageView;
 
 
 public class DisplayPod extends PodActivity {
@@ -30,11 +34,19 @@ public class DisplayPod extends PodActivity {
         PodDataAccess carPodsDatabase = dataAccessFor.pods(this);
         Pod pod = carPodsDatabase.getFirstPodInDatabase();
         populateActionBar(pod);
+        setPicture("");
         setPodHomeLocation(pod.getHomeLocation());
         setDepartureTime(pod.getDepartureTime());
         setReturnTime(pod.getReturnTime());
         setAbout(pod.getAboutPod());
         setMembers(pod.getMembers());
+    }
+
+    private void setPicture(String picture) {
+        File imageFile = new File(getFilesDir(), picture);
+        if (imageFile.exists() && imageFile.isFile()) {
+            imageView(this, R.id.profile_picture).setImageURI(Uri.fromFile(imageFile));
+        }
     }
 
     private void setMembers(List<Person> members) {

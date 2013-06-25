@@ -10,11 +10,21 @@
                   android:layout_width="fill_parent"
                   android:layout_height="120dp"
                   android:layout_gravity="left">
-        <ImageView android:id="@+id/car_photo"
-                   android:layout_width="100dp"
-                   android:layout_height="100dp"
-                   android:background="#ff0000"
-                   android:contentDescription="@string/desc_user_photo"/>
+
+        <ImageView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:id="@+id/profile_picture"
+                android:layout_gravity="center"
+                android:src="@drawable/default_picture"
+                android:maxHeight="@android:dimen/thumbnail_height"
+                android:maxWidth="@android:dimen/thumbnail_width"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:contentDescription="@string/desc_user_photo"/>
+
         <LinearLayout android:orientation="vertical"
                       android:layout_width="fill_parent"
                       android:layout_height="fill_parent">
