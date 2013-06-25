@@ -1,7 +1,9 @@
 package com.thoughtworks.carpods.UI.pod;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.thoughtworks.carpods.R;
@@ -27,7 +29,7 @@ public class DisplayPod extends PodActivity {
 
         PodDataAccess carPodsDatabase = dataAccessFor.pods(this);
         Pod pod = carPodsDatabase.getFirstPodInDatabase();
-        setPodName(pod.getName());
+        populateActionBar(pod);
         setPodHomeLocation(pod.getHomeLocation());
         setDepartureTime(pod.getDepartureTime());
         setReturnTime(pod.getReturnTime());
@@ -64,7 +66,21 @@ public class DisplayPod extends PodActivity {
         ((TextView)findViewById(R.id.home_location)).setText(homeLocation);
     }
 
-    private void setPodName(String name) {
-        ((TextView)findViewById(R.id.pod_name)).setText(name);
+    private void populateActionBar(Pod pod) {
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle(pod.getName());
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
