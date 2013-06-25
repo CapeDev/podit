@@ -12,3 +12,9 @@ To open the list of all simulators you have set up:
 
 To build, run tests, package, and deploy to the simulator:
 	mvn clean package android:deploy android:run
+
+To run cobertura to get test coverage reports:
+    mvn clean package cobertura:cobertura
+
+To view the cobertura reports, from your projects root directory:
+    ~/target/site/cobertura/index.html
