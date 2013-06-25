@@ -19,6 +19,7 @@ import java.io.File;
 import java.util.List;
 
 import static com.thoughtworks.carpods.fun.ViewCast.imageView;
+import static com.thoughtworks.carpods.fun.ViewCast.textView;
 
 
 public class DisplayPod extends PodActivity {
@@ -57,25 +58,26 @@ public class DisplayPod extends PodActivity {
             // FIXME - for more information, see: http://stackoverflow.com/questions/9494037/how-to-set-text-size-of-textview-dynamically-for-diffrent-screens
             memberNameView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             memberNameView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            memberNameView.setPadding(5, 0, 0, 0);
             memberNameView.setText(memberToAdd.getFirstName() + " " + memberToAdd.getLastName());
             podMemberLayout.addView(memberNameView);
         }
     }
 
     private void setAbout(String aboutPod) {
-        ((TextView)findViewById(R.id.about_pod)).setText(aboutPod);
+        textView(this, R.id.about_pod_field).setText(aboutPod);
     }
 
     private void setReturnTime(int returnTime) {
-        ((TextView)findViewById(R.id.return_time)).setText(String.valueOf(returnTime));
+        textView(this, R.id.return_time).setText(String.valueOf(returnTime));
     }
 
     private void setDepartureTime(int departureTime) {
-        ((TextView)findViewById(R.id.departure_time)).setText(String.valueOf(departureTime));
+        textView(this, R.id.departure_time).setText(String.valueOf(departureTime));
     }
 
     private void setPodHomeLocation(String homeLocation) {
-        ((TextView)findViewById(R.id.home_location)).setText(homeLocation);
+        textView(this, R.id.home_location_field).setText(homeLocation);
     }
 
     private void populateActionBar(Pod pod) {

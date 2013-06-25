@@ -1,67 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+              android:orientation = "vertical"
+              android:layout_width = "match_parent"
+              android:layout_height = "match_parent"
+              android:layout_alignParentLeft = "true"
+              android:layout_alignParentTop = "true"
+              android:padding = "5dp">
 
-    <!-- FIXME: convert this to a relative layout to avoid severely nested Linear Layouts -->
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_width="fill_parent"
-                  android:layout_height="120dp"
-                  android:layout_gravity="left">
+    <RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+                    android:layout_height = "120dp"
+                    android:layout_width = "fill_parent">
 
         <ImageView
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:id="@+id/profile_picture"
-                android:layout_gravity="center"
-                android:src="@drawable/default_picture"
-                android:maxHeight="@android:dimen/thumbnail_height"
-                android:maxWidth="@android:dimen/thumbnail_width"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:contentDescription="@string/desc_user_photo"/>
+                android:id = "@+id/profile_picture"
+                android:layout_width = "150dp"
+                android:layout_height = "match_parent"
+                android:layout_gravity = "center"
+                android:src = "@drawable/default_picture"
+                android:maxHeight = "@android:dimen/thumbnail_height"
+                android:maxWidth = "@android:dimen/thumbnail_width"
+                android:scaleType= "fitCenter"
+                android:layout_alignParentTop = "true"
+                android:layout_alignParentLeft = "true"
+                android:contentDescription = "@string/desc_user_photo"/>
 
-        <LinearLayout android:orientation="vertical"
-                      android:layout_width="fill_parent"
-                      android:layout_height="fill_parent">
-            <TextView android:id="@+id/home_location"
-                     android:layout_width="fill_parent"
-                     android:layout_height="wrap_content"
-                     android:paddingBottom="0dp"
-                     android:paddingTop="0dp"
-                     android:hint="@string/home_location_label"/>
-            <LinearLayout android:orientation="horizontal"
-                          android:layout_width="fill_parent"
-                          android:layout_height="wrap_content">
-                <TextView android:id="@+id/departure_time"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="1"
-                          android:textSize="15sp"
-                          android:text="@string/default_time"/>
-                <TextView android:id="@+id/return_time"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="1"
-                          android:textSize="15sp"
-                          android:hint="@string/default_time"/>
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+        <TextView
+                android:id = "@+id/home_location_label"
+                android:layout_height = "wrap_content"
+                android:layout_width = "wrap_content"
+                android:layout_alignParentTop = "true"
+                android:layout_toRightOf = "@id/profile_picture"
+                android:text = "@string/home_location_label"
+                android:textColor = "@android:color/holo_blue_bright" />
+
+        <TextView
+                android:id = "@+id/home_location_field"
+                android:layout_height = "wrap_content"
+                android:layout_width = "wrap_content"
+                android:layout_toRightOf = "@id/profile_picture"
+                android:layout_below = "@id/home_location_label"/>
+
+        <TextView android:id = "@+id/departure_time"
+                  android:layout_width = "wrap_content"
+                  android:layout_height = "wrap_content"
+                  android:layout_weight = "1"
+                  android:layout_toRightOf = "@id/profile_picture"
+                  android:layout_below = "@id/home_location_field"
+                  android:textSize = "15sp"
+                  android:text = "@string/default_time"/>
+
+        <TextView android:id = "@+id/return_time"
+                  android:layout_width = "wrap_content"
+                  android:layout_height = "wrap_content"
+                  android:layout_weight = "1"
+                  android:layout_toRightOf = "@id/departure_time"
+                  android:layout_below = "@id/home_location_field"
+                  android:textSize = "15sp"
+                  android:paddingLeft = "15dp"
+                  android:hint = "@string/default_time"/>
+
+    </RelativeLayout>
 
     <LinearLayout android:orientation="vertical"
                   android:layout_width="fill_parent"
-                  android:layout_height="wrap_content">
+                  android:layout_height="wrap_content"
+                  android:paddingTop="10dp">
         <TextView android:id="@+id/about_pod_label"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
+                  android:textColor = "@android:color/holo_blue_bright"
                   android:textSize="20sp"
                   android:text="@string/about_pod_label" />
-        <TextView android:id="@+id/about_pod"
+        <TextView android:id="@+id/about_pod_field"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
                   android:lines="3"
@@ -76,8 +87,8 @@
         <TextView android:id="@+id/my_pod_members_label"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
+                  android:textColor = "@android:color/holo_blue_bright"
                   android:textSize="20sp"
                   android:text="@string/pod_members_label"/>
     </LinearLayout>
-
 </LinearLayout>
