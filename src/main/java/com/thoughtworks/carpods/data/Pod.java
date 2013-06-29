@@ -1,13 +1,11 @@
 package com.thoughtworks.carpods.data;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pod {
 
-    private final int id;
+    private long id;
     private String podName;
     private String podHomeLocation;
     private int podDepartureTime;
@@ -43,6 +41,18 @@ public class Pod {
 
     public String getAboutPod() {
         return aboutPod;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public List<Person> getMembers() {
+        return members;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public static class Builder {
@@ -87,6 +97,11 @@ public class Pod {
 
         public Builder member(Person newPodMember) {
             podMembers.add(newPodMember);
+            return this;
+        }
+
+        public Builder members(List<Person> members) {
+            podMembers = members;
             return this;
         }
 

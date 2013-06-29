@@ -22,6 +22,7 @@ public class PeoplePopulator implements Populator {
         database.savePerson(createPerson("Luke", "Skywalker", "Hilton Anatole", "Young Jedi"));
         database.savePerson(createPerson("Princess", "Leia", "Hilton Anatole", "Luke's Sister"));
         database.savePerson(createPerson("Darth", "Vader", "Hilton Anatole", "Luke's Father"));
+        database.savePerson(createPerson("Aniken", "SkyWalker", "Renaissance", "A kid with android dreams"));
     }
 
     private Person createPerson(String firstname, String lastName, String location, String about) {

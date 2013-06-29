@@ -101,6 +101,7 @@ public class PeopleDataAccess {
                 personBuilder.homeLocation(cursor.getString(cursor.getColumnIndex(PodItDatabase.HOME_LOCATION)));
                 personBuilder.aboutMe(cursor.getString(cursor.getColumnIndex(PodItDatabase.ABOUT_ME)));
                 personBuilder.picture(cursor.getString(cursor.getColumnIndex(PodItDatabase.PICTURE)));
+                personBuilder.id(cursor.getInt(cursor.getColumnIndex(PodItDatabase.ROWID)));
             }
 
         }  finally {

@@ -72,13 +72,28 @@ public class PodDataAccess {
         long podId = database.insert(podTableName, null, podInfo);
         database.close();
 
+        pod.setId(podId);
+        savePodMembers(pod);
+
         return podId;
     }
 
+    private void savePodMembers(Pod pod) {
+        PodMemberDataAccess podMemberDataAccess = new PodMemberDataAccess(podItDatabase);
+        List<Person> members = pod.getMembers();
+        List<Integer> memberIds = new ArrayList<Integer>();
+        for (Person member : members) {
+            memberIds.add(member.getId());
+        }
+        podMemberDataAccess.addMembersToPod(memberIds, pod.getId());
+    }
+
     public Pod getFirstPodInDatabase() {
+        int podId = 1;
+
         String[] columns = {PodItDatabase.ROWID, PodItDatabase.POD_NAME, PodItDatabase.POD_HOME_LOCATION, PodItDatabase.POD_DEPARTURE_TIME, PodItDatabase.POD_RETURN_TIME, PodItDatabase.ABOUT_POD};
         String selection = PodItDatabase.ROWID + " = ?";
-        String[] selectionArgs = {"1"};
+        String[] selectionArgs = {String.valueOf(podId)};
 
         Cursor cursor = null;
         Pod.Builder podBuilder = new Pod.Builder();
@@ -101,6 +116,24 @@ public class PodDataAccess {
             }
         }
 
+        List<Person> members = getPodMembersForPod(podId);
+        podBuilder.members(members);
+
         return podBuilder.build();
+    }
+
+    private List<Person> getPodMembersForPod(int podId) {
+        PodMemberDataAccess podMemberDataAccess = new PodMemberDataAccess(podItDatabase);
+        List<Integer> podMemberIds = podMemberDataAccess.getMemberIdsForPod(podId);
+        Log.v(CLASS_TAG, "Got a member ID list of " + podMemberIds.size() + " for podId: " + podId);
+
+        PeopleDataAccess peopleDataAccess = new PeopleDataAccess(podItDatabase);
+        List<Person> members = new ArrayList<Person>();
+        for (Integer memberId : podMemberIds) {
+            members.add(peopleDataAccess.getPersonFromDatabaseWithId(memberId));
+
+        }
+        Log.v(CLASS_TAG, "Got a member list of " + members.size() + " for podId: " + podId);
+        return members;
     }
 }
