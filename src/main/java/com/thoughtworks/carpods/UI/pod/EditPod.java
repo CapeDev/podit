@@ -14,7 +14,7 @@ import com.thoughtworks.carpods.plumb.PodActivity;
 
 import javax.inject.Inject;
 
-
+// FIXME - what if the activity is editing a pod instead of creating a new one?
 public class EditPod extends PodActivity {
 
     @Inject
@@ -43,15 +43,15 @@ public class EditPod extends PodActivity {
     }
 
     private Pod getDataFromView() {
-        Pod.Builder podBuilder = new Pod.Builder();
+        if (podBuilder == null) {
+            podBuilder = new Pod.Builder();
+        }
         podBuilder.name(getPodNameFromView());
         podBuilder.homeLocation(getHomeLocationFromView());
         // FIXME - should these be some kind of date object instead of a integer?
         podBuilder.departureTime(getDepartureTimeFromView());
         podBuilder.returnTime(getReturnTimeFromView());
         podBuilder.about(getAboutFromView());
-
-        // FIXME - how am I going to get the members from the view?
 
         return podBuilder.build();
     }
@@ -101,8 +101,9 @@ public class EditPod extends PodActivity {
                 PeopleDataAccess personDataAccess = dataAccessFor.people(this);
                 Person newPodMember = personDataAccess.getPersonFromDatabaseWithId(personId);
 
-                // FIXME - what if the activity is editing a pod instead of creating a new one?
-                podBuilder = new Pod.Builder();
+                if(podBuilder == null) {
+                    podBuilder = new Pod.Builder();
+                }
                 podBuilder.member(newPodMember);
 
                 addMemberToView(newPodMember);
