@@ -3,10 +3,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
+              android:layout_height="@dimen/edit_text_height"
               android:focusable="false"
-              android:background="@android:color/background_dark"
-              android:padding="10dp">
+        >
 
     <TextView
             android:id="@+id/first_name_label"
@@ -21,8 +20,8 @@
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
 
     <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/edit_text_height"
+            android:layout_height="@dimen/edit_text_height"
             android:id="@+id/profile_picture"
             android:layout_alignParentRight="true"
             android:src="@drawable/default_picture"

@@ -1,9 +1,11 @@
 package com.thoughtworks.carpods.UI.people;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -32,6 +34,7 @@ public class PeopleList extends ListPodActivity {
         Toast.makeText(this, "I've got " + peopleNames.size() + " from the database.", Toast.LENGTH_LONG).show();
 
         setListAdapter(new PeopleAdapter(this, peopleNames));
+        setUpActionBar();
     }
 
 //    @Override
@@ -68,6 +71,23 @@ public class PeopleList extends ListPodActivity {
     public void onDestroy() {
         super.onDestroy();
         logMessage("onDestroy");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setUpActionBar() {
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private void logMessage (String methodName) {

@@ -1,6 +1,7 @@
 package com.thoughtworks.carpods.UI.people;
 
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -45,6 +46,7 @@ public class EditPerson extends PodActivity {
 
         setContentView(R.layout.edit_person);
         setUpImagePicker();
+        setUpActionBar();
     }
 
     private void setUpImagePicker() {
@@ -105,13 +107,12 @@ public class EditPerson extends PodActivity {
         return editText(this, R.id.about_me_input).getText().toString();
     }
 
+    /* TODO: Find a better way to copy image from gallery*/
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            if (requestCode == SELECT_PICTURE) {
-                Uri selectedImageUri = data.getData();
-                bitmap = BitmapFactory.decodeFile(getPath(selectedImageUri));
-                imageButton(this, R.id.profile_picture).setImageBitmap(bitmap);
-            }
+        if (resultCode == RESULT_OK && requestCode == SELECT_PICTURE) {
+            bitmap = BitmapFactory.decodeFile(getPath(data.getData()));
+            imageButton(this, R.id.profile_picture).setImageBitmap(bitmap);
         }
     }
 
@@ -128,5 +129,22 @@ public class EditPerson extends PodActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.edit_person, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setUpActionBar() {
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 }

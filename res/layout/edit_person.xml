@@ -11,14 +11,14 @@
 
         <EditText android:id="@+id/first_name_input"
                   android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
+                  android:layout_height="@dimen/edit_text_height"
                   android:hint="@string/first_name_label"
                   android:layout_toLeftOf="@+id/profile_picture"
                   android:layout_centerVertical="true"/>
 
         <ImageButton
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="62dp"
+                android:layout_height="62dp"
                 android:id="@+id/profile_picture"
                 android:layout_gravity="center"
                 android:src="@drawable/default_picture"
@@ -35,19 +35,16 @@
 
     <EditText android:id="@+id/last_name_input"
               android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:hint="@string/last_name_label"
-              android:layout_margin="5sp" />
+              android:layout_height="@dimen/edit_text_height"
+              android:hint="@string/last_name_label" />
     <EditText android:id="@+id/home_location_input"
               android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:hint="@string/home_location_label"
-              android:layout_margin="5sp"/>
+              android:layout_height="@dimen/edit_text_height"
+              android:hint="@string/home_location_label"/>
     <EditText android:id="@+id/about_me_input"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:minLines="3"
-              android:hint="@string/tell_me_about_yourself"
-              android:layout_margin="5sp" />
+              android:hint="@string/tell_me_about_yourself" android:minHeight="@dimen/edit_text_height"/>
 
 </LinearLayout>
