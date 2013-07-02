@@ -3,7 +3,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:padding="5dp">
 
     <!-- FIXME: convert this to a relative layout to avoid severely nested Linear Layouts -->
     <LinearLayout android:orientation="horizontal"
@@ -20,17 +21,16 @@
                 android:maxHeight="48dp"
                 android:baselineAlignBottom="false"
                 android:scaleType="centerCrop"
-                android:layout_alignParentRight="true"
                 style="@android:style/Widget.DeviceDefault.Button.Borderless"
                 android:adjustViewBounds="false"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:contentDescription="@string/picture" />
         <LinearLayout android:orientation="vertical"
                       android:layout_width="fill_parent"
                       android:layout_height="fill_parent">
             <EditText android:id="@+id/pod_name"
                       android:layout_width="fill_parent"
-                      android:layout_height="wrap_content"
+                      android:layout_height="@dimen/edit_text_height"
                       android:textSize="25sp"
                       android:lines="1"
                       android:singleLine="true"
@@ -73,36 +73,43 @@
         <TextView android:id="@+id/about_pod_label"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
-                  android:textSize="20sp"
-                  android:text="@string/about_pod_label" />
+                  android:text="@string/about_pod_label"
+                  android:textIsSelectable="false"
+                  style="?android:attr/listSeparatorTextViewStyle"/>
         <EditText android:id="@+id/about_pod"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
                   android:hint="@string/tell_me_about_pod"
+                  android:minLines="3"
                   android:lines="3"
-                  android:gravity="top"/>
+                  android:focusableInTouchMode="true"/>
     </LinearLayout>
 
-    <LinearLayout android:orientation="horizontal"
+    <RelativeLayout android:orientation="horizontal"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
                   android:layout_gravity="right"
                   android:gravity="right">
-        <TextView android:id="@+id/my_pod_members_label"
+        <TextView android:id="@+id/pod_members_label"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
-                  android:textSize="20sp"
                   android:text="@string/pod_members_label"
-                  android:layout_weight="1"/>
+                  android:layout_gravity="center_vertical"
+                  style="?android:attr/listSeparatorTextViewStyle"
+                  android:layout_alignParentBottom="false"
+                  android:layout_alignBottom="@+id/add_member"/>
         <ImageView android:id="@+id/add_member"
-                   android:layout_height="20sp"
-                   android:layout_width="wrap_content"
-                   android:src="@android:drawable/ic_input_add"
-                   android:layout_weight="1"
+                   android:layout_height="32dp"
+                   android:layout_width="32dp"
+                   android:src="@drawable/ic_add_person"
                    android:clickable="true"
                    android:onClick="addMemberClick"
-                   android:gravity="center" />
-    </LinearLayout>
+                   android:gravity="center"
+                   android:contentDescription="New Member"
+                   android:layout_alignParentRight="true"
+                   android:layout_alignParentTop="true"
+                   android:layout_centerVertical="true"/>
+    </RelativeLayout>
 
     <LinearLayout android:id="@+id/member_list"
                   android:orientation="vertical"

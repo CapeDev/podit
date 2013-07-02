@@ -11,7 +11,6 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_height="200dp"
                     android:layout_width="fill_parent">
-
         <ImageView
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
@@ -51,13 +50,11 @@
             android:padding="10dp">
 
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/home_location_label"
-                android:textAllCaps="true"
                 android:id="@+id/textView"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-                android:textColor="@android:color/holo_blue_light"/>
+                style="?android:attr/listSeparatorTextViewStyle"/>
 
         <TextView
                 android:layout_width="wrap_content"
@@ -74,13 +71,12 @@
             android:padding="10dp">
 
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/about_me_label"
                 android:textAllCaps="true"
                 android:id="@+id/textView2"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-                android:textColor="@android:color/holo_blue_light"/>
+                style="?android:attr/listSeparatorTextViewStyle"/>
 
         <TextView
                 android:layout_width="wrap_content"
