@@ -2,15 +2,10 @@ package com.thoughtworks.carpods.UI.people;
 
 
 import android.app.ActionBar;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,22 +18,22 @@ import com.thoughtworks.carpods.data.Person;
 import com.thoughtworks.carpods.plumb.PodActivity;
 
 import javax.inject.Inject;
-import java.io.FileOutputStream;
-import java.util.Calendar;
 
+import static com.thoughtworks.carpods.fun.FileMoveUtils.tryToSaveBitmapInInternalStorage;
+import static com.thoughtworks.carpods.fun.PathUtils.getPath;
 import static com.thoughtworks.carpods.fun.ViewCast.editText;
 import static com.thoughtworks.carpods.fun.ViewCast.imageButton;
 
 public class EditPerson extends PodActivity {
     private static final String TAG = "EditPerson";
 
-    public static final String PICTURE_PREFIX = "person_";
+    protected static final String PICTURE_PREFIX = "person_";
     protected static final int SELECT_PICTURE = 1;
 
     @Inject DataAccessFactory dataAccessFor;
 
     private PeopleDataAccess peopleDataAccess;
-    private Bitmap bitmap;
+    private Bitmap profilePicture;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,17 +64,7 @@ public class EditPerson extends PodActivity {
     }
 
     private String savePictureToDisk() {
-        String pictureName = String.format("%s_%d.jpg", PICTURE_PREFIX, Calendar.getInstance().getTimeInMillis()).toLowerCase();
-
-        try {
-            FileOutputStream outputStream = openFileOutput(pictureName, Context.MODE_PRIVATE);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
-            return pictureName;
-        } catch (Exception e) {
-            Log.d(TAG, "User has no profile picture");
-        }
-
-        return "";
+        return profilePicture == null ? "" : tryToSaveBitmapInInternalStorage(getBaseContext(), profilePicture, PICTURE_PREFIX);
     }
 
     protected Person getDataFromView() {
@@ -107,21 +92,12 @@ public class EditPerson extends PodActivity {
         return editText(this, R.id.about_me_input).getText().toString();
     }
 
-    /* TODO: Find a better way to copy image from gallery*/
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == SELECT_PICTURE) {
-            bitmap = BitmapFactory.decodeFile(getPath(data.getData()));
-            imageButton(this, R.id.profile_picture).setImageBitmap(bitmap);
+            profilePicture = BitmapFactory.decodeFile(getPath(data.getData(), getContentResolver()));
+            imageButton(this, R.id.profile_picture).setImageBitmap(profilePicture);
         }
-    }
-
-    public String getPath(Uri uri) {
-        String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
     }
 
     @Override
