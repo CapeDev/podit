@@ -7,15 +7,15 @@
               android:padding="5dp">
 
     <!-- FIXME: convert this to a relative layout to avoid severely nested Linear Layouts -->
-    <LinearLayout android:orientation="horizontal"
+    <RelativeLayout android:orientation="horizontal"
                   android:layout_width="fill_parent"
-                  android:layout_height="120dp"
+                  android:layout_height="wrap_content"
                   android:layout_gravity="left">
         <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="62dp"
+                android:layout_height="62dp"
                 android:id="@+id/profile_picture"
-                android:layout_gravity="center"
+                android:layout_gravity="right"
                 android:src="@drawable/default_picture"
                 android:maxWidth="48dp"
                 android:maxHeight="48dp"
@@ -23,48 +23,89 @@
                 android:scaleType="centerCrop"
                 style="@android:style/Widget.DeviceDefault.Button.Borderless"
                 android:adjustViewBounds="false"
-                android:layout_margin="5dp"
-                android:contentDescription="@string/picture" />
-        <LinearLayout android:orientation="vertical"
+                android:contentDescription="@string/picture"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentRight="true"/>
+
+        <EditText android:id="@+id/pod_name"
+                  android:layout_width="fill_parent"
+                  android:layout_height="@dimen/edit_text_height"
+                  android:lines="1"
+                  android:singleLine="true"
+                  android:hint="@string/pod_name"
+                  android:layout_toLeftOf="@+id/profile_picture"
+                  android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout2">
+
+        <TextView
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:id="@+id/textView2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/home_location_label"
+                android:textIsSelectable="false"
+                android:layout_marginTop="10dp"/>
+
+        <Spinner android:id="@+id/home_location_spinner"
+                 android:layout_width="fill_parent"
+                 android:layout_height="@dimen/edit_text_height"
+                 android:paddingBottom="0dp"
+                 android:paddingTop="0dp"
+                 android:entries="@array/home_locations"
+                 android:prompt="@string/choose" />
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout"
+            android:layout_marginTop="10dp">
+
+        <TextView
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:id="@+id/textView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Departs"
+                android:textIsSelectable="false"/>
+
+        <LinearLayout android:orientation="horizontal"
                       android:layout_width="fill_parent"
-                      android:layout_height="fill_parent">
-            <EditText android:id="@+id/pod_name"
-                      android:layout_width="fill_parent"
-                      android:layout_height="@dimen/edit_text_height"
-                      android:textSize="25sp"
-                      android:lines="1"
-                      android:singleLine="true"
-                      android:hint="@string/pod_name"/>
-            <Spinner android:id="@+id/home_location_spinner"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="5dp">
+            <!-- FIXME: check this out for implementation for the timepicker for the onclick functionality of the display times:
+                 FIXME: http://www.mkyong.com/android/android-time-picker-example/-->
+            <!--<TimePicker android:id="@+id/leave_time_picker"
                      android:layout_width="fill_parent"
-                     android:layout_height="wrap_content"
-                     android:paddingBottom="0dp"
-                     android:paddingTop="0dp"
-                     android:entries="@array/home_locations"
-                     android:prompt="@string/choose" />
-            <LinearLayout android:orientation="horizontal"
-                          android:layout_width="fill_parent"
-                          android:layout_height="wrap_content">
-                <!-- FIXME: check this out for implementation for the timepicker for the onclick functionality of the display times:
-                     FIXME: http://www.mkyong.com/android/android-time-picker-example/-->
-                <!--<TimePicker android:id="@+id/leave_time_picker"
-                         android:layout_width="fill_parent"
-                         android:layout_height="wrap_content" /> -->
-                <!-- FIXME: create a preferences activity to determine if the user prefers military or 12-hour time -->
-                <TextView android:id="@+id/departure_time"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="1"
-                          android:textSize="15sp"
-                          android:text="@string/default_time"/>
-                <TextView android:id="@+id/return_time"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="1"
-                          android:textSize="15sp"
-                          android:text="@string/default_time"/>
-            </LinearLayout>
-         </LinearLayout>
+                     android:layout_height="wrap_content" /> -->
+            <!-- FIXME: create a preferences activity to determine if the user prefers military or 12-hour time -->
+            <TextView android:id="@+id/departure_time"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="@string/default_time"
+                      android:textAppearance="@android:style/TextAppearance.Holo.Medium"
+                      android:autoText="false"
+                      android:gravity="center_horizontal"/>
+            <TextView android:id="@+id/return_time"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="@string/default_time"
+                      android:textAppearance="@android:style/TextAppearance.Holo.Medium"
+                      android:autoText="false"
+                      android:gravity="center_horizontal"/>
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout android:orientation="vertical"
@@ -75,7 +116,8 @@
                   android:layout_height="wrap_content"
                   android:text="@string/about_pod_label"
                   android:textIsSelectable="false"
-                  style="?android:attr/listSeparatorTextViewStyle"/>
+                  style="?android:attr/listSeparatorTextViewStyle"
+                  android:layout_marginTop="10dp"/>
         <EditText android:id="@+id/about_pod"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
@@ -89,7 +131,8 @@
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
                   android:layout_gravity="right"
-                  android:gravity="right">
+                  android:gravity="right"
+                  android:layout_marginTop="10dp">
         <TextView android:id="@+id/pod_members_label"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
@@ -97,7 +140,8 @@
                   android:layout_gravity="center_vertical"
                   style="?android:attr/listSeparatorTextViewStyle"
                   android:layout_alignParentBottom="false"
-                  android:layout_alignBottom="@+id/add_member"/>
+                  android:layout_alignBottom="@+id/add_member"
+                />
         <ImageView android:id="@+id/add_member"
                    android:layout_height="32dp"
                    android:layout_width="32dp"
