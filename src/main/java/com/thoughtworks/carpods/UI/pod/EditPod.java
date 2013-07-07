@@ -14,6 +14,8 @@ import com.thoughtworks.carpods.data.*;
 import com.thoughtworks.carpods.plumb.PodActivity;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 // FIXME - what if the activity is editing a pod instead of creating a new one?
 public class EditPod extends PodActivity {
@@ -25,6 +27,7 @@ public class EditPod extends PodActivity {
 
     private String CLAZZ_TAG = "EditPod";
     private Pod.Builder podBuilder;
+    private List<Person> podMembers = new ArrayList<Person>();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,15 +54,16 @@ public class EditPod extends PodActivity {
     }
 
     private Pod getDataFromView() {
-        if (podBuilder == null) {
-            podBuilder = new Pod.Builder();
-        }
+        podBuilder = new Pod.Builder();
         podBuilder.name(getPodNameFromView());
         podBuilder.homeLocation(getHomeLocationFromView());
         // FIXME - should these be some kind of date object instead of a integer?
         podBuilder.departureTime(getDepartureTimeFromView());
         podBuilder.returnTime(getReturnTimeFromView());
         podBuilder.about(getAboutFromView());
+        for (Person member : podMembers) {
+            podBuilder.member(member);
+        }
 
         return podBuilder.build();
     }
@@ -105,18 +109,16 @@ public class EditPod extends PodActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == PICK_CONTACT_REQUEST) {
                 long personId = data.getLongExtra("personId", -1);
-
                 PeopleDataAccess personDataAccess = dataAccessFor.people(this);
                 Person newPodMember = personDataAccess.getPersonFromDatabaseWithId(personId);
-
-                if(podBuilder == null) {
-                    podBuilder = new Pod.Builder();
-                }
-                podBuilder.member(newPodMember);
-
+                addMemberToMemberList(newPodMember);
                 addMemberToView(newPodMember);
             }
         }
+    }
+
+    private void addMemberToMemberList(Person newPodMember) {
+        podMembers.add(newPodMember);
     }
 
     private void addMemberToView(Person memberToAdd) {
