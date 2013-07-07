@@ -94,10 +94,6 @@ public class EditPod extends PodActivity {
         return ((EditText)findViewById(R.id.pod_name)).getText().toString();
     }
 
-    public void cancelClick(View v) {
-        finish();
-    }
-
     public void addMemberClick(View view) {
         Intent peopleListIntent = new Intent(this, PeopleList.class);
         startActivityForResult(peopleListIntent, PICK_CONTACT_REQUEST);
