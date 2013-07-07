@@ -1,5 +1,6 @@
 package com.thoughtworks.carpods.UI.pod;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +21,7 @@ public class EditPod extends PodActivity {
     @Inject
     DataAccessFactory dataAccessFor;
 
-    private static final int PICK_CONTACT_REQUEST = 1;
+    protected static final int PICK_CONTACT_REQUEST = 1;
 
     private String CLAZZ_TAG = "EditPod";
     private Pod.Builder podBuilder;
@@ -29,9 +30,16 @@ public class EditPod extends PodActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.edit_pod);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        setUpActionBar();
 
         Log.v(CLAZZ_TAG, "Done with onCreate in EditPod");
+    }
+
+    private void setUpActionBar() {
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     public void save(MenuItem item) {
