@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.thoughtworks.carpods.R;
+import com.thoughtworks.carpods.UI.pod.EditPod;
 import com.thoughtworks.carpods.data.DataAccessFactory;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
@@ -37,22 +38,22 @@ public class PeopleList extends ListPodActivity {
         setUpActionBar();
     }
 
-//    @Override
-//    protected void onListItemClick(ListView listView, View view, int position, long id) {
-//        Person item = (Person) listView.getAdapter().getItem(position);
-//        Intent intent = new Intent(this, DisplayPerson.class);
-//        intent.putExtra("id", (item.getId() + 1));
-//        startActivity(intent);
-//    }
-
     @Override
     protected void onListItemClick(ListView listView, View view, int position, long id) {
+        Person item = (Person) listView.getAdapter().getItem(position);
+
         Toast.makeText(this, "hey hey kids! I clicked position " + position, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent();
-        // FIXME - what happens when there is a big list?  what id gets returned? i.e. whats the difference between 'position' and 'id'?
-        intent.putExtra("personId", id + 1);
-        setResult(Activity.RESULT_OK, intent);
-        finish();
+
+        if (sourceActivityIs(EditPod.class)) {
+            Intent intent = new Intent();
+            intent.putExtra("id", item.getId());
+            setResult(Activity.RESULT_OK, intent);
+            finish();
+        } else {
+            Intent intent = new Intent(this, DisplayPerson.class);
+            intent.putExtra("id", item.getId());
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -88,6 +89,10 @@ public class PeopleList extends ListPodActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    private boolean sourceActivityIs(Class<? extends Activity> anActivity) {
+        return getIntent().hasExtra("sourceActivity") && getIntent().getStringExtra("sourceActivity").equals(anActivity.getSimpleName());
     }
 
     private void logMessage (String methodName) {

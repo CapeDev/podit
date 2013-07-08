@@ -95,13 +95,13 @@ public class EditPod extends PodActivity {
     }
 
     public void addMemberClick(View view) {
-        Intent peopleListIntent = new Intent(this, PeopleList.class);
-        startActivityForResult(peopleListIntent, PICK_CONTACT_REQUEST);
+        Intent intent = new Intent(this, PeopleList.class);
+        intent.putExtra("sourceActivity", this.getClass().getSimpleName());
+        startActivityForResult(intent, PICK_CONTACT_REQUEST);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if (resultCode == RESULT_OK) {
             if (requestCode == PICK_CONTACT_REQUEST) {
                 long personId = data.getLongExtra("personId", -1);
