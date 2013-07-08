@@ -16,8 +16,6 @@ import com.thoughtworks.carpods.UI.pod.PodList;
 import com.thoughtworks.carpods.data.development.PeoplePopulator;
 import com.thoughtworks.carpods.data.development.PodPopulator;
 import com.thoughtworks.carpods.data.development.Populator;
-import com.thoughtworks.carpods.example.HelloAndroidActivity;
-import com.thoughtworks.carpods.example.HelloScrollView;
 
 public class ActivitySwitcher extends Activity {
 
@@ -27,14 +25,6 @@ public class ActivitySwitcher extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_switcher);
         applicationContext = getApplicationContext();
-    }
-
-    public void startExample(View view) {
-        startActivity(new Intent(this, HelloAndroidActivity.class));
-    }
-
-    public void startScrollViewExample(View view) {
-        startActivity(new Intent(this, HelloScrollView.class));
     }
 
     public void startEditPerson(View view) {
