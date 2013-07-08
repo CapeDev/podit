@@ -53,8 +53,8 @@ public class DisplayPerson extends PodActivity {
     }
 
     private Person person() {
-        if (getIntent().hasExtra("id")) {
-            return dataAccess.getPersonFromDatabaseWithId(getIntent().getIntExtra("id", 0));
+        if (getIntent().hasExtra("personId")) {
+            return dataAccess.getPersonFromDatabaseWithId(getIntent().getIntExtra("personId", 0));
         }
 
         return dataAccess.getFirstPersonFromDatabase();
