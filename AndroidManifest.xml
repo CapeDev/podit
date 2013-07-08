@@ -13,9 +13,6 @@
           </intent-filter>
       </activity>
 
-      <activity android:name=".example.HelloAndroidActivity" />
-      <activity android:name=".example.HelloScrollView" />
-
       <activity android:name=".UI.people.EditPerson" android:icon="@drawable/ic_action_user" android:label="@string/create_person"/>
       <activity android:name=".UI.people.DisplayPerson" android:icon="@drawable/ic_action_user">
           <meta-data
