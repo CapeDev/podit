@@ -48,7 +48,7 @@ public class Person {
         private String lastName;
         private String homeLocation;
         private String aboutMe;
-        private String picture;
+        private String picture = "";
 
         public Builder firstName(String firstName) {
             this.firstName = (firstName == null) ? "" : firstName ;
