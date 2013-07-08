@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
@@ -42,8 +41,6 @@ public class PeopleList extends ListPodActivity {
     protected void onListItemClick(ListView listView, View view, int position, long id) {
         Person item = (Person) listView.getAdapter().getItem(position);
 
-        Toast.makeText(this, "hey hey kids! I clicked position " + position, Toast.LENGTH_LONG).show();
-
         if (sourceActivityIs(EditPod.class)) {
             Intent intent = new Intent();
             intent.putExtra("id", item.getId());
@@ -51,27 +48,9 @@ public class PeopleList extends ListPodActivity {
             finish();
         } else {
             Intent intent = new Intent(this, DisplayPerson.class);
-            intent.putExtra("id", item.getId());
+            intent.putExtra("personId", item.getId());
             startActivity(intent);
         }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        logMessage("onPause");
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        logMessage("onStop");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        logMessage("onDestroy");
     }
 
     @Override
@@ -93,9 +72,5 @@ public class PeopleList extends ListPodActivity {
 
     private boolean sourceActivityIs(Class<? extends Activity> anActivity) {
         return getIntent().hasExtra("sourceActivity") && getIntent().getStringExtra("sourceActivity").equals(anActivity.getSimpleName());
-    }
-
-    private void logMessage (String methodName) {
-        Log.v(CLASS_TAG, "-------------------> I'm calling: " + methodName);
     }
 }
