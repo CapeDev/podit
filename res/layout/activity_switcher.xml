@@ -7,18 +7,31 @@
                   android:layout_width="match_parent"
                   android:layout_height="match_parent">
 
-        <Button android:id="@+id/start_edit_person"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Create / Edit Person"
-                android:layout_gravity="bottom"
-                android:onClick="startEditPerson" />
         <Button android:id="@+id/populate_people"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Populate People"
                 android:layout_gravity="bottom"
                 android:onClick="populatePeople" />
+        <Button android:id="@+id/populate_pods"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Populate Pods"
+                android:layout_gravity="bottom"
+                android:onClick="populatePods" />
+
+        <View android:layout_width="fill_parent"
+              android:layout_height="2dp"
+              android:layout_marginTop="6dp"
+              android:layout_marginBottom="6dp"
+              android:background="#999999" />
+
+        <Button android:id="@+id/start_edit_person"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Create / Edit Person"
+                android:layout_gravity="bottom"
+                android:onClick="startEditPerson" />
         <Button android:id="@+id/start_display_person"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -44,12 +57,6 @@
                 android:text="Create / Edit Pod"
                 android:layout_gravity="bottom"
                 android:onClick="startCreatePod" />
-        <Button android:id="@+id/populate_pods"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Populate Pods"
-                android:layout_gravity="bottom"
-                android:onClick="populatePods" />
         <Button android:id="@+id/start_display_pod"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
