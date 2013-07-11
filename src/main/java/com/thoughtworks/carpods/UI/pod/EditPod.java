@@ -104,7 +104,7 @@ public class EditPod extends PodActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == PICK_CONTACT_REQUEST) {
-                long personId = data.getLongExtra("personId", -1);
+                long personId = data.getIntExtra("personId", -1);
                 PeopleDataAccess personDataAccess = dataAccessFor.people(this);
                 Person newPodMember = personDataAccess.getPersonFromDatabaseWithId(personId);
                 addMemberToMemberList(newPodMember);

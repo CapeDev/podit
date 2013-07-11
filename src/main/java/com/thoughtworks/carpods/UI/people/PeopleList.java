@@ -43,7 +43,7 @@ public class PeopleList extends ListPodActivity {
 
         if (sourceActivityIs(EditPod.class)) {
             Intent intent = new Intent();
-            intent.putExtra("id", item.getId());
+            intent.putExtra("personId", item.getId());
             setResult(Activity.RESULT_OK, intent);
             finish();
         } else {
