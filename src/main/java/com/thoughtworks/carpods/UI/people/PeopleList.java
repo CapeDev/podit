@@ -1,6 +1,5 @@
 package com.thoughtworks.carpods.UI.people;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -46,13 +45,6 @@ public class PeopleList extends ListPodActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void setUpActionBar() {
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
     }
 
 }
