@@ -16,6 +16,9 @@ import com.thoughtworks.carpods.UI.pod.PodList;
 import com.thoughtworks.carpods.data.development.PeoplePopulator;
 import com.thoughtworks.carpods.data.development.PodPopulator;
 import com.thoughtworks.carpods.data.development.Populator;
+import net.hockeyapp.android.UpdateManager;
+
+import static com.thoughtworks.carpods.R.string.hockey_app_id;
 
 public class ActivitySwitcher extends Activity {
 
@@ -25,6 +28,7 @@ public class ActivitySwitcher extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_switcher);
         applicationContext = getApplicationContext();
+        UpdateManager.register(this, getString(hockey_app_id));
     }
 
     public void startEditPerson(View view) {
