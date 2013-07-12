@@ -31,7 +31,7 @@ public class DisplayPerson extends PodActivity {
         Person person = person();
 
         populateActionBar(person);
-        setPicture(person.getPicture());
+        setPicture(person.iconPath());
         setPersonName();
         setHomeLocation(person.getHomeLocation());
         setAboutMe(person.getAboutMe());

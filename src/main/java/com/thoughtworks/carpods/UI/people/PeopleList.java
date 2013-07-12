@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.thoughtworks.carpods.R;
+import com.thoughtworks.carpods.UI.PoditListAdapter;
 import com.thoughtworks.carpods.UI.pod.EditPod;
 import com.thoughtworks.carpods.data.DataAccessFactory;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
@@ -26,14 +27,14 @@ public class PeopleList extends ListPodActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.people_list);
+        setContentView(R.layout.list_with_icons);
 
         PeopleDataAccess dataAccess = dataAccessFor.people(this);
         List<Person> peopleNames = dataAccess.getAllPeopleNames();
 
         Toast.makeText(this, "I've got " + peopleNames.size() + " from the database.", Toast.LENGTH_LONG).show();
 
-        setListAdapter(new PeopleAdapter(this, peopleNames));
+        setListAdapter(new PoditListAdapter(this, peopleNames));
         setUpActionBar();
     }
 
