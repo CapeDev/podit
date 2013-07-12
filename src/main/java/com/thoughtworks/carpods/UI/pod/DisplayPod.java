@@ -26,14 +26,15 @@ public class DisplayPod extends PodActivity {
 
     @Inject
     DataAccessFactory dataAccessFor;
+    private PodDataAccess podDatabase;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.display_pod);
 
-        PodDataAccess carPodsDatabase = dataAccessFor.pods(this);
-        Pod pod = carPodsDatabase.getFirstPodInDatabase();
+        podDatabase = dataAccessFor.pods(this);
+        Pod pod = loadPod();
         populateActionBar(pod);
         setPicture("");
         setPodHomeLocation(pod.getHomeLocation());
@@ -41,6 +42,13 @@ public class DisplayPod extends PodActivity {
         setReturnTime(pod.getReturnTime());
         setAbout(pod.getAboutPod());
         setMembers(pod.getMembers());
+    }
+
+    private Pod loadPod() {
+        if (getIntent().hasExtra("id")) {
+            return podDatabase.getPodFromDatabaseWithId(getIntent().getLongExtra("id", 0));
+        }
+        return podDatabase.getFirstPodInDatabase();
     }
 
     private void setPicture(String picture) {

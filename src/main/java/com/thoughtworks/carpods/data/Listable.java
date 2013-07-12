@@ -9,6 +9,8 @@ package com.thoughtworks.carpods.data;
  */
 public interface Listable {
 
+    Long getId();
+
     String iconPath();
 
     String label();
