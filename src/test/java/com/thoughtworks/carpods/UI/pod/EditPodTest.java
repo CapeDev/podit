@@ -125,6 +125,17 @@ public class EditPodTest {
         assertThat(activity.isFinishing(), is(true));
     }
 
+    @Test
+    public void shouldCallSuperOnOptionMenuItemSelectedWhenAnyOtherItemIsSelectedFromTheOptionsMenu() {
+        MenuItem menuItem = mock(MenuItem.class);
+        when(menuItem.getItemId()).thenReturn(-1);
+//        verify(activity).super.onOptionsItemSelected(menuItem);
+        // FIXME - how can we test that the super class's onOptionsItemSelected() is called?
+        // FIXME - continued: apparently, when the supers onOptionsItemSelected() is called, it returns false;
+        assertThat(activity.onOptionsItemSelected(menuItem), is(false));
+
+    }
+
     private Pod createPodInformation(List<Person> members) {
         Pod.Builder podBuilder = new Pod.Builder()
                 .name("My New Pod")
