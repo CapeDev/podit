@@ -4,6 +4,7 @@ import android.app.ListActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 import com.thoughtworks.carpods.R;
+import com.thoughtworks.carpods.UI.PoditListAdapter;
 import com.thoughtworks.carpods.data.Pod;
 import com.thoughtworks.carpods.data.PodDataAccess;
 
@@ -16,7 +17,7 @@ public class PodList extends ListActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pod_list);
+        setContentView(R.layout.list_with_icons);
 
         if (database == null) {
             database = new PodDataAccess(this);
@@ -26,6 +27,6 @@ public class PodList extends ListActivity {
 
         Toast.makeText(this, "I've got " + podNames.size() + " from the database.", Toast.LENGTH_LONG).show();
 
-        setListAdapter(new PodAdapter(this, podNames));
+        setListAdapter(new PoditListAdapter(this, podNames));
     }
 }

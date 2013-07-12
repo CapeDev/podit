@@ -41,7 +41,7 @@
         <Button android:id="@+id/show_people_list"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="People ListView"
+                android:text="People List"
                 android:layout_gravity="bottom"
                 android:onClick="startPeopleList" />
 

@@ -1,6 +1,6 @@
 package com.thoughtworks.carpods.data;
 
-public class Person {
+public class Person implements Listable {
 
     private String firstName;
     private String lastName;
@@ -38,8 +38,14 @@ public class Person {
         return id;
     }
 
-    public String getPicture() {
+    @Override
+    public String iconPath() {
         return picture;
+    }
+
+    @Override
+    public String label() {
+        return String.format("%s %s", firstName, lastName);
     }
 
     public static class Builder {

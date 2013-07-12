@@ -3,7 +3,7 @@ package com.thoughtworks.carpods.data;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pod {
+public class Pod implements Listable {
 
     private long id;
     private String podName;
@@ -53,6 +53,16 @@ public class Pod {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    @Override
+    public String label() {
+        return podName;
+    }
+
+    @Override
+    public String iconPath() {
+        return "";
     }
 
     public static class Builder {

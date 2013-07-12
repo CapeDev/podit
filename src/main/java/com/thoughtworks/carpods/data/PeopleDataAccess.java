@@ -33,7 +33,7 @@ public class PeopleDataAccess {
         info.put(PodItDatabase.LAST_NAME, person.getLastName());
         info.put(PodItDatabase.HOME_LOCATION, person.getHomeLocation());
         info.put(PodItDatabase.ABOUT_ME, person.getAboutMe());
-        info.put(PodItDatabase.PICTURE, person.getPicture());
+        info.put(PodItDatabase.PICTURE, person.iconPath());
 
         database = podItDatabase.getWritableDatabase();
         database.insert(table, null, info);
