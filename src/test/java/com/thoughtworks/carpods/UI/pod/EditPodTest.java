@@ -134,7 +134,7 @@ public class EditPodTest {
                 .homeLocation("Renaissance")
                 .aboutMe("Just an awesome person")
                 .picture("")
-                .id(1)
+                .id(1L)
                 .build();
     }
 
@@ -145,7 +145,7 @@ public class EditPodTest {
                 .homeLocation("Renaissance")
                 .aboutMe("Likes to Eat and Drink things")
                 .picture("")
-                .id(2)
+                .id(2L)
                 .build();
     }
 

@@ -6,7 +6,7 @@ public class Person implements Listable {
     private String lastName;
     private String homeLocation;
     private String aboutMe;
-    private int id = -1;
+    private Long id = -1L;
     private String picture;
 
     private Person(Builder personBuilder) {
@@ -34,7 +34,8 @@ public class Person implements Listable {
         return aboutMe;
     }
 
-    public int getId() {
+    @Override
+    public Long getId() {
         return id;
     }
 
@@ -49,7 +50,7 @@ public class Person implements Listable {
     }
 
     public static class Builder {
-        private int id;
+        private Long id;
         private String firstName;
         private String lastName;
         private String homeLocation;
@@ -76,7 +77,7 @@ public class Person implements Listable {
             return this;
         }
 
-        public Builder id(int id) {
+        public Builder id(Long id) {
             this.id = id;
             return this;
         }

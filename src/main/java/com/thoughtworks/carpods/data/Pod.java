@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Pod implements Listable {
 
-    private long id;
+    private Long id;
     private String podName;
     private String podHomeLocation;
     private int podDepartureTime;
@@ -43,7 +43,8 @@ public class Pod implements Listable {
         return aboutPod;
     }
 
-    public long getId() {
+    @Override
+    public Long getId() {
         return id;
     }
 
@@ -51,7 +52,7 @@ public class Pod implements Listable {
         return members;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -72,7 +73,7 @@ public class Pod implements Listable {
         private int departureTime;
         private int returnTime;
         private String about;
-        private int id = -1;
+        private Long id = -1L;
         private List<Person> podMembers = new ArrayList<Person>();
 
         public Builder name(String name) {
@@ -100,7 +101,7 @@ public class Pod implements Listable {
             return this;
         }
 
-        public Builder id(int id) {
+        public Builder id(Long id) {
             this.id = id;
             return this;
         }

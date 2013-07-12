@@ -39,19 +39,8 @@ public class PeopleList extends ListPodActivity {
     }
 
     @Override
-    protected void onListItemClick(ListView listView, View view, int position, long id) {
-        Person item = (Person) listView.getAdapter().getItem(position);
-
-        if (sourceActivityIs(EditPod.class)) {
-            Intent intent = new Intent();
-            intent.putExtra("personId", item.getId());
-            setResult(Activity.RESULT_OK, intent);
-            finish();
-        } else {
-            Intent intent = new Intent(this, DisplayPerson.class);
-            intent.putExtra("personId", item.getId());
-            startActivity(intent);
-        }
+    protected Class<DisplayPerson> getDisplayClass() {
+        return DisplayPerson.class;
     }
 
     @Override
@@ -71,7 +60,4 @@ public class PeopleList extends ListPodActivity {
         }
     }
 
-    private boolean sourceActivityIs(Class<? extends Activity> anActivity) {
-        return getIntent().hasExtra("sourceActivity") && getIntent().getStringExtra("sourceActivity").equals(anActivity.getSimpleName());
-    }
 }

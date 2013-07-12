@@ -44,7 +44,7 @@ public class PodDataAccess {
                 while (!cursor.isAfterLast()) {
                     Pod.Builder podBuilder = new Pod.Builder();
                     podBuilder.name(cursor.getString(cursor.getColumnIndex(PodItDatabase.POD_NAME)));
-                    podBuilder.id(cursor.getInt(cursor.getColumnIndex(PodItDatabase.ROWID)));
+                    podBuilder.id(cursor.getLong(cursor.getColumnIndex(PodItDatabase.ROWID)));
                     podList.add(podBuilder.build());
                     cursor.moveToNext();
                 }
@@ -81,7 +81,7 @@ public class PodDataAccess {
     private void savePodMembers(Pod pod) {
         PodMemberDataAccess podMemberDataAccess = new PodMemberDataAccess(podItDatabase);
         List<Person> members = pod.getMembers();
-        List<Integer> memberIds = new ArrayList<Integer>();
+        List<Long> memberIds = new ArrayList<Long>();
         for (Person member : members) {
             memberIds.add(member.getId());
         }
@@ -89,8 +89,10 @@ public class PodDataAccess {
     }
 
     public Pod getFirstPodInDatabase() {
-        int podId = 1;
+        return getPodFromDatabaseWithId(1L);
+    }
 
+    public Pod getPodFromDatabaseWithId(Long podId) {
         String[] columns = {PodItDatabase.ROWID, PodItDatabase.POD_NAME, PodItDatabase.POD_HOME_LOCATION, PodItDatabase.POD_DEPARTURE_TIME, PodItDatabase.POD_RETURN_TIME, PodItDatabase.ABOUT_POD};
         String selection = PodItDatabase.ROWID + " = ?";
         String[] selectionArgs = {String.valueOf(podId)};
@@ -104,6 +106,7 @@ public class PodDataAccess {
             if (cursor != null && cursor.getCount() > 0) {
                 Log.v(CLASS_TAG, "retrieved " + cursor.getCount() + " Pods from the database");
                 cursor.moveToLast();
+                podBuilder.id(cursor.getLong(cursor.getColumnIndex(PodItDatabase.ROWID)));
                 podBuilder.name(cursor.getString(cursor.getColumnIndex(PodItDatabase.POD_NAME)));
                 podBuilder.homeLocation(cursor.getString(cursor.getColumnIndex(PodItDatabase.POD_HOME_LOCATION)));
                 podBuilder.departureTime(cursor.getInt(cursor.getColumnIndex(PodItDatabase.POD_DEPARTURE_TIME)));
@@ -122,7 +125,7 @@ public class PodDataAccess {
         return podBuilder.build();
     }
 
-    private List<Person> getPodMembersForPod(int podId) {
+    private List<Person> getPodMembersForPod(Long podId) {
         PodMemberDataAccess podMemberDataAccess = new PodMemberDataAccess(podItDatabase);
         List<Integer> podMemberIds = podMemberDataAccess.getMemberIdsForPod(podId);
         Log.v(CLASS_TAG, "Got a member ID list of " + podMemberIds.size() + " for podId: " + podId);
