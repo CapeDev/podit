@@ -3,6 +3,7 @@ package com.thoughtworks.carpods.UI.pod;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.thoughtworks.carpods.R;
@@ -32,8 +33,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.refEq;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.robolectric.Robolectric.shadowOf;
 
@@ -114,6 +114,15 @@ public class EditPodTest {
 
         activity.save(null);
         verify(podDataAccess, times(1)).savePod(refEq(pod));
+    }
+
+    @Test
+    public void shouldCallFinishWhenHomeIdIsSelectedFromTheOptionsMenu() {
+        int homeId = android.R.id.home;
+        MenuItem menuItem = mock(MenuItem.class);
+        when(menuItem.getItemId()).thenReturn(homeId);
+        activity.onOptionsItemSelected(menuItem);
+        assertThat(activity.isFinishing(), is(true));
     }
 
     private Pod createPodInformation(List<Person> members) {
