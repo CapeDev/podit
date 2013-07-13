@@ -1,6 +1,5 @@
 package com.thoughtworks.carpods.UI.pod;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,46 +25,51 @@ public class EditPod extends PodActivity {
     protected static final int PICK_CONTACT_REQUEST = 1;
 
     private String CLAZZ_TAG = "EditPod";
-    private Pod.Builder podBuilder;
     private List<Person> podMembers = new ArrayList<Person>();
+    private boolean edit;
+    private Pod pod;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.edit_pod);
+        populateView();
         setUpActionBar();
 
         Log.v(CLAZZ_TAG, "Done with onCreate in EditPod");
     }
 
-    private void setUpActionBar() {
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
+    private void populateView() {
+        Long id = getIntent().getLongExtra("id", 0L);
+        if (id > 0) {
+            edit = true;
+            pod = dataAccessFor.pods(this).getPodFromDatabaseWithId(id);
+            ((TextView)findViewById(R.id.pod_name)).setText(pod.getName());
+            ((TextView)findViewById(R.id.about_pod)).setText(pod.getAboutPod());
         }
     }
 
     public void save(MenuItem item) {
         showToast("I'm saving a pod from the menu!");
-        Pod pod = getDataFromView();
+        Pod pod = buildPodFromFormWithId(this.pod == null ? -1L : this.pod.getId());
         PodDataAccess podDataAccess = dataAccessFor.pods(this);
-        podDataAccess.savePod(pod);
+        if (edit) {
+            podDataAccess.updatePod(pod);
+        } else {
+            podDataAccess.savePod(pod);
+        }
         finish();
     }
 
-    private Pod getDataFromView() {
-        podBuilder = new Pod.Builder();
-        podBuilder.name(getPodNameFromView());
-        podBuilder.homeLocation(getHomeLocationFromView());
-        // FIXME - should these be some kind of date object instead of a integer?
-        podBuilder.departureTime(getDepartureTimeFromView());
-        podBuilder.returnTime(getReturnTimeFromView());
-        podBuilder.about(getAboutFromView());
-        for (Person member : podMembers) {
-            podBuilder.member(member);
-        }
-
-        return podBuilder.build();
+    private Pod buildPodFromFormWithId(Long id) {
+        return new Pod.Builder().id(id)
+                                .name(getPodNameFromView())
+                                .homeLocation(getHomeLocationFromView())
+                                .departureTime(getDepartureTimeFromView())
+                                .returnTime(getReturnTimeFromView())
+                                .about(getAboutFromView())
+                                .members(podMembers)
+                                .build();
     }
 
     private String getAboutFromView() {
@@ -131,7 +135,7 @@ public class EditPod extends PodActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.edit_person, menu);
+        getMenuInflater().inflate(R.menu.edit_action_bar, menu);
         return true;
     }
 

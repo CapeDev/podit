@@ -10,6 +10,7 @@
     <string name="home_location_label">Home Location</string>
     <string name="about_me_label">About Me</string>
     <string name="save">Save</string>
+    <string name="edit">Edit</string>
     <string name="people_list">People List</string>
     <string name="pod_name">Pod Name</string>
     <string name="about_pod_label">About the pod</string>
