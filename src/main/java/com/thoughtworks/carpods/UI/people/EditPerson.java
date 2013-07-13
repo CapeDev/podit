@@ -1,7 +1,6 @@
 package com.thoughtworks.carpods.UI.people;
 
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -103,7 +102,7 @@ public class EditPerson extends PodActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.edit_person, menu);
+        inflater.inflate(R.menu.edit_action_bar, menu);
         return true;
     }
 
@@ -115,12 +114,5 @@ public class EditPerson extends PodActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void setUpActionBar() {
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
     }
 }
