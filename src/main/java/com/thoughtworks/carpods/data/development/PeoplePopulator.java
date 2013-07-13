@@ -1,6 +1,8 @@
 package com.thoughtworks.carpods.data.development;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
 
@@ -24,6 +26,7 @@ public class PeoplePopulator implements Populator {
         database.savePerson(createPerson("Darth", "Vader", "Hilton Anatole", "Luke's Father"));
         database.savePerson(createPerson("Aniken", "SkyWalker", "Renaissance", "A kid with android dreams"));
     }
+
 
     private Person createPerson(String firstname, String lastName, String location, String about) {
         return new Person.Builder()

@@ -1,9 +1,11 @@
 package com.thoughtworks.carpods.plumb;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import com.thoughtworks.carpods.PodApplication;
@@ -26,7 +28,15 @@ public abstract class ListPodActivity extends ListActivity  {
         startActivity(intent);
     }
 
-    protected abstract Class<? extends Object> getDisplayClass();
 
+
+    protected void setUpActionBar() {
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    protected abstract Class<? extends Object> getDisplayClass();
 
 }

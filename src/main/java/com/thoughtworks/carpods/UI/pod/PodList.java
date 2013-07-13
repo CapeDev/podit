@@ -20,6 +20,7 @@ import java.util.List;
 public class PodList extends ListPodActivity {
 
     PodDataAccess database;
+    List<Pod> podNames;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,13 +29,15 @@ public class PodList extends ListPodActivity {
         if (database == null) {
             database = new PodDataAccess(this);
         }
-
-        List<Pod> podNames = database.getAllPodNames();
-
-        Toast.makeText(this, "I've got " + podNames.size() + " from the database.", Toast.LENGTH_LONG).show();
-
-        setListAdapter(new PoditListAdapter(this, podNames));
         setUpActionBar();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        podNames = database.getAllPodNames();
+        Toast.makeText(this, "I've got " + podNames.size() + " from the database.", Toast.LENGTH_LONG).show();
+        setListAdapter(new PoditListAdapter(this, podNames));
     }
 
     @Override
@@ -42,7 +45,7 @@ public class PodList extends ListPodActivity {
         return DisplayPod.class;
     }
 
-    private void setUpActionBar() {
+    protected void setUpActionBar() {
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);

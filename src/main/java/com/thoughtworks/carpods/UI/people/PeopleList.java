@@ -3,7 +3,9 @@ package com.thoughtworks.carpods.UI.people;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
@@ -17,7 +19,10 @@ import com.thoughtworks.carpods.data.Person;
 import com.thoughtworks.carpods.plumb.ListPodActivity;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class PeopleList extends ListPodActivity {
     static final private String CLASS_TAG = "PeopleList";
@@ -51,13 +56,6 @@ public class PeopleList extends ListPodActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void setUpActionBar() {
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
     }
 
 }
