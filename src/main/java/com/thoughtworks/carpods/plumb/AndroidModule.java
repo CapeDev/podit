@@ -9,6 +9,7 @@ import com.thoughtworks.carpods.UI.pod.DisplayPod;
 import com.thoughtworks.carpods.UI.pod.EditPod;
 import com.thoughtworks.carpods.UI.pod.PodList;
 import com.thoughtworks.carpods.data.DataAccessFactory;
+import com.thoughtworks.carpods.data.development.PeoplePopulator;
 import dagger.Module;
 import dagger.Provides;
 
@@ -23,7 +24,8 @@ import javax.inject.Singleton;
                 PeopleList.class,
                 EditPod.class,
                 DisplayPod.class,
-                PodList.class
+                PodList.class,
+                PeoplePopulator.class
         }
 )
 public class AndroidModule {
