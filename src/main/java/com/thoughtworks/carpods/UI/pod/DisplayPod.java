@@ -8,7 +8,6 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.thoughtworks.carpods.R;
@@ -59,12 +58,6 @@ public class DisplayPod extends PodActivity {
             return podDatabase.getPodFromDatabaseWithId(getIntent().getLongExtra("id", 0));
         }
         return podDatabase.getFirstPodInDatabase();
-    }
-
-    public void addLocation(View view){
-        Intent locationIntent = new Intent(view.getContext(), LocationActivity.class);
-        startActivityForResult(locationIntent, 0);
-
     }
 
     private void setPicture(String picture) {

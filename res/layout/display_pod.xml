@@ -60,14 +60,6 @@
                   android:paddingLeft = "15dp"
                   android:hint = "@string/default_time"/>
 
-        <Button android:id="@+id/button_add_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button_add_location"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:onClick="addLocation"/>
-
     </RelativeLayout>
 
     <LinearLayout android:orientation="vertical"
