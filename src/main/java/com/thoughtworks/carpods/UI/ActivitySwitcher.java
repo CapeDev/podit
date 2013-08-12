@@ -15,7 +15,6 @@ import com.thoughtworks.carpods.UI.people.PeopleList;
 import com.thoughtworks.carpods.UI.pod.DisplayPod;
 import com.thoughtworks.carpods.UI.pod.EditPod;
 import com.thoughtworks.carpods.UI.pod.PodList;
-import com.thoughtworks.carpods.data.development.PeoplePopulator;
 import com.thoughtworks.carpods.data.development.PodPopulator;
 import com.thoughtworks.carpods.data.development.Populator;
 import net.hockeyapp.android.UpdateManager;
@@ -40,7 +39,6 @@ public class ActivitySwitcher extends Activity {
         if (!preferences.getBoolean("initialized", false)) {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putBoolean("initialized", true);
-            populate(new PeoplePopulator(applicationContext));
             populate(new PodPopulator(applicationContext));
             editor.commit();
         }
