@@ -9,11 +9,8 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Toast;
 import com.thoughtworks.carpods.R;
-import com.thoughtworks.carpods.UI.people.DisplayPerson;
 import com.thoughtworks.carpods.UI.people.EditPerson;
 import com.thoughtworks.carpods.UI.people.PeopleList;
-import com.thoughtworks.carpods.UI.pod.DisplayPod;
-import com.thoughtworks.carpods.UI.pod.EditPod;
 import com.thoughtworks.carpods.UI.pod.PodList;
 import com.thoughtworks.carpods.data.development.PodPopulator;
 import com.thoughtworks.carpods.data.development.Populator;
@@ -48,10 +45,6 @@ public class ActivitySwitcher extends Activity {
         startActivity(new Intent(this, EditPerson.class));
     }
 
-    public void startDisplayPerson(View view) {
-        startActivity(new Intent(this, DisplayPerson.class));
-    }
-
     private void populate(Populator populator) {
         populator.populate();
         Toast.makeText(getApplicationContext(), "Done populating", Toast.LENGTH_SHORT).show();
@@ -59,14 +52,6 @@ public class ActivitySwitcher extends Activity {
 
     public void startPeopleList(View view) {
         startActivity(new Intent(this, PeopleList.class));
-    }
-
-    public void startCreatePod(View view) {
-        startActivity(new Intent(this, EditPod.class));
-    }
-
-    public void startDisplayPod(View view) {
-        startActivity(new Intent(this, DisplayPod.class));
     }
 
     public void startPodList(View view) {

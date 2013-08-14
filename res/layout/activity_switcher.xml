@@ -13,12 +13,6 @@
                 android:text="Create / Edit Person"
                 android:layout_gravity="bottom"
                 android:onClick="startEditPerson" />
-        <Button android:id="@+id/start_display_person"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Display Person"
-                android:layout_gravity="bottom"
-                android:onClick="startDisplayPerson" />
         <Button android:id="@+id/show_people_list"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -32,18 +26,6 @@
               android:layout_marginBottom="6dp"
               android:background="#999999" />
 
-        <Button android:id="@+id/create_car_pod"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Create / Edit Pod"
-                android:layout_gravity="bottom"
-                android:onClick="startCreatePod" />
-        <Button android:id="@+id/start_display_pod"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Display Pod"
-                android:layout_gravity="bottom"
-                android:onClick="startDisplayPod" />
         <Button android:id="@+id/start_pod_list"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
