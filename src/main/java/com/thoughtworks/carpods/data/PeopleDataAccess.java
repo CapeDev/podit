@@ -33,7 +33,7 @@ public class PeopleDataAccess {
         info.put(PodItDatabase.LAST_NAME, person.getLastName());
         info.put(PodItDatabase.HOME_LOCATION, person.getHomeLocation());
         info.put(PodItDatabase.ABOUT_ME, person.getAboutMe());
-        info.put(PodItDatabase.PICTURE, person.getPicture());
+        info.put(PodItDatabase.PICTURE, person.iconPath());
 
         database = podItDatabase.getWritableDatabase();
         database.insert(table, null, info);
@@ -63,7 +63,7 @@ public class PeopleDataAccess {
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
                     Person.Builder personBuilder = new Person.Builder();
-                    personBuilder.id(cursor.getInt(cursor.getColumnIndex(PodItDatabase.ROWID)));
+                    personBuilder.id(cursor.getLong(cursor.getColumnIndex(PodItDatabase.ROWID)));
                     personBuilder.firstName(cursor.getString(cursor.getColumnIndex(PodItDatabase.FIRST_NAME)));
                     personBuilder.lastName(cursor.getString(cursor.getColumnIndex(PodItDatabase.LAST_NAME)));
                     personBuilder.picture(cursor.getString(cursor.getColumnIndex(PodItDatabase.PICTURE)));
@@ -101,7 +101,7 @@ public class PeopleDataAccess {
                 personBuilder.homeLocation(cursor.getString(cursor.getColumnIndex(PodItDatabase.HOME_LOCATION)));
                 personBuilder.aboutMe(cursor.getString(cursor.getColumnIndex(PodItDatabase.ABOUT_ME)));
                 personBuilder.picture(cursor.getString(cursor.getColumnIndex(PodItDatabase.PICTURE)));
-                personBuilder.id(cursor.getInt(cursor.getColumnIndex(PodItDatabase.ROWID)));
+                personBuilder.id(cursor.getLong(cursor.getColumnIndex(PodItDatabase.ROWID)));
             }
 
         }  finally {

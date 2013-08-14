@@ -25,6 +25,7 @@ public class PeoplePopulator implements Populator {
         database.savePerson(createPerson("Aniken", "SkyWalker", "Renaissance", "A kid with android dreams"));
     }
 
+
     private Person createPerson(String firstname, String lastName, String location, String about) {
         return new Person.Builder()
                                   .firstName(firstname)

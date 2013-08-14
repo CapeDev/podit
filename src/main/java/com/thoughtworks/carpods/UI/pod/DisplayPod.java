@@ -1,9 +1,12 @@
 package com.thoughtworks.carpods.UI.pod;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,14 +29,21 @@ public class DisplayPod extends PodActivity {
 
     @Inject
     DataAccessFactory dataAccessFor;
+    private PodDataAccess podDatabase;
+    private Pod pod;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.display_pod);
 
-        PodDataAccess carPodsDatabase = dataAccessFor.pods(this);
-        Pod pod = carPodsDatabase.getFirstPodInDatabase();
+        podDatabase = dataAccessFor.pods(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        pod = loadPod();
         populateActionBar(pod);
         setPicture("");
         setPodHomeLocation(pod.getHomeLocation());
@@ -41,6 +51,13 @@ public class DisplayPod extends PodActivity {
         setReturnTime(pod.getReturnTime());
         setAbout(pod.getAboutPod());
         setMembers(pod.getMembers());
+    }
+
+    private Pod loadPod() {
+        if (getIntent().hasExtra("id")) {
+            return podDatabase.getPodFromDatabaseWithId(getIntent().getLongExtra("id", 0));
+        }
+        return podDatabase.getFirstPodInDatabase();
     }
 
     private void setPicture(String picture) {
@@ -86,6 +103,19 @@ public class DisplayPod extends PodActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(pod.getName());
         }
+    }
+
+    public void edit(MenuItem unused) {
+        Intent intent = new Intent(this, EditPod.class);
+        intent.putExtra("id", pod.getId());
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.display_action_bar, menu);
+        return true;
     }
 
     @Override

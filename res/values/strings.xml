@@ -10,6 +10,8 @@
     <string name="home_location_label">Home Location</string>
     <string name="about_me_label">About Me</string>
     <string name="save">Save</string>
+    <string name="edit">Edit</string>
+    <string name="create">Create</string>
     <string name="people_list">People List</string>
     <string name="pod_name">Pod Name</string>
     <string name="about_pod_label">About the pod</string>
@@ -25,4 +27,6 @@
     <string name="desc_user_photo">User Photo</string>
     <string name="picture">Picture</string>
     <string name="full_name_label">Full Name</string>
+    <string name="hockey_app_id">022eb717ff90637a9966ca23c6d39d46</string>
+    <string name="google_api_key">AIzaSyC9w_iQ_BZSPoLvHXP9xj1MLCVjeCxDeJk</string>
 </resources>

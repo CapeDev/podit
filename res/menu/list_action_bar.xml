@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_save"
-          android:icon="@drawable/ic_action_done"
+    <item android:id="@+id/action_save"
+          android:icon="@android:drawable/ic_input_add"
           android:title="@string/save"
           android:showAsAction="ifRoom|withText"
-          android:onClick="save"/>
+          android:onClick="add"/>
 </menu>

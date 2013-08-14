@@ -20,18 +20,19 @@ import static com.thoughtworks.carpods.fun.ViewCast.textView;
 public class DisplayPerson extends PodActivity {
     @Inject DataAccessFactory dataAccessFor;
 
-    private PeopleDataAccess dataAccess;
+    private PeopleDataAccess peopleDatabase;
+    private Person person;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dataAccess = dataAccessFor.people(this);
+        peopleDatabase = dataAccessFor.people(this);
 
         setContentView(R.layout.display_person);
 
-        Person person = person();
+        person = loadPerson();
 
         populateActionBar(person);
-        setPicture(person.getPicture());
+        setPicture(person.iconPath());
         setPersonName();
         setHomeLocation(person.getHomeLocation());
         setAboutMe(person.getAboutMe());
@@ -52,18 +53,18 @@ public class DisplayPerson extends PodActivity {
         }
     }
 
-    private Person person() {
-        if (getIntent().hasExtra("personId")) {
-            return dataAccess.getPersonFromDatabaseWithId(getIntent().getIntExtra("personId", 0));
+    private Person loadPerson() {
+        if (getIntent().hasExtra("id")) {
+            return peopleDatabase.getPersonFromDatabaseWithId(getIntent().getLongExtra("id", 0L));
         }
 
-        return dataAccess.getFirstPersonFromDatabase();
+        return peopleDatabase.getFirstPersonFromDatabase();
     }
 
     protected void setPersonName() {
         TextView firstNameField = textView(this, R.id.full_name_field);
 
-        firstNameField.setText(String.format("%s %s", person().getFirstName(), person().getLastName()));
+        firstNameField.setText(person.label());
         firstNameField.setTextSize(2* textView(this, R.id.full_name_label).getTextSize());
     }
 

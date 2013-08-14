@@ -30,6 +30,11 @@
             <version>1.0.1</version>
         </dependency>
         <dependency>
+          <groupId>net.hockeyapp.android</groupId>
+          <artifactId>HockeySDK</artifactId>
+          <version>3.0.0</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.10</version>
@@ -72,9 +77,41 @@
                     <sdk>
                         <platform>14</platform>
                     </sdk>
-                                        <undeployBeforeDeploy>true</undeployBeforeDeploy>
+                    <undeployBeforeDeploy>true</undeployBeforeDeploy>
+                    <sign>
+                        <debug>false</debug>
+                    </sign>
                 </configuration>
                 <extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jarsigner-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <id>signing</id>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <inherited>true</inherited>
+                        <configuration>
+                            <archiveDirectory></archiveDirectory>
+                            <includes>
+                                <include>target/*.apk</include>
+                            </includes>
+                            <keystore>thoughtworks.keystore</keystore>
+                            <storepass>thoughtworks21</storepass>
+                            <keypass>thoughtworks21</keypass>
+                            <alias>thoughtworks</alias>
+                            <arguments>
+                                <argument>-sigalg</argument><argument>MD5withRSA</argument>
+                                <argument>-digestalg</argument><argument>SHA1</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>

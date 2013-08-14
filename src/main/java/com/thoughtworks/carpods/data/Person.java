@@ -1,12 +1,12 @@
 package com.thoughtworks.carpods.data;
 
-public class Person {
+public class Person implements Listable {
 
     private String firstName;
     private String lastName;
     private String homeLocation;
     private String aboutMe;
-    private int id = -1;
+    private Long id = -1L;
     private String picture;
 
     private Person(Builder personBuilder) {
@@ -34,16 +34,23 @@ public class Person {
         return aboutMe;
     }
 
-    public int getId() {
+    @Override
+    public Long getId() {
         return id;
     }
 
-    public String getPicture() {
+    @Override
+    public String iconPath() {
         return picture;
     }
 
+    @Override
+    public String label() {
+        return String.format("%s %s", firstName, lastName);
+    }
+
     public static class Builder {
-        private int id;
+        private Long id;
         private String firstName;
         private String lastName;
         private String homeLocation;
@@ -70,7 +77,7 @@ public class Person {
             return this;
         }
 
-        public Builder id(int id) {
+        public Builder id(Long id) {
             this.id = id;
             return this;
         }

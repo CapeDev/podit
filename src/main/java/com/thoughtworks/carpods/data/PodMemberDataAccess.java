@@ -20,10 +20,10 @@ public class PodMemberDataAccess {
         this.podItDatabase = database;
     }
 
-    public void addMembersToPod(List<Integer> members, long podId) {
+    public void addMembersToPod(List<Long> members, long podId) {
 
         database = podItDatabase.getWritableDatabase();
-        for (Integer memberId : members) {
+        for (Long memberId : members) {
             ContentValues info  = new ContentValues();
             info.put(PodItDatabase.POD_ID, podId);
             info.put(PodItDatabase.MEMBER_ID, memberId);

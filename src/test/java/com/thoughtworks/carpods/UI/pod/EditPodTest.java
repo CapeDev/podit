@@ -60,6 +60,7 @@ public class EditPodTest {
         ObjectGraph.create(new AndroidModule(Robolectric.application), new TestModule()).inject(this);
 
         // FIXME - Can we instantiate the activity by using Robolectric.buildActivity() to avoid the warning in the build?
+        activity.setIntent(new Intent());
         activity.onCreate(new Bundle());
     }
 
@@ -154,7 +155,7 @@ public class EditPodTest {
                 .homeLocation("Renaissance")
                 .aboutMe("Just an awesome person")
                 .picture("")
-                .id(1)
+                .id(1L)
                 .build();
     }
 
@@ -165,7 +166,7 @@ public class EditPodTest {
                 .homeLocation("Renaissance")
                 .aboutMe("Likes to Eat and Drink things")
                 .picture("")
-                .id(2)
+                .id(2L)
                 .build();
     }
 
