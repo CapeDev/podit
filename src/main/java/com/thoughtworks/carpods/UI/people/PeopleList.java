@@ -1,10 +1,14 @@
 package com.thoughtworks.carpods.UI.people;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.UI.PoditListAdapter;
+import com.thoughtworks.carpods.UI.pod.EditPod;
 import com.thoughtworks.carpods.data.DataAccessFactory;
 import com.thoughtworks.carpods.data.PeopleDataAccess;
 import com.thoughtworks.carpods.data.Person;
@@ -47,4 +51,8 @@ public class PeopleList extends ListPodActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void add(MenuItem unused) {
+        Toast.makeText(this, "I just clicked the add button!", Toast.LENGTH_LONG).show();
+        startActivity(new Intent(this, EditPod.class));
+    }
 }

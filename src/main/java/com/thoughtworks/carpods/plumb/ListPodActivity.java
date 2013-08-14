@@ -4,9 +4,13 @@ import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import com.thoughtworks.carpods.PodApplication;
+import com.thoughtworks.carpods.R;
 import com.thoughtworks.carpods.data.Listable;
 
 public abstract class ListPodActivity extends ListActivity  {
@@ -23,8 +27,6 @@ public abstract class ListPodActivity extends ListActivity  {
         startActivity(intent);
     }
 
-
-
     protected void setUpActionBar() {
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
@@ -34,4 +36,12 @@ public abstract class ListPodActivity extends ListActivity  {
 
     protected abstract Class<? extends Object> getDisplayClass();
 
+    public abstract void add(MenuItem unused);
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.list_action_bar, menu);
+        return true;
+    }
 }

@@ -44,13 +44,6 @@ public class PodList extends ListPodActivity {
         return DisplayPod.class;
     }
 
-    protected void setUpActionBar() {
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -59,13 +52,6 @@ public class PodList extends ListPodActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.list_action_bar, menu);
-        return true;
     }
 
     public void add(MenuItem unused) {
